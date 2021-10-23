@@ -1,0 +1,35 @@
+// buttons
+.btn{
+    border: none;
+    outline: none;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 10px 30px;
+    text-decoration: none;
+	position: relative !important; 
+	transition: all .3s;
+	overflow: hidden;
+    margin-top: 15px;
+}
+
+.btn-primary{
+    background-color: $secondary;
+    color: $white;
+    border: 1px solid $secondary;
+}
+
+.btn-border{
+    border: 1px solid $dark;
+    color: $dark;
+	background: transparent !important;
+}
+
+
+.btn:hover {
+    transform: translateY(-3px);
+	background: darken($secondary ,7%);  
+}
+
+.btn-go-back{
+	margin-top: 50px;
+}

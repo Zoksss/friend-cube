@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="328" height="328" viewBox="0 0 328 328">
+  <defs>
+    <filter id="Rectangle_1" x="0" y="0" width="328" height="328" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_3" data-name="Group 3" transform="translate(-627 -450)">
+    <g id="Group_2" data-name="Group 2" transform="translate(-164 46)">
+      <g transform="matrix(1, 0, 0, 1, 791, 404)" filter="url(#Rectangle_1)">
+        <rect id="Rectangle_1-2" data-name="Rectangle 1" width="310" height="310" rx="10" transform="translate(9 6)" fill="#272727"/>
+      </g>
+      <rect id="Rectangle_45" data-name="Rectangle 45" width="90" height="90" rx="10" transform="translate(813 423)" fill="#fff"/>
+      <rect id="Rectangle_50" data-name="Rectangle 50" width="90" height="90" rx="10" transform="translate(813 520)" fill="#fff"/>
+      <rect id="Rectangle_53" data-name="Rectangle 53" width="90" height="90" rx="10" transform="translate(813 617)" fill="#fff"/>
+      <rect id="Rectangle_46" data-name="Rectangle 46" width="90" height="90" rx="10" transform="translate(910 423)" fill="#ff5800"/>
+      <rect id="Rectangle_49" data-name="Rectangle 49" width="90" height="90" rx="10" transform="translate(910 520)" fill="#fff"/>
+      <rect id="Rectangle_52" data-name="Rectangle 52" width="90" height="90" rx="10" transform="translate(910 617)" fill="#fff"/>
+      <rect id="Rectangle_47" data-name="Rectangle 47" width="90" height="90" rx="10" transform="translate(1007 423)" fill="#fff"/>
+      <rect id="Rectangle_48" data-name="Rectangle 48" width="90" height="90" rx="10" transform="translate(1007 520)" fill="#ff5800"/>
+      <rect id="Rectangle_51" data-name="Rectangle 51" width="90" height="90" rx="10" transform="translate(1007 617)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

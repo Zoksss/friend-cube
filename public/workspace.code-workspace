@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "..\\..\\rubictime\\public\\design"
+		},
+		{
+			"path": "..\\..\\rubictime\\public\\assets"
+		}
+	],
+	"settings": {}
+}

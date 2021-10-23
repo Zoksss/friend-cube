@@ -1,0 +1,39 @@
+.start-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 80vh;
+
+    p{
+        margin-top: 10px;
+    }
+
+    .start-container-btn{
+        margin-top: 55px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: $white;
+        width: 300px;
+        height: 250px;
+        -webkit-box-shadow: 0px 3px 10px 5px rgba(0,0,0,0.05);
+        -moz-box-shadow: 0px 3px 10px 5px rgba(0,0,0,0.05);
+        box-shadow: 0px 3px 10px 5px rgba(0,0,0,0.05);
+
+        .create-game, .join-game{
+            margin-bottom: 11px;
+            margin-top: 11px;
+        }
+    }
+
+    .start-container-credit{
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 25px;
+        color: $dark;
+    }
+
+    /*display:none;*/
+}

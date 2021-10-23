@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
+    <title>FriendCUBE | Cube with friends</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5">
+
+</head>
+
+<body>
+    <section>
+        <div class="container">
+
+            <!-- Join and Create Game container -->
+            <div class="start-container">
+                <h1>SOLVE. WITH. FRIENDS.</h1>
+                <p>no need to login, just play</p>
+                <div class="start-container-btn">
+                    <a href="#" class="btn btn-primary">&nbsp Join Game &nbsp</a>
+                    <p>or</p>
+                    <a href="#" class="btn btn-border create-game">Create Game</a>
+                </div>
+                <p class="start-container-credit">Created and designed by Zoks</p>
+            </div>
+
+            <!-- Choose puzzle -->
+            <div class="choose-puzzle-container" id="choosePuzzleContainer">
+                <h1>SOLVE. WITH. FRIENDS.</h1>
+                <p>no need to login, just play</p>
+
+                <div class="choose-puzzle-button-container">
+                    <button class="puzzle-button" onclick="selectPuzzle('3x3') ">
+                        <img src="assets/333.svg">
+                        <h3>3X3</h3>
+                    </button>
+                    <button class="puzzle-button" onclick="selectPuzzle('2x2')">
+                        <img src="assets/222.svg">
+                        <h3>2X2</h3>
+                    </button>
+                    <button class="puzzle-button disabled" onclick="selectPuzzle('pyra')">
+                        <img src="assets/pyraminx.svg">
+                        <h3>Pyraminx</h3>
+                    </button>
+                    <button class="puzzle-button disabled" onclick="selectPuzzle('mega')">
+                        <img src="assets/megaminx.svg">
+                        <h3>Megaminx</h3>
+                    </button>
+                    <button class="puzzle-button disabled" onclick="selectPuzzle('sq1')">
+                        <img src="assets/square1.svg">
+                        <h3>Square 1</h3>
+                    </button>
+                    <button class="puzzle-button disabled" onclick="selectPuzzle('4x4')">
+                        <img src="assets/444.svg">
+                        <h3>4X4</h3>
+                    </button>
+                    <button class="puzzle-button disabled" onclick="selectPuzzle('5x5')">
+                        <img src="assets/555.svg">
+                        <h3>5X5</h3>
+                    </button>
+                    <button class="puzzle-button disabled" onclick="selectPuzzle('??')">
+                        <img src="assets/555.svg">
+                        <h3>6X6</h3>
+                    </button>
+                </div>
+                <a href=# class="btn btn-border">Go Back</a>
+            </div>
+            
+
+            <!-- Join container-->
+            <div class="nickname-container" id="nicknameContainer">
+                <h1 id="nicknameContainerTitle">JOIN</h1>
+                <p id="nicknameContainerSubtitle">enter room code and nickname below</p>
+                <div class="nickname-input-container">
+                    <form>
+                        <p>Nickname</p>
+                        <input type="text" min=5 id="nicknameInput" name="nickname" placeholder="Nickname" maxlength="20">
+                        <p id="codeLabel">Code</p>
+                        <input min=6; max=6; id="codeInput" type="number" name="code" placeholder="Code" maxlength="6">
+                    </form>
+                    <a href="#" class="btn btn-primary">Join Game</a>
+                </div>
+                <a href="#" class="btn btn-border">Go Back</a>
+            </div>
+
+
+            <!-- Create container-->
+            <div class="nickname-container" id="nicknameContainer">
+                <h1 id="nicknameContainerTitle">CREATE</h1>
+                <p id="nicknameContainerSubtitle">enter nickname below</p>
+                <div class="nickname-input-container">
+                    <form>
+                        <p>Nickname</p>
+                        <input type="text" min=5 id="nicknameInput" name="nickname" placeholder="Nickname"
+                            maxlength="20">
+
+                    </form>
+                    <a href="#" class="btn btn-primary">Create Game</a>
+                </div>
+                <a href="#" class="btn btn-border">Go Back</a>
+            </div>
+            
+        </div>
+    </section>
+</body>
+
+</html>
