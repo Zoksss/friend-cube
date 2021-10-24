@@ -305,4 +305,377 @@ p {
 .choose-puzzle-container .choose-puzzle-button-container .disabled img {
   opacity: 0.4;
 }
+
+.sidebar {
+  position: absolute;
+  width: 270px;
+  height: 100vh;
+  background-color: #FFF;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  overflow-y: auto;
+  /* Handle on hover */
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 7px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: white;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #bebebe;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: #9c9c9c;
+}
+
+.sidebar h3 {
+  font-size: 35px;
+  margin: 20px 0 0 25px;
+}
+
+.sidebar table {
+  position: relative;
+  width: 100%;
+  padding: 15px;
+  border-spacing: 15px 15px;
+  font-weight: 600;
+  font-size: 1vw;
+}
+
+.sidebar table .table-header {
+  font-weight: 700;
+}
+
+.sidebar table tr {
+  margin-top: 15px;
+}
+
+.sidebar table .table-no {
+  border-right: 1px solid black;
+}
+
+.timer-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+  height: 100vh;
+}
+
+.timer-container .puzzle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1.563rem;
+}
+
+.timer-container .scramble {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 0.938rem;
+}
+
+.timer-container .times {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+}
+
+.timer-container .times .time {
+  font-size: 7.813rem;
+  font-weight: 700;
+}
+
+.timer-container .times .ao5, .timer-container .times .ao12 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+#code {
+  position: absolute;
+  bottom: 25px;
+}
+
+.bottom-buttons {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  bottom: 25px;
+  left: 25px;
+  z-index: 2;
+  background-color: #FFF;
+}
+
+.bottom-buttons .settings-btn {
+  margin-right: 15px;
+  position: relative;
+  padding: 25px;
+  background-color: #FF7700;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 60px;
+  height: 60px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.bottom-buttons #openPlayersBtn {
+  background-color: #18B923;
+}
+
+.bottom-buttons #exitRoom {
+  background-color: #E22121;
+}
+
+.hidden-on-start {
+  display: inline-block;
+}
+
+.playerRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 65px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+}
+
+.playerRow .view-more-btn {
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px 20px;
+  color: #FFF;
+  background-color: #1161FF;
+  font-weight: 500;
+  text-align: center;
+  -webkit-transition: 200ms all ease;
+  transition: 200ms all ease;
+}
+
+.playerRow .view-more-btn:hover {
+  background-color: #4483ff;
+}
+
+.playerRow .null-col {
+  padding: 10px 55px;
+}
+
+.times {
+  display: none;
+}
+
+.times .times-div table tr td {
+  padding: 8px 20px;
+  font-size: 18px;
+}
+
+.back-btn {
+  display: none;
+  position: absolute;
+  bottom: 35px;
+  right: 75px;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 10px 20px;
+  color: #FFF;
+  background-color: #1161FF;
+  font-weight: 500;
+  text-align: center;
+  -webkit-transition: 200ms all ease;
+  transition: 200ms all ease;
+}
+
+.back-btn:hover {
+  background-color: #4483ff;
+}
+
+.modal {
+  display: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 105;
+  opacity: 1;
+  -webkit-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+  /*pointer-events: none;*/
+  height: 100vh;
+  padding: 100px 50px;
+}
+
+.modal .modal-container {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+  padding: 35px 75px;
+  background-color: #FFF;
+  width: 700px;
+}
+
+.modal .modal-container h2 {
+  margin: 0 auto;
+}
+
+.modal .modal-container hr {
+  height: 2px;
+  background-color: #b0b0b0;
+  margin: 10px 0;
+}
+
+.modal .modal-container .color-settings-container {
+  margin-top: 25px;
+}
+
+.modal .modal-container .prefferences-container {
+  margin-top: 35px;
+}
+
+.modal .modal-container .cont-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 10px;
+}
+
+.modal .modal-container .cont-row h4 {
+  margin-right: 10px;
+  color: #272727;
+}
+
+.modal .modal-container .reset-btn {
+  position: absolute;
+  bottom: 35px;
+  right: 175px;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 10px 20px;
+  color: #242424;
+  -webkit-transition: 200ms all ease;
+  transition: 200ms all ease;
+}
+
+.modal .modal-container .reset-btn:hover {
+  background-color: #d7d7d7;
+}
+
+.modal .modal-container .apply-btn {
+  position: absolute;
+  bottom: 35px;
+  right: 75px;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 10px 20px;
+  color: #FFF;
+  background-color: #1161FF;
+  font-weight: 600;
+  text-align: center;
+  -webkit-transition: 200ms all ease;
+  transition: 200ms all ease;
+}
+
+.modal .modal-container .apply-btn:hover {
+  background-color: #4483ff;
+}
+
+.modal .settings-exit-btn {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+}
+
+.start-game-modal-container {
+  height: 300px !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.start-game-modal-container hr {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.start-game-modal-container .start-game-btn {
+  height: 100px;
+  width: 80%;
+  background-color: #18B923;
+  font-size: 30pt;
+  font-weight: 700;
+  text-decoration: none;
+  color: #FFF;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
 /*# sourceMappingURL=style.css.map */

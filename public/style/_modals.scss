@@ -1,0 +1,118 @@
+.modal{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.7);
+	z-index: 105;
+	opacity:1;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	/*pointer-events: none;*/
+    height: 100vh;
+    padding: 100px 50px;
+
+    .modal-container{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: 35px 75px;
+        background-color: $white;
+        width: 700px;
+
+        h2{
+            margin: 0 auto;
+        }
+        hr{
+            height: 2px;
+            background-color: lighten($dark, 55%);
+            margin: 10px 0;
+        }
+
+        .color-settings-container{
+            margin-top: 25px;
+        }
+
+        .prefferences-container{
+            margin-top: 35px;
+        }
+        .cont-row{
+            display: flex;  
+            align-items: center;
+            margin-top: 10px;
+
+            h4{
+                margin-right: 10px;
+                color: #272727;
+                
+            }
+        }
+        .reset-btn{
+            position: absolute;
+            bottom: 35px;
+            right: 175px;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px 20px;
+            color: $dark;
+            transition: 200ms all ease;
+            
+            &:hover{
+                background-color: lighten($dark, 70%);
+            }
+        }
+        .apply-btn{
+            position: absolute;
+            bottom: 35px;
+            right: 75px;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px 20px;
+            color: $white;
+            background-color: $blue;
+            font-weight: 600;
+            text-align: center;
+            transition: 200ms all ease;
+            
+            &:hover{
+                background-color: lighten($blue, 10%);
+            }
+        }
+    }   
+
+    .settings-exit-btn{
+        position: absolute;
+        top: 50px;
+        right: 50px;
+    }
+}
+
+.start-game-modal-container{
+    height: 300px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    hr{
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .start-game-btn{
+        height: 100px;
+        width: 80%;
+        background-color: $green;
+        font-size: 30pt;
+        font-weight: 700;
+        text-decoration: none;
+        color: $white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

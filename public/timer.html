@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
+    <title>FriendCUBE | Cube with friends</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5">
+</head>
+<body>
+
+    <div class="modal players">
+        <div class="modal-container">
+            <a href="#" class="settings-exit-btn" id="closePlayerModalBtn"><img src="assets/x.svg"></a>
+            <h2>Joined Player's Stats</h2>
+            <hr class="modal-underline">
+        </div>
+    </div>
+
+    <div class="modal">
+        <div class="modal-container start-game-modal-container">
+            <h2>Room: x3f341</h2>
+            <hr class="modal-underline">
+            <a href="#" class="start-game-btn">Start Game</a>
+        </div>
+    </div>
+
+
+    <div class="sidebar">
+        <h3>Your times</h3>
+        <table id="sidebarTimes">
+            <tr class="table-header">
+                <td>no</td>
+                <td>time</td>
+                <td>ao5</td>
+                <td>ao12</td>
+            </tr>
+            <tr id="nullElement"></tr>
+        </table>
+    </div>
+
+
+    <div class="timer-container">
+        <h2 id="code">code: x3f341</h2>
+        <p class="puzzle hidden-on-start" id="puzzle">3X3</p>
+        <h3 class="scramble hidden-on-start" id="scramble">L' F B' R' U L' B2 R D' B' U2 R2 B' L2 F2 D2 R2 D2 B R2</h3>
+        <div class="times">
+            <p class="time" id="time">00:00.00</p>
+            <p class="ao5 hidden-on-start" id="ao5">ao5: <span>--</span></p>
+            <p class="ao12 hidden-on-start" id="ao12">ao12: <span>--</span></p>
+        </div>
+    </div>
+
+    <div class="bottom-buttons">
+        <a href="#" class= "settings-btn" id="openSettingsBtn"><img src="./assets/settings.svg"></a>
+        <a href="#" class= "settings-btn" id="openPlayersBtn"><img src="./assets/user.svg"></a>
+        <a href="#" class= "settings-btn" id="exitRoom"><img src="./assets/exit.svg"></a>
+    </div>
+<body>
+
+
+</body>
+</html> 

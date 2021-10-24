@@ -1,0 +1,141 @@
+.sidebar{
+    position: absolute;
+    width: 270px;
+    height: 100vh;
+    background-color: $white;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    overflow-y: auto;
+    
+    &::-webkit-scrollbar {
+    width: 7px;
+  }
+  
+   &::-webkit-scrollbar-track {
+    background: rgb(255, 255, 255);
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgb(190, 190, 190);
+  }
+  
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgb(156, 156, 156);
+  }
+
+    h3{
+        font-size: 35px;
+        margin: 20px 0 0 25px;
+    }
+        
+        table{
+            position: relative;
+            width: 100%;
+            padding: 15px;
+            border-spacing: 15px 15px;
+            font-weight: 600; 
+            font-size: 1vw;;
+            
+            
+            .table-header{
+                font-weight: 700;
+            }
+            
+            tr{
+                margin-top: 15px;
+            }
+            
+            .table-no{
+                border-right: 1px solid black;
+            }
+
+        }
+}
+
+
+.timer-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    height: 100vh;
+
+    .puzzle{
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-top: 1.563rem;
+
+    }
+
+    .scramble{
+        font-size: 2rem;
+        font-weight: 700;
+        margin-top: 0.938rem;
+    }
+
+    .times{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        top: 50%;
+
+        transform: translate(0, -50%);
+
+
+        .time{
+            font-size: 7.813rem;  
+            font-weight: 700;
+        }
+
+        .ao5, .ao12{
+            font-size: 2.5rem;
+            font-weight: 700; 
+        }
+    }
+}
+
+
+#code{
+    position: absolute;
+    bottom: 25px;
+}
+
+.bottom-buttons{
+    position: absolute;
+    display: flex;
+    bottom: 25px;
+    left: 25px;
+    z-index: 2;
+    background-color: $white;
+
+    
+    .settings-btn{
+        margin-right: 15px;
+        position: relative;
+        padding: 25px;
+        background-color: $secondary;
+        display: flex;
+        width: 60px;
+        height: 60px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #openPlayersBtn{
+        background-color: $green;
+    }
+    #exitRoom{
+        background-color: $red;
+    }
+}
+
+.hidden-on-start{
+    display: inline-block;
+}
