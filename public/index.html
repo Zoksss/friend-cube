@@ -16,17 +16,34 @@
         <div class="container">
 
             <!-- Join and Create Game container -->
-            <div class="start-container">
+            <div class="start-container" id="mainMenuContainer">
                 <h1>SOLVE. WITH. FRIENDS.</h1>
                 <p>no need to login, just play</p>
                 <div class="start-container-btn">
-                    <a href="#" class="btn btn-primary">&nbsp Join Game &nbsp</a>
+                    <a role="button" class="btn btn-primary" id="mainMenuJoinGame">&nbsp Join Game &nbsp</a>
                     <p>or</p>
-                    <a href="#" class="btn btn-border create-game">Create Game</a>
+                    <a role="button" class="btn btn-border create-game" id="mainMenuCreateGame">Create Game</a>
                 </div>
-                <p class="start-container-credit">Created and designed by Zoks</p>
+                <p class="start-container-credit">Created by Zoks</p>
             </div>
 
+            <!-- Join container-->
+            <div class="nickname-container" id="enterNicknameContainer">
+                <h1 id="nicknameContainerTitle">JOIN</h1>
+                <p id="nicknameContainerSubtitle">enter room code and nickname below</p>
+                <div class="nickname-input-container">
+                    <form>
+                        <p>Nickname</p>
+                        <input type="text" min=5 id="nicknameInput" name="nickname" placeholder="Nickname" maxlength="20">
+                        <p id="codeLabel">Code</p>
+                        <input min=6; max=6; id="codeInput" type="number" name="code" placeholder="Code" maxlength="6">
+                    </form>
+                    <a role="button" class="btn btn-primary" id="enterNicknameContainerBtn">Join Game</a>
+                </div>
+                <a role="button" class="btn btn-border" id="enterNicknameContainerGoBack">Go Back</a>
+            </div>
+
+            
             <!-- Choose puzzle -->
             <div class="choose-puzzle-container" id="choosePuzzleContainer">
                 <h1>SOLVE. WITH. FRIENDS.</h1>
@@ -66,29 +83,13 @@
                         <h3>6X6</h3>
                     </button>
                 </div>
-                <a href=# class="btn btn-border">Go Back</a>
+                <a role="button" class="btn btn-border" id="choosePuzzleContainerGoBack">Go Back</a>
             </div>
             
 
-            <!-- Join container-->
-            <div class="nickname-container" id="nicknameContainer">
-                <h1 id="nicknameContainerTitle">JOIN</h1>
-                <p id="nicknameContainerSubtitle">enter room code and nickname below</p>
-                <div class="nickname-input-container">
-                    <form>
-                        <p>Nickname</p>
-                        <input type="text" min=5 id="nicknameInput" name="nickname" placeholder="Nickname" maxlength="20">
-                        <p id="codeLabel">Code</p>
-                        <input min=6; max=6; id="codeInput" type="number" name="code" placeholder="Code" maxlength="6">
-                    </form>
-                    <a href="#" class="btn btn-primary">Join Game</a>
-                </div>
-                <a href="#" class="btn btn-border">Go Back</a>
-            </div>
-
 
             <!-- Create container-->
-            <div class="nickname-container" id="nicknameContainer">
+            <div class="nickname-container" id="createNicknameContainer">
                 <h1 id="nicknameContainerTitle">CREATE</h1>
                 <p id="nicknameContainerSubtitle">enter nickname below</p>
                 <div class="nickname-input-container">
@@ -98,13 +99,17 @@
                             maxlength="20">
 
                     </form>
-                    <a href="#" class="btn btn-primary">Create Game</a>
+                    <a role="button" class="btn btn-primary" id="createNicknameContainerBtn">Create Game</a>
                 </div>
-                <a href="#" class="btn btn-border">Go Back</a>
+                <a role="button" class="btn btn-border" id="createNicknameContainerGoBack">Go Back</a>
             </div>
             
         </div>
     </section>
+    <span id="transitionHolder"></span>
+    
+    <script src="js/scenes.js"></script>
+    <script src="js/input.js"></script>
 </body>
 
 </html>

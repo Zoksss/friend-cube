@@ -84,12 +84,13 @@ p {
   font-weight: 600;
   font-size: 18px;
   padding: 10px 30px;
-  text-decoration: none;
   position: relative !important;
+  text-decoration: none;
   -webkit-transition: all .3s;
   transition: all .3s;
   overflow: hidden;
   margin-top: 15px;
+  cursor: pointer;
 }
 
 .btn-primary {
@@ -677,5 +678,44 @@ p {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.transition::before {
+  pointer-events: none;
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  background-color: #FFF;
+  height: 100%;
+  width: 100%;
+  -webkit-animation: flash 0.6s ease-out;
+          animation: flash 0.6s ease-out;
+  z-index: 99;
+  opacity: 0;
+}
+
+@-webkit-keyframes flash {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 /*# sourceMappingURL=style.css.map */

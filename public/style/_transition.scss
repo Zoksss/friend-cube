@@ -1,0 +1,21 @@
+.transition {
+    &::before{
+        pointer-events: none;
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        background-color: $white;
+        height: 100%;
+        width: 100%;
+        animation: flash 0.6s ease-out;
+        z-index: 99;
+        opacity: 0;
+    }
+}
+
+@keyframes flash {
+    0%   {opacity: 0;}
+    50%  {opacity: 1;}
+    100%  { opacity: 0;}
+}
