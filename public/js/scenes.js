@@ -11,8 +11,6 @@ const enterNicknameContainerGoBackBtn = document.querySelector("#enterNicknameCo
 const choosePuzzleContainerGoBackBtn = document.querySelector("#choosePuzzleContainerGoBack");
 const createNicknameContainerGoBack = document.querySelector("#createNicknameContainerGoBack");
 
-const enterNicknameContainerBtn = document.querySelector("#enterNicknameContainerBtn");
-const createNicknameContainerBtn = document.querySelector("#createNicknameContainerBtn");
 
 
 
