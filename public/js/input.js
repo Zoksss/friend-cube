@@ -9,14 +9,14 @@ let selectedPuzzle;
 
 enterNicknameContainerBtn.addEventListener("click", (e) =>{
     e.preventDefault();
-    urlString = `${window.location.origin}/public/timer.html?nickname=${nicknameInput.value}&code=${codeInput.value}`;
+    urlString = `${window.location.origin}/public/timer.html`;
     let url = new URL(urlString);
     window.location.href = url;
 });
 
 createNicknameContainerBtn.addEventListener("click", (e) =>{
     e.preventDefault();
-    urlString = `${window.location.origin}/public/timer.html?nickname=${nicknameInput.value}&code=${makeRoomId(8)}&puzzle=${selectedPuzzle}`;
+    urlString = `${window.location.origin}/public/timer.html`;
     let url = new URL(urlString);
     window.location.href = url;
 });
