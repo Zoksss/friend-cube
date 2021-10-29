@@ -1,36 +1,72 @@
 // buttons
-.btn{
+.btn {
     border: none;
     outline: none;
     font-weight: 600;
     font-size: 18px;
     padding: 10px 30px;
-	position: relative !important; 
+    position: relative !important;
     text-decoration: none;
-	transition: all .3s;
-	overflow: hidden;
+    transition: all 0.3s;
+    overflow: hidden;
     margin-top: 15px;
     cursor: pointer;
 }
 
-.btn-primary{
+.btn-primary {
     background-color: $secondary;
     color: $white;
     border: 1px solid $secondary;
 }
 
-.btn-border{
+.btn-border {
     border: 1px solid $dark;
     color: $dark;
-	background: transparent !important;
+    background: transparent !important;
 }
-
 
 .btn:hover {
     transform: translateY(-3px);
-	background: darken($secondary ,7%);  
+    background: darken($secondary, 7%);
 }
 
-.btn-go-back{
-	margin-top: 50px;
+.btn-go-back {
+    margin-top: 50px;
+}
+
+.alert {
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    min-width: 80%;
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+        &:hover {
+            color: black;
+        }
+    }
+}
+
+.alert-unload {
+    animation: AlertloadOut 500ms ease;
+}
+
+@keyframes AlertloadOut {
+    0% {
+        top: 100px;
+    }
+    100% {
+        top: -200px;
+    }
 }

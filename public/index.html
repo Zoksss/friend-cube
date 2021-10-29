@@ -12,9 +12,12 @@
 </head>
 
 <body>
-    <section>
+    <section id="inputSection">
         <div class="container">
 
+            <div class="alert" id="alert">
+                Indicates a dangerous or potentially negative action.
+              </div>
             <!-- Join and Create Game container -->
             <div class="start-container" id="mainMenuContainer">
                 <h1>SOLVE. WITH. FRIENDS.</h1>
@@ -36,7 +39,7 @@
                         <p>Nickname</p>
                         <input type="text" min=5 id="nicknameInput" name="nickname" placeholder="Nickname" maxlength="20">
                         <p id="codeLabel">Code</p>
-                        <input min=6; max=6; id="codeInput" type="text" name="code" placeholder="Code" maxlength="6">
+                        <input id="codeInput" type="text" name="code" placeholder="Code" maxlength="8">
                     </form>
                     <a role="button" class="btn btn-primary" id="enterNicknameContainerBtn">Join Game</a>
                 </div>
@@ -106,8 +109,71 @@
         </div>
     </section>
 
+    <section class="timer-section" id="timerSection">
+        <div class="waiting-for-start-overlay" id="waitForStartOverlay">
+            <h1>Waiting for leader to start the game</h1>
+            <img src="assets/loading.gif" alt="loading">
+        </div>
+    
+        <div class="modal">
+            <div class="modal-container start-game-modal-container" id="leaderStartGameContainer">
+                <h2>Room: x3f341</h2>
+                <hr class="modal-underline">
+                <a href="#" class="start-game-btn">Start Game</a>
+            </div>
+        </div>
+    
+        <div class="modal players">
+            <div class="modal-container">
+                <a href="#" class="settings-exit-btn" id="closePlayerModalBtn"><img src="assets/x.svg"></a>
+                <h2>Joined Player's Stats</h2>
+                <hr class="modal-underline">
+            </div>
+        </div>
+    
+    
+        <div class="sidebar">
+            <h3>Your times</h3>
+            <table id="sidebarTimes">
+                <tr class="table-header">
+                    <td>no</td>
+                    <td>time</td>
+                </tr>
+                <tr>
+                    <td>1.</td>
+                    <td>35.40</td>
+                </tr>
+                <tr>
+                    <td>2.</td>
+                    <td>1:35.40</td>
+                </tr>
+                <tr id="nullElement"></tr>
+            </table>
+        </div>
+    
+    
+        <div class="timer-container">
+            <h2 id="code">code: x3f341</h2>
+            <p class="puzzle hidden-on-start" id="puzzle">3X3</p>
+            <h3 class="scramble hidden-on-start" id="scramble">Waiting for start</h3>
+            <div class="times">
+                <p class="time" id="time">00:00.00</p>
+                <p class="ao5 hidden-on-start" id="ao5">ao5: <span>--</span></p>
+                <p class="ao12 hidden-on-start" id="ao12">ao12: <span>--</span></p>
+            </div>
+        </div>
+    
+        <div class="bottom-buttons">
+            <a href="#" class="settings-btn" id="openSettingsBtn"><img src="./assets/settings.svg"></a>
+            <a href="#" class="settings-btn" id="openPlayersBtn"><img src="./assets/user.svg"></a>
+            <a href="#" class="settings-btn" id="exitRoom"><img src="./assets/exit.svg"></a>
+        </div>
+    </section>
+
     <span id="transitionHolder"></span>
     
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/socket.js"></script>
     <script src="js/scenes.js"></script>
     <script src="js/input.js"></script>
 </body>

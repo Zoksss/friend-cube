@@ -22,11 +22,8 @@ mainMenuJoinGameBtn.addEventListener("click", () => {
 });
 
 enterNicknameContainerGoBackBtn.addEventListener("click", () =>{
+    alertDestroy();
     transitionAnim(enterNicknameContainer, mainMenuContainer);
-});
-
-enterNicknameContainerBtn.addEventListener("click", () =>{
-    // join timer screen
 });
 
 
@@ -42,9 +39,12 @@ choosePuzzleContainerGoBackBtn.addEventListener("click", () =>{
 });
 
 createNicknameContainerGoBack.addEventListener("click", () =>{
+    clearTimeout(t);
     transitionAnim(createNicknameContainer, choosePuzzleContainer);
 });
 
+
+// transition between input screens and timer screen is in *input.js*
 
 
 function transitionAnim(hiddingElement, showingElement){   // transition between containers
