@@ -1,5 +1,5 @@
-const express = require("express");
 const socket = require("socket.io");
+const express = require("express");
 
 // App setup
 const PORT = process.env.PORT || 3000;
@@ -15,23 +15,48 @@ app.use(express.static("public"));
 // Socket setup
 const io = socket(server);
 
-let activeRooms = [
 
-]
+
+let activeRooms = [];
+
+const validateInput = (nickname, roomCode, puzzle) => {
+  console.log(roomCode)
+  if (nickname === "") return false;
+  if (nickname.length < 3) return false;
+  if (roomCode.length != 8) return false;
+  if (puzzle != "3x3") return false;
+  return true;
+}
+
 
 io.on("connection", (socket) => {
   console.log("Made socket connection with id: " + socket.id);
+  // update socket list on waiting screen
 
   socket.on("join", (nickname, roomCode, puzzle) => {
-    if(roomCode.toString().length === 8){
+    if (validateInput(nickname, roomCode, puzzle) === true) { // input is valid
       socket.nickname = nickname;
-      let obj = activeRooms.find(o => o.name === roomCode)
-      if(obj == null){
-        activeRooms.push({roomId: roomCode, leader: socket.id, puzzle: puzzle, isLocked: false, sockets: [socket.id]})
-        console.table(activeRooms);
+      let currRoom = activeRooms.find(o => o.roomId === roomCode);
+      if (currRoom != undefined) {
+        // room alredy exists
+        if(currRoom.isLocked == false){ 
+          currRoom.sockets.push(socket.id); 
+          socket.join(roomCode);
+          // fire event for joining
+          socket.emit("joinToTimer");
+        }
+        // else error - room is closed 
+        socket.emit("serverError");
       }
-
-      socket.join(roomCode);
+      else {
+        // creating room
+        activeRooms.push({ roomId: roomCode, leader: socket.id, puzzle: puzzle, isLocked: false, sockets: [socket.id] })
+        socket.join(roomCode);
+        // fireing event for leader
+        socket.emit("joinToTimerLeader");
+      }
     }
+    // else error
+    console.table(activeRooms);
   })
 });

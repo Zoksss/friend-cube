@@ -7,6 +7,9 @@ const inputSection = document.querySelector("#inputSection")
 const nicknameInput = document.querySelector("#nicknameInput");
 const codeInput = document.querySelector("#codeInput");
 
+const waitForStartOverlay = document.querySelector("#waitForStartOverlay");
+const waitForStartLeaderOverlay = document.querySelector("#waitForStartLeaderOverlay");
+
 const alertBox = document.querySelector("#alert")
 
 let urlString;
@@ -30,43 +33,31 @@ const inputLogic = (e) => {
 
     0 - no error
     1 - empty nickname
-    2 - empty code
-    3 - nickname must be more than 3
-    4 - code must be 8 characters
+    2 - nickname must be more than 3
+    3 - code must be 8 characters
 
     */
 
     let inputState = validateInput();
     console.log(inputState);
     switch (inputState) {
-        case 0:
-            transitionAnim(inputSection, timerSection);
-            timerSection.style.display = "block"
-            break;
         case 1:
-            alertBox.innerHTML = "Nickname cannot be empty."
-            displayAlert()
+            displayAlert("Nickname cannot be empty.")
             break;
         case 2:
-            alertBox.innerHTML = "Code cannot be empty."
-            displayAlert()
+            displayAlert("Nickname must be 3 or more characters")
             break;
         case 3:
-            alertBox.innerHTML = "Nickname must be 3 or more characters"
-            displayAlert()
-            break;
-        case 4:
-            alertBox.innerHTML = "Code must be 8 characters."
-            displayAlert()
+            displayAlert("Code must be 8 characters.")
             break;
         default:
-            transitionAnim(inputSection, timerSection);
-            timerSection.style.display = "block"
+            console.log("Error");
             break;
     }
 }
 
-const displayAlert = (type) => {
+const displayAlert = (message) => {
+    alertBox.innerHTML = message
     alertBox.style.display = "block"
     t = setTimeout(() => {
         alertBox.classList.add("alert-unload");
@@ -74,11 +65,15 @@ const displayAlert = (type) => {
     }, 5000);
 }
 
+const alertDestroy = () => {
+    alertBox.style.display = "none"
+    alertBox.classList.remove("alert-unload");
+}
+
 const validateInput = () => {
     if (nicknameInput.value == "") return 1;
-    if (codeInput.value == "") return 2;
-    if (nicknameInput.value.length < 3) return 3;
-    if (codeInput.value.length != 8) return 4;
+    if (nicknameInput.value.length < 3) return 2;
+    if (codeInput.value.length != 8) return 3;
     return 0;
 }
 
@@ -100,10 +95,23 @@ const makeRoomId = length => {
 }
 
 
-const alertDestroy = () => {
-    alertBox.style.display = "none"
-    alertBox.classList.remove("alert-unload");
-}
+
 
 
 // first joined socekt is leader
+
+socket.on("serverError", () => {
+    displayAlert("Error - Unable to join, try again");
+});
+
+socket.on("joinToTimer", () => {
+    transitionAnim(inputSection, timerSection);
+    timerSection.style.display = "block"
+});
+
+socket.on("joinToTimerLeader", () => {
+    waitForStartOverlay.style.display = "none";
+    waitForStartLeaderOverlay.style.display = "flex";
+    transitionAnim(inputSection, timerSection);
+    timerSection.style.display = "block"
+});
