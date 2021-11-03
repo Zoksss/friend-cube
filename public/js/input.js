@@ -7,8 +7,6 @@ const inputSection = document.querySelector("#inputSection")
 const nicknameInput = document.querySelector("#nicknameInput");
 const codeInput = document.querySelector("#codeInput");
 
-const waitForStartOverlay = document.querySelector("#waitForStartOverlay");
-const waitForStartLeaderOverlay = document.querySelector("#waitForStartLeaderOverlay");
 
 const alertBox = document.querySelector("#alert")
 
@@ -98,20 +96,4 @@ const makeRoomId = length => {
 
 
 
-// first joined socekt is leader
 
-socket.on("serverError", () => {
-    displayAlert("Error - Unable to join, try again");
-});
-
-socket.on("joinToTimer", () => {
-    transitionAnim(inputSection, timerSection);
-    timerSection.style.display = "block"
-});
-
-socket.on("joinToTimerLeader", () => {
-    waitForStartOverlay.style.display = "none";
-    waitForStartLeaderOverlay.style.display = "flex";
-    transitionAnim(inputSection, timerSection);
-    timerSection.style.display = "block"
-});

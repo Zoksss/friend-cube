@@ -19,6 +19,10 @@ const io = socket(server);
 
 let activeRooms = [];
 
+const sendMessageToAll = (message, roomCode) => {
+  socket.broadcast.in(roomCode).emit(message);
+};
+
 const validateInput = (nickname, roomCode, puzzle) => {
   console.log(roomCode)
   if (nickname === "") return false;
@@ -53,10 +57,22 @@ io.on("connection", (socket) => {
         activeRooms.push({ roomId: roomCode, leader: socket.id, puzzle: puzzle, isLocked: false, sockets: [socket.id] })
         socket.join(roomCode);
         // fireing event for leader
-        socket.emit("joinToTimerLeader");
+        socket.emit("joinToTimerLeader", roomCode);
+      }
+
+      // update joined players status
+      let msg = [];
+      
+      currRoom = activeRooms.find(o => o.roomId === roomCode);
+      if(currRoom != undefined){
+        currRoom.sockets.forEach(socketId => {
+          msg.push(io.sockets.sockets[socketId].nickname);
+        });
+        sendMessageToAll(roomCode, msg);
+        console.log("Sent socket update : " + msg);
       }
     }
     // else error
     console.table(activeRooms);
-  })
+  });
 });

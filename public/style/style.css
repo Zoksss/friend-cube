@@ -405,18 +405,42 @@ p {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  padding: 250px 0;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   z-index: 1000;
 }
 
-.waiting-for-start-leader-overlay img {
-  width: 200px;
-  height: 200px;
+.waiting-for-start-leader-overlay .start-game-btn {
+  height: 100px;
+  margin-top: 50px;
+  width: 60%;
+  background-color: #18B923;
+  font-size: 30pt;
+  font-weight: 700;
+  text-decoration: none;
+  color: #FFF;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.waiting-for-start-leader-overlay .joined-users {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 50px;
+}
+
+.waiting-for-start-leader-overlay .joined-users p {
+  margin: 0 15px;
 }
 
 .sidebar {
@@ -428,6 +452,7 @@ p {
   left: 0;
   z-index: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   /* Handle on hover */
 }
 
@@ -529,7 +554,8 @@ p {
   font-weight: 700;
 }
 
-.timer-container .times .ao5, .timer-container .times .ao12 {
+.timer-container .times .ao5,
+.timer-container .times .ao12 {
   font-size: 2.5rem;
   font-weight: 700;
 }
@@ -770,25 +796,6 @@ p {
   width: 60%;
   margin-left: auto;
   margin-right: auto;
-}
-
-.start-game-modal-container .start-game-btn {
-  height: 100px;
-  width: 80%;
-  background-color: #18B923;
-  font-size: 30pt;
-  font-weight: 700;
-  text-decoration: none;
-  color: #FFF;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
 .transition::before {
