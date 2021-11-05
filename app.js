@@ -1,4 +1,4 @@
-const socket = require("socket.io");
+const sockets = require("socket.io");
 const express = require("express");
 
 // App setup
@@ -13,15 +13,11 @@ const server = app.listen(PORT, function () {
 app.use(express.static("public"));
 
 // Socket setup
-const io = socket(server);
+const io = sockets(server);
 
 
 
 let activeRooms = [];
-
-const sendMessageToAll = (message, roomCode) => {
-  socket.broadcast.in(roomCode).emit(message);
-};
 
 const validateInput = (nickname, roomCode, puzzle) => {
   console.log(roomCode)
@@ -64,11 +60,12 @@ io.on("connection", (socket) => {
       let msg = [];
       
       currRoom = activeRooms.find(o => o.roomId === roomCode);
+      console.log(currRoom);
       if(currRoom != undefined){
         currRoom.sockets.forEach(socketId => {
           msg.push(io.sockets.sockets[socketId].nickname);
         });
-        sendMessageToAll(roomCode, msg);
+        io.in(roomCode).emit("displayUsers", JSON.stringify(msg));
         console.log("Sent socket update : " + msg);
       }
     }

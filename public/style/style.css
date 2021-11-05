@@ -432,14 +432,14 @@ p {
           align-items: center;
 }
 
-.waiting-for-start-leader-overlay .joined-users {
+.joined-users {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   margin-top: 50px;
 }
 
-.waiting-for-start-leader-overlay .joined-users p {
+.joined-users p {
   margin: 0 15px;
 }
 

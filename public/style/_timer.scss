@@ -48,15 +48,15 @@
         align-items: center;
     }
 
-    .joined-users{
-        display: flex;
-        margin-top: 50px;
-        p{
-            margin: 0 15px;
-        }
-    }
 }
 
+.joined-users{
+    display: flex;
+    margin-top: 50px;
+    p{
+        margin: 0 15px;
+    }
+}
 .sidebar {
     position: absolute;
     width: 270px;

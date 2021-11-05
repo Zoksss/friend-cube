@@ -1,6 +1,11 @@
+
 const waitForStartOverlay = document.querySelector("#waitForStartOverlay");
 const waitForStartLeaderOverlay = document.querySelector("#waitForStartLeaderOverlay");
 const waitForStartLeaderOverlayRoomCode = document.querySelector("#waitForStartLeaderOverlayRoomCode");
+
+const joinedUsersContainer = document.querySelector("#joinedUsersContainer");
+const joinedUsersContainer2 = document.querySelector("#joinedUsersContainer2");
+
 
 let socket = io();
 
@@ -19,6 +24,7 @@ socket.on("joinToTimer", () => {
     waitForStartLeaderOverlay.style.display = "none";
     waitForStartOverlay.style.display = "flex";
     timerSection.style.display = "block"
+    console.log("test");
 });
 
 socket.on("joinToTimerLeader", (roomCode) => {
@@ -27,4 +33,32 @@ socket.on("joinToTimerLeader", (roomCode) => {
     waitForStartLeaderOverlayRoomCode.innerHTML = roomCode;
     transitionAnim(inputSection, timerSection);
     timerSection.style.display = "block";
+});
+
+socket.on("displayUsers", (usersJSON) => {
+    let users = JSON.parse(usersJSON);
+    
+    let child = joinedUsersContainer.lastElementChild; 
+    while (child) {
+        joinedUsersContainer.removeChild(child);
+        child = joinedUsersContainer.lastElementChild;
+    }
+
+    users.forEach(element => {
+        let dom = document.createElement("p");
+        dom.innerText = element
+        joinedUsersContainer.append(dom);
+    });
+
+    let child2 = joinedUsersContainer2.lastElementChild; 
+    while (child2) {
+        joinedUsersContainer2.removeChild(child2);
+        child2 = joinedUsersContainer2.lastElementChild;
+    }
+
+    users.forEach(element => {
+        let dom = document.createElement("p");
+        dom.innerText = element
+        joinedUsersContainer2.append(dom);
+    });
 });
