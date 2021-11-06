@@ -1,5 +1,7 @@
+
 const enterNicknameContainerBtn = document.querySelector("#enterNicknameContainerBtn");
 const createNicknameContainerBtn = document.querySelector("#createNicknameContainerBtn");
+const leaderStartGame = document.querySelector("#leaderStartGame");
 
 const timerSection = document.querySelector("#timerSection")
 const inputSection = document.querySelector("#inputSection")
@@ -92,7 +94,10 @@ const makeRoomId = length => {
     return result;
 }
 
-
+leaderStartGame.addEventListener("click", () =>{
+    console.log("fireinbg start");
+    socket.emit("leaderStartGamee", codeInput.value);
+});
 
 
 

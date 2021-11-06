@@ -31,7 +31,23 @@ const validateInput = (nickname, roomCode, puzzle) => {
 
 io.on("connection", (socket) => {
   console.log("Made socket connection with id: " + socket.id);
-  // update socket list on waiting screen
+  
+  socket.on("leaderStartGamee", (roomCode) => {
+
+    // someone clicked start game button 
+    console.log("test na serveru krvavu ti majku jebem")
+    roomWhereIsLeader = activeRooms.find(o => o.leader === socket.id);
+    if (roomWhereIsLeader) {
+      // start the game
+      console.log(roomWhereIsLeader);
+
+      if(roomWhereIsLeader.roomId === roomCode){
+        io.in(roomWhereIsLeader.roomId).emit("startGame");
+        roomWhereIsLeader.isLocked = true;
+      }
+      else console.log("jebem ti lebac hakerski...")
+    }
+  });
 
   socket.on("join", (nickname, roomCode, puzzle) => {
     if (validateInput(nickname, roomCode, puzzle) === true) { // input is valid
@@ -39,8 +55,8 @@ io.on("connection", (socket) => {
       let currRoom = activeRooms.find(o => o.roomId === roomCode);
       if (currRoom != undefined) {
         // room alredy exists
-        if(currRoom.isLocked == false){ 
-          currRoom.sockets.push(socket.id); 
+        if (currRoom.isLocked == false) {
+          currRoom.sockets.push(socket.id);
           socket.join(roomCode);
           // fire event for joining
           socket.emit("joinToTimer");
@@ -58,10 +74,10 @@ io.on("connection", (socket) => {
 
       // update joined players status
       let msg = [];
-      
+
       currRoom = activeRooms.find(o => o.roomId === roomCode);
       console.log(currRoom);
-      if(currRoom != undefined){
+      if (currRoom != undefined) {
         currRoom.sockets.forEach(socketId => {
           msg.push(io.sockets.sockets[socketId].nickname);
         });
@@ -69,6 +85,7 @@ io.on("connection", (socket) => {
         console.log("Sent socket update : " + msg);
       }
     }
+
     // else error
     console.table(activeRooms);
   });

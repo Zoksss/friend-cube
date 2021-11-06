@@ -7,6 +7,8 @@ const joinedUsersContainer = document.querySelector("#joinedUsersContainer");
 const joinedUsersContainer2 = document.querySelector("#joinedUsersContainer2");
 
 
+
+
 let socket = io();
 
 socket.on("connect", () => {
@@ -62,3 +64,9 @@ socket.on("displayUsers", (usersJSON) => {
         joinedUsersContainer2.append(dom);
     });
 });
+
+socket.on("startGame", () => {
+    console.log("starting game");
+    waitForStartOverlay.style.display = "none";
+    waitForStartLeaderOverlay.style.display = "none";
+})
