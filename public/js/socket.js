@@ -37,8 +37,7 @@ socket.on("joinToTimerLeader", (roomCode) => {
     timerSection.style.display = "block";
 });
 
-socket.on("displayUsers", (usersJSON) => {
-    let users = JSON.parse(usersJSON);
+socket.on("displayUsers", (users) => {
     
     let child = joinedUsersContainer.lastElementChild; 
     while (child) {
@@ -69,4 +68,16 @@ socket.on("startGame", () => {
     console.log("starting game");
     waitForStartOverlay.style.display = "none";
     waitForStartLeaderOverlay.style.display = "none";
+})
+
+
+
+
+let timesToAdd = [];
+
+socket.on("timeGetFromSocket", (data) => {
+    console.log("data je: ")
+    //console.table(data);
+    timesToAdd.push({socketName: data.socketName, time: data.stime})
+    console.table(timesToAdd);
 })

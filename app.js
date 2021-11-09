@@ -18,6 +18,7 @@ const io = sockets(server);
 
 
 let activeRooms = [];
+let times = [];
 
 const validateInput = (nickname, roomCode, puzzle) => {
   console.log(roomCode)
@@ -32,8 +33,8 @@ const validateInput = (nickname, roomCode, puzzle) => {
 io.on("connection", (socket) => {
   console.log("Made socket connection with id: " + socket.id);
   
+  
   socket.on("leaderStartGamee", (roomCode) => {
-
     // someone clicked start game button 
     console.log("test na serveru krvavu ti majku jebem")
     roomWhereIsLeader = activeRooms.find(o => o.leader === socket.id);
@@ -47,6 +48,28 @@ io.on("connection", (socket) => {
       }
       else console.log("jebem ti lebac hakerski...")
     }
+  });
+
+  socket.on("finalTime", (data) => {
+    let roomCode = data.roomCode
+    let time = data.time;
+    console.log("kod je : " + roomCode)
+    console.log("vreme primljeno")
+    console.table(time);
+    // if socket is in room
+    //let socketId = socket.id;
+    //times.push({roomCode : { socketId: [time]}});
+    
+    let roomWhereSocketIs = activeRooms.find(o => o.roomId === roomCode);
+    console.log(roomWhereSocketIs);
+    let socketRoom = roomWhereSocketIs.sockets.filter(o => o === socket.id)
+    console.log(socketRoom);
+    if(socketRoom){
+      console.log(roomWhereSocketIs.roomId);
+      io.in(roomWhereSocketIs.roomId).emit("timeGetFromSocket", ({socketName: socket.nickname, stime: time }));
+      console.table(times);
+    }
+
   });
 
   socket.on("join", (nickname, roomCode, puzzle) => {
@@ -81,7 +104,7 @@ io.on("connection", (socket) => {
         currRoom.sockets.forEach(socketId => {
           msg.push(io.sockets.sockets[socketId].nickname);
         });
-        io.in(roomCode).emit("displayUsers", JSON.stringify(msg));
+        io.in(roomCode).emit("displayUsers", msg);
         console.log("Sent socket update : " + msg);
       }
     }
