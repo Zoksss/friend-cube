@@ -68,6 +68,7 @@ socket.on("startGame", () => {
     console.log("starting game");
     waitForStartOverlay.style.display = "none";
     waitForStartLeaderOverlay.style.display = "none";
+    isReady = true;
 })
 
 
@@ -80,4 +81,9 @@ socket.on("timeGetFromSocket", (data) => {
     //console.table(data);
     timesToAdd.push({socketName: data.socketName, time: data.stime})
     console.table(timesToAdd);
+})
+
+socket.on("ready", () => {
+    isReady = true;
+    console.log("now is ready")
 })

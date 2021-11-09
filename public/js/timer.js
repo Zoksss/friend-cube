@@ -25,8 +25,10 @@ let currentTime, timeElapsed, hour, min, sec, ms;
 
 let times = [];
 
+let isReady = false;
+
 document.addEventListener("keydown", event => {
-    if (event.isComposing || event.keyCode === 32 && !debounce) {
+    if (event.isComposing || event.keyCode === 32 && !debounce && isReady) {
         debounce = true;
 
         console.log("Space clicked");
@@ -37,7 +39,7 @@ document.addEventListener("keydown", event => {
             timerStop();
             isTimerRunningTrue = false;
             isTimmerStoppedTrue = true;
-            if (hideElementsOnStartTrue) displayChange("block");
+            if(hideElementsOnStartTrue) displayChange("block");
         }
     }
 });
@@ -83,6 +85,8 @@ const timerStop = () => {
     socket.emit("finalTime", {roomCode: codeInput.value, time: {hours: hour, minutes: min, seconds: sec, milliseconds: ms}});
     //console.table(times);
     clearInterval(started);
+    scrambleElement.innerHTML = "Waiting for other players to finish solving..."
+    isReady = false;
 }
 
 const timerReset = () => {
