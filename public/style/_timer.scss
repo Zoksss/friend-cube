@@ -100,6 +100,20 @@
         font-weight: 600;
         font-size: 1vw;
 
+        .round-marker{
+        
+            margin-top: 25px;
+            td{
+                border-top: 1px solid black;
+                font-weight: 400;
+            }
+        }
+
+        td{
+            font-size: 1rem;
+            height: 20px;
+
+        }
         .table-header {
             font-weight: 700;
         }

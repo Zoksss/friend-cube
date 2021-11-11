@@ -19,7 +19,6 @@ const io = sockets(server);
 
 let activeRooms = [];
 let times = [];
-let isRoomReady = []; // {roomId, sockets[{socketId: "asdjfh123sdf_1sf", isReady: false}]}
 
 const validateInput = (nickname, roomCode, puzzle) => {
   console.log(roomCode)
@@ -30,25 +29,29 @@ const validateInput = (nickname, roomCode, puzzle) => {
   return true;
 }
 
-const checkIfEveryoneIsReady = (roomCode) => {
+const checkIfEveryoneisFinished = (roomCode) => {
   let roomObject = activeRooms.find(o => o.roomId === roomCode);
-  if(roomObject){
-    for(let i = 0; i <= roomObject.sockets.length; i++){
-      if(roomObject.sockets[i].isReady === false) {
-        return false;
-      }
-      else{
-        return true;
+  let temp = true;
+  if (roomObject) {
+    for (let i = 0; i < roomObject.sockets.length; i++) {
+      if (roomObject.sockets[i].isFinished === false) {
+        temp = false;
+        break;
       }
     }
+    return temp;
   }
-  return false;
+  
 }
 
+const newRoundStart = () => {
+
+}
 
 io.on("connection", (socket) => {
   console.log("Made socket connection with id: " + socket.id);
-  
+
+
   socket.on("leaderStartGamee", (roomCode) => {
     // someone clicked start game button 
     roomWhereIsLeader = activeRooms.find(o => o.leader === socket.id);
@@ -56,11 +59,15 @@ io.on("connection", (socket) => {
       // start the game
       console.log(roomWhereIsLeader);
 
-      if(roomWhereIsLeader.roomId === roomCode){
+      if (roomWhereIsLeader.roomId === roomCode) {
         io.in(roomWhereIsLeader.roomId).emit("startGame");
         roomWhereIsLeader.isLocked = true;
+
+        for (let i = 0; i < roomWhereIsLeader.sockets.length; i++)
+          roomWhereIsLeader.sockets[i].isFinished = false;
       }
       else console.log("jebem ti lebac hakerski...")
+
     }
   });
 
@@ -69,17 +76,30 @@ io.on("connection", (socket) => {
     let time = data.time;
     console.log("vreme primljeno")
     let roomWhereSocketIs = activeRooms.find(o => o.roomId === roomCode);
-    let socketRoom = roomWhereSocketIs.sockets.filter(o => o.socketId === socket.id)
-    if(socketRoom){
-      isRoomReady.push({roomId: roomCode, sockets: [{socketId: socket.id, isReady: true}]});
-      io.in(roomWhereSocketIs.roomId).emit("timeGetFromSocket", ({socketName: socket.nickname, stime: time }));
+    if (roomWhereSocketIs) {
+      io.in(roomWhereSocketIs.roomId).emit("timeGetFromSocket", ({ socketName: socket.nickname, stime: time }));
     }
-    console.log(checkIfEveryoneIsReady(roomCode));
-    if(checkIfEveryoneIsReady(roomCode)){
+    roomWhereSocketIs.sockets.filter(o => o.socket === socket.id).isFinished = true;
+    let socketObjectInRoom;
+    for(let i = 0; i < roomWhereSocketIs.sockets.length; i++){
+      if(roomWhereSocketIs.sockets[i].socketId === socket.id){ 
+        socketObjectInRoom = roomWhereSocketIs.sockets[i];
+        break;
+      }
+    }
+    socketObjectInRoom.isFinished = true;
+    console.table(activeRooms[0].sockets);
+    console.log(checkIfEveryoneisFinished(roomCode));
+    if (checkIfEveryoneisFinished(roomCode) === true) {
       // everyone is ready
+       console.log("krvava majka");
+        
+      // start new round !
       io.in(roomCode).emit("ready");
-      for(let i = 0; i < roomWhereSocketIs.sockets.length; i++)
-        roomWhereSocketIs.sockets[i].isReady = true;
+
+      for (let i = 0; i < roomWhereSocketIs.sockets.length; i++)
+        roomWhereSocketIs.sockets[i].isFinished = false;
+        
     }
   });
 
@@ -91,7 +111,7 @@ io.on("connection", (socket) => {
         // room alredy exists
         if (currRoom.isLocked == false) {
           let socketId = socket.id
-          currRoom.sockets.push({socketId: socket.id, isReady: true});
+          currRoom.sockets.push({ socketId: socket.id, isFinished: true });
           socket.join(roomCode);
           // fire event for joining
           socket.emit("joinToTimer");
@@ -101,7 +121,7 @@ io.on("connection", (socket) => {
       }
       else {
         // creating room
-        activeRooms.push({ roomId: roomCode, leader: socket.id, puzzle: puzzle, isLocked: false, sockets: [{socketId: socket.id, isReady: true}]})
+        activeRooms.push({ roomId: roomCode, leader: socket.id, puzzle: puzzle, isLocked: false, sockets: [{ socketId: socket.id, isFinished: true }] })
 
         socket.join(roomCode);
         // fireing event for leader
@@ -115,6 +135,7 @@ io.on("connection", (socket) => {
       currRoom = activeRooms.find(o => o.roomId === roomCode);
       console.log(currRoom);
       if (currRoom != undefined) {
+        msg = [];
         currRoom.sockets.forEach(socket => {
           msg.push(io.sockets.sockets[socket.socketId].nickname);
         });

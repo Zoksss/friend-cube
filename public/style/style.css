@@ -487,6 +487,20 @@ p {
   font-size: 1vw;
 }
 
+.sidebar table .round-marker {
+  margin-top: 25px;
+}
+
+.sidebar table .round-marker td {
+  border-top: 1px solid black;
+  font-weight: 400;
+}
+
+.sidebar table td {
+  font-size: 1rem;
+  height: 20px;
+}
+
 .sidebar table .table-header {
   font-weight: 700;
 }

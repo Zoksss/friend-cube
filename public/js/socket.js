@@ -7,7 +7,7 @@ const joinedUsersContainer = document.querySelector("#joinedUsersContainer");
 const joinedUsersContainer2 = document.querySelector("#joinedUsersContainer2");
 
 
-
+let round = 0;
 
 let socket = io();
 
@@ -74,16 +74,47 @@ socket.on("startGame", () => {
 
 
 
+
 let timesToAdd = [];
+
+
 
 socket.on("timeGetFromSocket", (data) => {
     console.log("data je: ")
     //console.table(data);
-    timesToAdd.push({socketName: data.socketName, time: data.stime})
-    console.table(timesToAdd);
+    let socketName = data.socketName;
+    let time = data.stime;
+
+    const elemRound = document.createElement('tr');
+    const elem = document.createElement('tr');
+
+    elemRound.classList.add("round-marker");
+
+    elemRound.innerHTML =
+        `
+        <td>Round <span id="roundCounterElement">${round}</span></td>
+    `;
+
+    elem.innerHTML =
+        `
+        <tr>
+            <td>${socketName}</td>
+            <td>${time.minutes}:${time.seconds}.${time.milliseconds}</td>
+        </tr>
+    `;
+
+    tableInserttarget.parentNode.insertBefore(elem, tableInserttarget);
+    tableInserttarget = elem;
+    tableInserttarget.parentNode.insertBefore(elemRound, tableInserttarget);
+    tableInserttarget = elemRound;
+
+
+
+
 })
 
 socket.on("ready", () => {
     isReady = true;
+    round++;
     console.log("now is ready")
 })
