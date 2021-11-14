@@ -97,18 +97,25 @@ socket.on("timeGetFromSocket", (data) => {
 
     elem.innerHTML =
         `
-        <tr>
             <td>${socketName}</td>
             <td>${time.minutes}:${time.seconds}.${time.milliseconds}</td>
-        </tr>
     `;
 
-    tableInserttarget.parentNode.insertBefore(elem, tableInserttarget);
-    tableInserttarget = elem;
-    tableInserttarget.parentNode.insertBefore(elemRound, tableInserttarget);
-    tableInserttarget = elemRound;
+
+    if(document.querySelector("#roundCounterElement") && document.querySelector("#roundCounterElement").innerHTML === round.toString()){
+        console.log("round shit alredy exist");
+        tableInserttarget.insertBefore(elem, tableInserttarget);
+        tableInserttarget = elem;
+    }
+    else{
+        tableInserttarget.parentNode.insertBefore(elemRound, tableInserttarget);
+        tableInserttarget = elemRound.parentElement;
+        tableInserttarget.append(elem);
+        tableInserttarget = elem;
 
 
+    }
+    
 
 
 })
