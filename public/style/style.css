@@ -358,6 +358,10 @@ p {
   opacity: 0.4;
 }
 
+.tbody-row-group {
+  width: 100%;
+}
+
 .timer-section {
   display: none;
 }

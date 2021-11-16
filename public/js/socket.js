@@ -85,35 +85,38 @@ socket.on("timeGetFromSocket", (data) => {
     let socketName = data.socketName;
     let time = data.stime;
 
-    const elemRound = document.createElement('tr');
-    const elem = document.createElement('tr');
+    
 
-    elemRound.classList.add("round-marker");
-
-    elemRound.innerHTML =
-        `
+    const tbody = document.createElement("tbody");
+    tbody.classList.add(`tbody-row-group`);
+    tbody.classList.add(`round-${round}`);
+    tbody.innerHTML = `
+    <tr class="round-marker">
         <td>Round <span id="roundCounterElement">${round}</span></td>
-    `;
+    </tr>
+    `
 
-    elem.innerHTML =
-        `
-            <td>${socketName}</td>
-            <td>${time.minutes}:${time.seconds}.${time.milliseconds}</td>
-    `;
+    const element = document.createElement("tr");
+    element.innerHTML = `
+    <tr>
+        <td>${socketName}</td>
+        <td>${time.minutes}:${time.seconds}.${time.milliseconds}</td>
+    </tr>`
 
 
-    if(document.querySelector("#roundCounterElement") && document.querySelector("#roundCounterElement").innerHTML === round.toString()){
+    if(document.querySelector(`.round-${round}`)){
         console.log("round shit alredy exist");
-        tableInserttarget.insertBefore(elem, tableInserttarget);
-        tableInserttarget = elem;
+
+        tableInserttarget = document.querySelector(`.round-${round}`);
+        tableInserttarget.append(element);
     }
     else{
-        tableInserttarget.parentNode.insertBefore(elemRound, tableInserttarget);
-        tableInserttarget = elemRound.parentElement;
-        tableInserttarget.append(elem);
-        tableInserttarget = elem;
-
-
+       tableInserttarget = document.querySelector(".table-header");
+        
+       tableInserttarget.parentElement.insertBefore(tbody, tableInserttarget.nextSibling);
+       tableInserttarget = tbody;
+       tableInserttarget.append(element);
+       tableInserttarget = element;
     }
     
 
