@@ -1,8 +1,4 @@
-.tbody-row-group{
-    width: 100%;
-    display: table;
 
-}
 
 .timer-section {
     display: none;
@@ -101,11 +97,19 @@
     table {
         position: relative;
         width: 100%;
-        padding: 15px;
+        /*padding: 15px;*/
         border-spacing: 15px 15px;
         font-weight: 600;
         font-size: 1vw;
-
+        
+ 
+        .tbody-row-group{
+            width: 100%;
+        }
+        .default-tbody{
+            display: table;
+            width: 100%;
+        }
         .round-marker{
         
             margin-top: 25px;

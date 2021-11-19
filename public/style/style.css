@@ -358,10 +358,6 @@ p {
   opacity: 0.4;
 }
 
-.tbody-row-group {
-  width: 100%;
-}
-
 .timer-section {
   display: none;
 }
@@ -485,10 +481,19 @@ p {
 .sidebar table {
   position: relative;
   width: 100%;
-  padding: 15px;
+  /*padding: 15px;*/
   border-spacing: 15px 15px;
   font-weight: 600;
   font-size: 1vw;
+}
+
+.sidebar table .tbody-row-group {
+  width: 100%;
+}
+
+.sidebar table .default-tbody {
+  display: table;
+  width: 100%;
 }
 
 .sidebar table .round-marker {
