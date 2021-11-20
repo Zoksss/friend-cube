@@ -7,7 +7,10 @@ const timerSection = document.querySelector("#timerSection")
 const inputSection = document.querySelector("#inputSection")
 
 const nicknameInput = document.querySelector("#nicknameInput");
+const nicknameInputOnCreate = document.querySelector("#nicknameInputOnCreate");
 const codeInput = document.querySelector("#codeInput");
+
+const exitRoom = document.querySelector("#exitRoom");
 
 
 const alertBox = document.querySelector("#alert")
@@ -22,13 +25,20 @@ enterNicknameContainerBtn.addEventListener("click", (e) => {
     socket.emit('join', nicknameInput.value, codeInput.value, "3x3");
 });
 createNicknameContainerBtn.addEventListener("click", (e) => {
+    codeInput.value = makeRoomId(8);
     inputLogic(e); 
-    socket.emit('join', nicknameInput.value, makeRoomId(8), selectedPuzzle);
+    socket.emit('join', nicknameInputOnCreate.value, codeInput.value, selectedPuzzle);
 });
+
+exitRoom.addEventListener("click", () => {
+    socket.emit("leave", codeInput.value);
+})
+
 const inputLogic = (e) => {
     e.preventDefault();
     clearTimeout(t);
 
+     
     /* error codes
 
     0 - no error
@@ -71,8 +81,8 @@ const alertDestroy = () => {
 }
 
 const validateInput = () => {
-    if (nicknameInput.value == "") return 1;
-    if (nicknameInput.value.length < 3) return 2;
+    if (nicknameInput.value === "" && nicknameInputOnCreate.value === "") return 1;
+    if (nicknameInput.value.length < 3 && nicknameInputOnCreate.value.length < 3) return 2;
     if (codeInput.value.length != 8) return 3;
     return 0;
 }
@@ -102,3 +112,7 @@ leaderStartGame.addEventListener("click", () =>{
 
 
 
+let array = [];
+array["zoksara"] = 123;
+array["zoksara5"] = 127;
+console.table(array["zoksara"])
