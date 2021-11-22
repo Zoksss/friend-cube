@@ -16,7 +16,7 @@ app.use(express.static("public"));
 const io = socketio(server);
 
 
-class CreateRoom {
+class Room {
     constructor(leader, puzzle) {
         this.leader = leader;
         this.puzzle = puzzle;
@@ -54,7 +54,7 @@ io.on("connection", (socket) => {
                 else socket.emit("serverError", "Room Closed");
             }
             else {
-                rooms[roomCode] = new CreateRoom(socket.id, puzzle);
+                rooms[roomCode] = new Room(socket.id, puzzle);
                 socket.join(roomCode);
                 socket.emit("joinToTimerLeader", roomCode);
             }
