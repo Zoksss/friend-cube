@@ -62,8 +62,40 @@ io.on("connection", (socket) => {
 
         }
         // update joined players status
-        updateWaitingScreenStatus(roomCode)
+        updateWaitingScreenStatus(roomCode);
     });
+
+    socket.on("leaderStartGamee", (roomCode) => {
+        // start game
+        if (!rooms[roomCode]) return;
+        if (!rooms[roomCode].sockets.filter(o => o.leader === socket.id));
+
+        rooms[roomCode].isLocked = true;
+        for (let i = 0; i < rooms[roomCode].sockets.length; i++)
+            rooms[roomCode].sockets[i].isFinished = false;
+
+        io.in(roomCode).emit("startGame");
+
+
+    });
+
+    socket.on("finalTime", (data) => {
+        if (!rooms[data.roomCode]) return;
+        let socketObjectInRoom = rooms[data.roomCode].sockets.find(o => o.socketId === socket.id);
+        if (!socketObjectInRoom) return;
+
+        io.in(data.roomCode).emit("timeGetFromSocket", ({ socketName: socket.nickname, stime: data.time }));
+        socketObjectInRoom.isFinished = true;
+
+        if (isEveryoneFinished(data.roomCode) === true) {
+            io.in(data.roomCode).emit("ready");
+            for (let i = 0; i < rooms[data.roomCode].sockets.length; i++)
+                rooms[data.roomCode].sockets[i].isFinished = false;
+
+        }
+
+    });
+
 
 });
 
@@ -71,7 +103,8 @@ io.on("connection", (socket) => {
 
 
 // functions
-const updateWaitingScreenStatus= (roomCode) => {
+
+const updateWaitingScreenStatus = (roomCode) => {
     let msg = [];
     rooms[roomCode].sockets.forEach(socket => {
         msg.push(io.sockets.sockets[socket.socketId].nickname);
@@ -85,4 +118,15 @@ const validateInput = (nickname, roomCode, puzzle) => {
     if (roomCode.length != 8) return false;
     if (puzzle != "3x3") return false;
     return true;
+}
+
+const isEveryoneFinished = (roomCode) => {
+    let temp = true;
+    for (let i = 0; i < rooms[roomCode].sockets.length; i++) {
+        if (rooms[roomCode].sockets[i].isFinished === false) {
+            temp = false;
+            break;
+        }
+    }
+    return temp;
 }

@@ -109,10 +109,3 @@ leaderStartGame.addEventListener("click", () =>{
     socket.emit("leaderStartGamee", codeInput.value);
 });
 
-
-
-
-let array = [];
-array["zoksara"] = 123;
-array["zoksara5"] = 127;
-console.table(array["zoksara"])
