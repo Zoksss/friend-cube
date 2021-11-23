@@ -31,7 +31,7 @@ createNicknameContainerBtn.addEventListener("click", (e) => {
 });
 
 exitRoom.addEventListener("click", () => {
-    socket.emit("leave", codeInput.value);
+    location.reload();
 })
 
 const inputLogic = (e) => {

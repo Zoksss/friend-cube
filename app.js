@@ -15,7 +15,6 @@ app.use(express.static("public"));
 // Socket setup
 const io = socketio(server);
 
-
 class Room {
     constructor(leader, puzzle) {
         this.leader = leader;
@@ -87,22 +86,44 @@ io.on("connection", (socket) => {
         io.in(data.roomCode).emit("timeGetFromSocket", ({ socketName: socket.nickname, stime: data.time }));
         socketObjectInRoom.isFinished = true;
 
-        if (isEveryoneFinished(data.roomCode) === true) {
-            io.in(data.roomCode).emit("ready");
-            for (let i = 0; i < rooms[data.roomCode].sockets.length; i++)
-                rooms[data.roomCode].sockets[i].isFinished = false;
-
-        }
+        if (!isEveryoneFinished(data.roomCode)) return;
+        io.in(data.roomCode).emit("ready");
+        for (let i = 0; i < rooms[data.roomCode].sockets.length; i++)
+            rooms[data.roomCode].sockets[i].isFinished = false;
 
     });
 
+    socket.on('disconnecting', () => {
 
+        let roomsObj = Object.keys(socket.rooms);
+        for (let i = 0; i < roomsObj.length; i++) {
+            if (roomsObj[i] === socket.id) continue;
+            let socketObj = rooms[roomsObj[i]].sockets.find(o => o.socketId === socket.id);
+            rooms[roomsObj[i]].sockets.splice(rooms[roomsObj[i]].sockets.indexOf(socketObj), 1);
+            checkIfRoomIsEmpty(roomsObj[i]);
+            delete socketObj;
+            socketObj = null;
+            break;
+        }
+    });
+
+    socket.on("disconnect", () => {
+        console.log('Got disconnect! ' + socket.id);
+        console.log(rooms);
+    });
 });
 
 
 
 
 // functions
+
+const checkIfRoomIsEmpty = (roomCode) => {
+    if (rooms[roomCode].sockets.length != 0) return;
+    delete rooms[roomCode];
+    console.log("Room " + roomCode + " deleted (empty)");
+
+}
 
 const updateWaitingScreenStatus = (roomCode) => {
     let msg = [];
