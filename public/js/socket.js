@@ -72,9 +72,6 @@ socket.on("startGame", () => {
 })
 
 
-
-
-
 let timesToAdd = [];
 
 
