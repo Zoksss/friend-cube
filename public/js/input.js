@@ -11,6 +11,7 @@ const nicknameInputOnCreate = document.querySelector("#nicknameInputOnCreate");
 const codeInput = document.querySelector("#codeInput");
 
 const exitRoom = document.querySelector("#exitRoom");
+const openSideBar = document.querySelector("#openSideBar");
 
 
 const alertBox = document.querySelector("#alert")
@@ -20,14 +21,48 @@ let selectedPuzzle;
 let t;
 
 enterNicknameContainerBtn.addEventListener("click", (e) => {
-    inputLogic(e); 
+    inputLogic(e);
     console.log(codeInput.value);
     socket.emit('join', nicknameInput.value, codeInput.value, "3x3");
 });
 createNicknameContainerBtn.addEventListener("click", (e) => {
     codeInput.value = makeRoomId(8);
-    inputLogic(e); 
+    inputLogic(e);
     socket.emit('join', nicknameInputOnCreate.value, codeInput.value, selectedPuzzle);
+});
+
+
+let isSidebarOpen = false;
+const sidebar = document.querySelector("#sidebar");
+
+openSideBar.addEventListener("click", (e) => {
+
+    if (!isSidebarOpen) {
+        // open it
+        sidebar.classList.add("sidebar-anim-open");
+        openSideBar.classList.add("sidebar-btn-anim-open");
+
+        setTimeout(() => {
+            sidebar.style.left = "0px";
+            openSideBar.style.left = "270px";
+            isSidebarOpen = true;
+        }, 200);
+
+        sidebar.addEventListener('animationend', () => { sidebar.classList.remove("sidebar-anim-open"); openSideBar.classList.remove("sidebar-btn-anim-open"); });
+    }
+    else {
+        // close it 
+        sidebar.classList.add("sidebar-anim-close");
+        openSideBar.classList.add("sidebar-btn-anim-close");
+        setTimeout(() => {
+            sidebar.style.left = "-300px";
+            openSideBar.style.left = "0px";
+            isSidebarOpen = false;
+        }, 200);
+
+        sidebar.addEventListener('animationend', () => { sidebar.classList.remove("sidebar-anim-close"); openSideBar.classList.remove("sidebar-btn-anim-close"); });
+    }
+
 });
 
 exitRoom.addEventListener("click", () => {
@@ -38,7 +73,7 @@ const inputLogic = (e) => {
     e.preventDefault();
     clearTimeout(t);
 
-     
+
     /* error codes
 
     0 - no error
@@ -104,8 +139,41 @@ const makeRoomId = length => {
     return result;
 }
 
-leaderStartGame.addEventListener("click", () =>{
+leaderStartGame.addEventListener("click", () => {
     console.log("fireinbg start");
     socket.emit("leaderStartGamee", codeInput.value);
 });
 
+
+function isMobile(x) {
+    if (!x.matches) { // If media query matches
+        // above 768
+        sidebar.classList.add("sidebar-anim-open");
+        openSideBar.style.display = "none";
+
+        setTimeout(() => {
+            sidebar.style.left = "0px";
+            isSidebarOpen = true;
+        }, 200);
+
+        sidebar.addEventListener('animationend', () => { sidebar.classList.remove("sidebar-anim-open"); openSideBar.classList.remove("sidebar-btn-anim-open"); });
+
+    } else {
+        // under 768
+        sidebar.classList.add("sidebar-anim-close");
+        openSideBar.style.display = "block"
+        openSideBar.classList.add("sidebar-btn-anim-close");
+        setTimeout(() => {
+            sidebar.style.left = "-300px";
+            openSideBar.style.left = "0px";
+            isSidebarOpen = false;
+        }, 200);
+
+        sidebar.addEventListener('animationend', () => { sidebar.classList.remove("sidebar-anim-close"); openSideBar.classList.remove("sidebar-btn-anim-close"); });
+    
+    }
+}
+
+let x = window.matchMedia("(max-width: 768px)")
+isMobile(x) // Call listener function at run time
+x.addListener(isMobile) // Attach listener function on state changes

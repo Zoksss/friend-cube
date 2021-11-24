@@ -450,11 +450,29 @@ p {
   height: 100vh;
   background-color: #FFF;
   top: 0;
-  left: 0;
+  left: -300px;
   z-index: 1;
   overflow-y: auto;
   overflow-x: hidden;
   /* Handle on hover */
+}
+
+.sidebar .sidebar-arrow-btn {
+  position: fixed;
+  top: 45%;
+  -webkit-transform: translate(0%, -50%);
+          transform: translate(0%, -50%);
+  left: 0px;
+  width: 60px;
+  height: 60px;
+  background-color: #e6e6e6;
+  border-radius: 0 15px 15px 0;
+  z-index: 99999;
+}
+
+.sidebar .sidebar-arrow-btn img {
+  width: 60px;
+  height: 60px;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -858,6 +876,60 @@ p {
   }
   100% {
     opacity: 0;
+  }
+}
+
+.sidebar-anim-open {
+  -webkit-animation: SideBarAnim 200ms linear;
+          animation: SideBarAnim 200ms linear;
+}
+
+.sidebar-anim-close {
+  animation: SideBarAnim 200ms reverse;
+}
+
+@-webkit-keyframes SideBarAnim {
+  from {
+    left: -300px;
+  }
+  to {
+    left: 0px;
+  }
+}
+
+@keyframes SideBarAnim {
+  from {
+    left: -300px;
+  }
+  to {
+    left: 0px;
+  }
+}
+
+.sidebar-btn-anim-open {
+  -webkit-animation: SideBarBtnAnim 200ms linear;
+          animation: SideBarBtnAnim 200ms linear;
+}
+
+.sidebar-btn-anim-close {
+  animation: SideBarBtnAnim 200ms reverse;
+}
+
+@-webkit-keyframes SideBarBtnAnim {
+  from {
+    left: 0px;
+  }
+  to {
+    left: 270px;
+  }
+}
+
+@keyframes SideBarBtnAnim {
+  from {
+    left: 0px;
+  }
+  to {
+    left: 270px;
   }
 }
 /*# sourceMappingURL=style.css.map */

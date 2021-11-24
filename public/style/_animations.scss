@@ -1,0 +1,23 @@
+.sidebar-anim-open{
+  animation: SideBarAnim 200ms linear;
+}
+.sidebar-anim-close{
+    animation: SideBarAnim 200ms reverse;
+  }
+
+@keyframes SideBarAnim {
+    from {left: -300px;}
+    to {left: 0px; }
+  }
+
+  .sidebar-btn-anim-open{
+    animation: SideBarBtnAnim 200ms linear;
+  }
+  .sidebar-btn-anim-close{
+      animation: SideBarBtnAnim 200ms reverse;
+    }
+  
+  @keyframes SideBarBtnAnim {
+      from {left: 0px;}
+      to {left: 270px; }
+    }
