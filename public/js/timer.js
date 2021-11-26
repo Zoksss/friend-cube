@@ -8,18 +8,16 @@ const sidebarTimes = document.querySelector("#sidebarTimes");
 const scrambleElement = document.querySelector('#scramble');
 const modal = document.querySelector(".modal");
 
-
 let tableInserttarget = document.querySelector('#nullElement');
 
-let currTimeIndex = 1;
 
+let currTimeIndex = 1;
 let debounce = false, isTimerRunningTrue = false, isTimmerStoppedTrue = false, hideElementsOnStartTrue = true;
 
 let timeBegan = null,
     timeStopped = null,
     stoppedDuration = 0,
     started = null;
-
 
 let currentTime, timeElapsed, hour, min, sec, ms;
 
@@ -39,7 +37,7 @@ document.addEventListener("keydown", event => {
             timerStop();
             isTimerRunningTrue = false;
             isTimmerStoppedTrue = true;
-            if(hideElementsOnStartTrue) displayChange("block");
+            if (hideElementsOnStartTrue) displayChange("block");
         }
     }
 });
@@ -81,9 +79,13 @@ const timerStart = () => {
 
 const timerStop = () => {
     timeStopped = new Date();
-    times.push({hours: hour, minutes: min, seconds: sec, milliseconds: ms});
-    socket.emit("finalTime", {roomCode: codeInput.value, time: {hours: hour, minutes: min, seconds: sec, milliseconds: ms}});
-    //console.table(times);
+    let curTime = { hours: hour, minutes: min, seconds: sec, milliseconds: ms }
+    times.push(curTime);
+
+    ao5Element.innerHTML = calculateAo5();
+    ao12Element.innerHTML = calculateAo12()
+    socket.emit("finalTime", { roomCode: codeInput.value, time: curTime });
+
     clearInterval(started);
     scrambleElement.innerHTML = "Waiting for other players to finish solving..."
     isReady = false;
@@ -97,7 +99,7 @@ const timerReset = () => {
 }
 
 function clockRunning() {
-       currentTime = new Date()
+    currentTime = new Date()
         , timeElapsed = new Date(currentTime - timeBegan - stoppedDuration)
         , hour = timeElapsed.getUTCHours()
         , min = timeElapsed.getUTCMinutes()
@@ -110,32 +112,67 @@ function clockRunning() {
         secString = (sec > 9 ? sec : "0" + sec),
         milisString = (ms > 99 ? ms : ms > 9 ? "0" + ms : "00" + ms),
 
-    timeString = (hour == 0 ? "" : hourString) + (min == 0 ? "" : minString) + (sec == 0 ? "" : secString) + "." + milisString
+        timeString = (hour == 0 ? "" : hourString) + (min == 0 ? "" : minString) + secString + "." + milisString
     mainTimeElement.innerHTML = timeString;
 };
 
 
 
-const displayTimes = () => {
-    //ao5Element.innerHTML = calculateAo5();
-    //ao12Element.innerHTML = calculateAo12();
+const calculateAo5 = () => {
+    let i = times.length;
+    if (i < 5) return "--";
+    if (times.length - 5 < 0) i = 0;
+    else i = times.length - 5;
 
-    //socket.emit('ao5ao12', ao5Element.innerHTML, ao12Element.innerHTML);
+    let averageHours = 0, averageMinutes = 0, averageSeconds = 0, averageMilliseconds = 0;
 
-    const elem = document.createElement('tr');
+    let counter = 0;
+    for (i; i < times.length; i++) {
+        averageHours += times[i].hours;
+        averageMinutes += times[i].minutes;
+        averageSeconds += times[i].seconds;
+        averageMilliseconds += times[i].milliseconds;
+        counter++;
+    }
+    let allMillisecodns = averageMilliseconds + averageSeconds * 1000 + averageMinutes * 60 * 1000 + averageHours * 60 * 60 * 1000
 
-    elem.innerHTML =
-        `
-    <td class="table-no">${times.length}.</td>
-    <td>${mainTimeElement.innerText}</td>
-    `;
+    return msToTime(Math.round(allMillisecodns /= counter));
+}
+const calculateAo12 = () => {
+    let i = times.length;
+    if (i < 12) return "--";
+    i = times.length - 12;
 
-    tableInserttarget.parentNode.insertBefore(elem, tableInserttarget);
-    tableInserttarget = elem;
+    let averageHours = 0, averageMinutes = 0, averageSeconds = 0, averageMilliseconds = 0;
 
-    generateScramble("3X3");
+    let counter = 0;
+    for (i; i < times.length; i++) {
+        averageHours += times[i].hours;
+        averageMinutes += times[i].minutes;
+        averageSeconds += times[i].seconds;
+        averageMilliseconds += times[i].milliseconds;
+        counter++;
+    }
+    let allMillisecodns = averageMilliseconds + averageSeconds * 1000 + averageMinutes * 60 * 1000 + averageHours * 60 * 60 * 1000
 
+    return msToTime(Math.round(allMillisecodns /= counter));
+}
+
+
+const msToTime = (s) => {
+    const pad = (n, z) => {
+        z = z || 2;
+        if (n == 0) return "";
+        return ('00' + n).slice(-z);
+    }
+    let ms = s % 1000;
+    s = (s - ms) / 1000;
+    let secs = s % 60;
+    s = (s - secs) / 60;
+    let mins = s % 60;
+    let hrs = (s - mins) / 60;
+    return pad(hrs) + ((hrs > 0) ? ":" : "") + pad(mins) + ((mins > 0) ? ":" : "") + ((secs.toString().length === 1) ? "0" + secs : secs) + '.' + pad(ms, 3);
 }
 
 const randomNum = (min, max) => Math.floor(Math.random() * (max - min)) + min;
-const isNumberEven = (num) => (num % 2  == 0) ? true : false;
+const isNumberEven = (num) => (num % 2 == 0) ? true : false;

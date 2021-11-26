@@ -30,7 +30,7 @@ socket.on("joinToTimer", () => {
 });
 
 socket.on("joinToTimerLeader", (roomCode) => {
-    waitForStartOverlay.style.display= "none";
+    waitForStartOverlay.style.display = "none";
     waitForStartLeaderOverlay.style.display = "flex";
     waitForStartLeaderOverlayRoomCode.innerHTML = roomCode;
     transitionAnim(inputSection, timerSection);
@@ -38,8 +38,8 @@ socket.on("joinToTimerLeader", (roomCode) => {
 });
 
 socket.on("displayUsers", (users) => {
-    
-    let child = joinedUsersContainer.lastElementChild; 
+
+    let child = joinedUsersContainer.lastElementChild;
     while (child) {
         joinedUsersContainer.removeChild(child);
         child = joinedUsersContainer.lastElementChild;
@@ -51,7 +51,7 @@ socket.on("displayUsers", (users) => {
         joinedUsersContainer.append(dom);
     });
 
-    let child2 = joinedUsersContainer2.lastElementChild; 
+    let child2 = joinedUsersContainer2.lastElementChild;
     while (child2) {
         joinedUsersContainer2.removeChild(child2);
         child2 = joinedUsersContainer2.lastElementChild;
@@ -82,7 +82,7 @@ socket.on("timeGetFromSocket", (data) => {
     let socketName = data.socketName;
     let time = data.stime;
 
-    
+
 
     const tbody = document.createElement("tbody");
     tbody.classList.add(`tbody-row-group`);
@@ -94,28 +94,29 @@ socket.on("timeGetFromSocket", (data) => {
     `
 
     const element = document.createElement("tr");
+    console.log(time.seconds.toString().length + "   " + "0" + time.seconds);
     element.innerHTML = `
     <tr>
         <td>${socketName}</td>
-        <td>${time.minutes}:${time.seconds}.${time.milliseconds}</td>
-    </tr>`
+        <td>${(time.hours != 0) ? time.hours + ":" : ""}${(time.minutes != 0) ? time.minutes + ":" : ""}${(time.seconds.toString().length === 1) ? "0" + time.seconds : time.seconds}.${time.milliseconds}
+    </td>`
 
 
-    if(document.querySelector(`.round-${round}`)){
+    if (document.querySelector(`.round-${round}`)) {
         console.log("round shit alredy exist");
 
         tableInserttarget = document.querySelector(`.round-${round}`);
         tableInserttarget.append(element);
     }
-    else{
-       tableInserttarget = document.querySelector(".table-header");
-        
-       tableInserttarget.parentElement.insertBefore(tbody, tableInserttarget.nextSibling);
-       tableInserttarget = tbody;
-       tableInserttarget.append(element);
-       tableInserttarget = element;
+    else {
+        tableInserttarget = document.querySelector(".table-header");
+
+        tableInserttarget.parentElement.insertBefore(tbody, tableInserttarget.nextSibling);
+        tableInserttarget = tbody;
+        tableInserttarget.append(element);
+        tableInserttarget = element;
     }
-    
+
 
 
 })

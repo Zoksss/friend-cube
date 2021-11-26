@@ -1,3 +1,18 @@
+
+.alert-unload {
+  animation: AlertloadOut 500ms ease;
+}
+
+@keyframes AlertloadOut {
+  0% {
+      top: 100px;
+  }
+  100% {
+      top: -200px;
+  }
+}
+
+
 .sidebar-anim-open{
   animation: SideBarAnim 200ms linear;
 }

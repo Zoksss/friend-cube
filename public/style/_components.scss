@@ -58,15 +58,10 @@
     }
 }
 
-.alert-unload {
-    animation: AlertloadOut 500ms ease;
-}
 
-@keyframes AlertloadOut {
-    0% {
-        top: 100px;
-    }
-    100% {
-        top: -200px;
-    }
+.input-warning{
+    border: 2px solid $red !important;
+}
+.input-warning-none{
+    border: none;
 }

@@ -143,27 +143,12 @@ p {
   color: black;
 }
 
-.alert-unload {
-  -webkit-animation: AlertloadOut 500ms ease;
-          animation: AlertloadOut 500ms ease;
+.input-warning {
+  border: 2px solid #E22121 !important;
 }
 
-@-webkit-keyframes AlertloadOut {
-  0% {
-    top: 100px;
-  }
-  100% {
-    top: -200px;
-  }
-}
-
-@keyframes AlertloadOut {
-  0% {
-    top: 100px;
-  }
-  100% {
-    top: -200px;
-  }
+.input-warning-none {
+  border: none;
 }
 
 .nickname-container {
@@ -876,6 +861,29 @@ p {
   }
   100% {
     opacity: 0;
+  }
+}
+
+.alert-unload {
+  -webkit-animation: AlertloadOut 500ms ease;
+          animation: AlertloadOut 500ms ease;
+}
+
+@-webkit-keyframes AlertloadOut {
+  0% {
+    top: 100px;
+  }
+  100% {
+    top: -200px;
+  }
+}
+
+@keyframes AlertloadOut {
+  0% {
+    top: 100px;
+  }
+  100% {
+    top: -200px;
   }
 }
 
