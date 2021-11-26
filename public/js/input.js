@@ -70,6 +70,9 @@ exitRoom.addEventListener("click", () => {
 })
 
 const inputLogic = (e) => {
+    nicknameInput.classList.remove("input-warning");
+    nicknameInputOnCreate.classList.remove("input-warning");
+    codeInput.classList.remove("input-warning");
     e.preventDefault();
     clearTimeout(t);
 
@@ -87,12 +90,17 @@ const inputLogic = (e) => {
     console.log(inputState);
     switch (inputState) {
         case 1:
-            displayAlert("Nickname cannot be empty.")
+            nicknameInput.classList.add("input-warning");
+            nicknameInputOnCreate.classList.add("input-warning");
+            displayAlert("Nickname cannot be empty.");
             break;
         case 2:
+            nicknameInput.classList.add("input-warning");
+            nicknameInputOnCreate.classList.add("input-warning");
             displayAlert("Nickname must be 3 or more characters")
             break;
         case 3:
+            codeInput.classList.add("input-warning");
             displayAlert("Code must be 8 characters.")
             break;
         default:
@@ -106,13 +114,16 @@ const displayAlert = (message) => {
     alertBox.style.display = "block"
     t = setTimeout(() => {
         alertBox.classList.add("alert-unload");
-        setTimeout(() => alertDestroy, 300);
+        alertDestroy();
     }, 5000);
 }
 
 const alertDestroy = () => {
-    alertBox.style.display = "none"
-    alertBox.classList.remove("alert-unload");
+    setTimeout(() => {
+        alertBox.style.display = "none"
+        alertBox.classList.remove("alert-unload");
+    }, 300);
+
 }
 
 const validateInput = () => {
@@ -123,13 +134,13 @@ const validateInput = () => {
 }
 
 
-const selectPuzzle = puzzle => {
+const selectPuzzle = (puzzle) => {
     selectedPuzzle = puzzle;
     transitionAnim(choosePuzzleContainer, createNicknameContainer);
 
 }
 
-const makeRoomId = length => {
+const makeRoomId = (length) => {
     let result = '';
     let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let charactersLength = characters.length;
@@ -146,7 +157,7 @@ leaderStartGame.addEventListener("click", () => {
 
 
 function isMobile(x) {
-    if (!x.matches) { // If media query matches
+    if (!x.matches) {
         // above 768
         sidebar.classList.add("sidebar-anim-open");
         openSideBar.style.display = "none";
@@ -170,7 +181,7 @@ function isMobile(x) {
         }, 200);
 
         sidebar.addEventListener('animationend', () => { sidebar.classList.remove("sidebar-anim-close"); openSideBar.classList.remove("sidebar-btn-anim-close"); });
-    
+
     }
 }
 

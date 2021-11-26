@@ -59,9 +59,10 @@ io.on("connection", (socket) => {
             }
             console.log(rooms);
 
+            updateWaitingScreenStatus(roomCode);
         }
         // update joined players status
-        updateWaitingScreenStatus(roomCode);
+
     });
 
     socket.on("leaderStartGamee", (roomCode) => {
