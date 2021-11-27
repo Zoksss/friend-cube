@@ -162,9 +162,10 @@
     }
 
     .scramble {
-        font-size: 2rem;
+        font-size: 1.2rem;
         font-weight: 700;
         margin-top: 0.938rem;
+        text-align: center;
     }
 
     .times {
@@ -181,7 +182,7 @@
         transform: translate(0, -50%);
 
         .time {
-            font-size: 7.813rem;
+            font-size: 4rem;
             font-weight: 700;
         }
 
@@ -195,15 +196,17 @@
 
 #code {
     position: absolute;
-    bottom: 25px;
+    bottom: 135px;
 }
 
 .bottom-buttons {
     position: absolute;
     display: flex;
     bottom: 25px;
-    left: 25px;
-    z-index: 2;
+    //left: 25px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1;
     background-color: $white;
 
     .settings-btn {

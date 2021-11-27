@@ -185,6 +185,6 @@ function isMobile(x) {
     }
 }
 
-let x = window.matchMedia("(max-width: 768px)")
+let x = window.matchMedia("(max-width: 1024px)")
 isMobile(x) // Call listener function at run time
 x.addListener(isMobile) // Attach listener function on state changes

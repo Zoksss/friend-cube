@@ -76,6 +76,20 @@ p {
     padding: 100px 100px;
     height: 100vh;
   }
+  .scramble {
+    font-size: 1.9rem !important;
+  }
+  .time {
+    font-size: 7rem !important;
+  }
+  #code {
+    bottom: 25px !important;
+  }
+  .bottom-buttons {
+    left: 25px !important;
+    -webkit-transform: translate(0, 0) !important;
+            transform: translate(0, 0) !important;
+  }
 }
 
 .btn {
@@ -548,9 +562,10 @@ p {
 }
 
 .timer-container .scramble {
-  font-size: 2rem;
+  font-size: 1.2rem;
   font-weight: 700;
   margin-top: 0.938rem;
+  text-align: center;
 }
 
 .timer-container .times {
@@ -577,7 +592,7 @@ p {
 }
 
 .timer-container .times .time {
-  font-size: 7.813rem;
+  font-size: 4rem;
   font-weight: 700;
 }
 
@@ -589,7 +604,7 @@ p {
 
 #code {
   position: absolute;
-  bottom: 25px;
+  bottom: 135px;
 }
 
 .bottom-buttons {
@@ -598,8 +613,10 @@ p {
   display: -ms-flexbox;
   display: flex;
   bottom: 25px;
-  left: 25px;
-  z-index: 2;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  z-index: 1;
   background-color: #FFF;
 }
 
