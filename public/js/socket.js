@@ -17,8 +17,8 @@ socket.on("connect", () => {
 
 // first joined socekt is leader
 
-socket.on("serverError", () => {
-    displayAlert("Error - Unable to join, try again");
+socket.on("serverError", (msg) => {
+    displayAlert(`Unable to join - ${msg}`);
 });
 
 socket.on("joinToTimer", () => {
@@ -126,3 +126,19 @@ socket.on("ready", () => {
     round++;
     console.log("now is ready")
 })
+
+
+
+socket.on("joinedLeavedNotification", (nickname) => {
+    const elem = document.createElement("p");
+    elem.classList.add("notification");
+    elem.innerHTML = `${nickname} joined the room`
+    setTimeout(() => {
+        console.log("test");
+        elem.parentNode.removeChild(elem);
+    }, 1000);
+ 
+});
+
+
+

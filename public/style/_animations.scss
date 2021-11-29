@@ -1,38 +1,62 @@
-
 .alert-unload {
   animation: AlertloadOut 500ms ease;
 }
 
 @keyframes AlertloadOut {
   0% {
-      top: 100px;
+    top: 100px;
   }
   100% {
-      top: -200px;
+    top: -200px;
   }
 }
 
-
-.sidebar-anim-open{
+.sidebar-anim-open {
   animation: SideBarAnim 200ms linear;
 }
-.sidebar-anim-close{
-    animation: SideBarAnim 200ms reverse;
-  }
+.sidebar-anim-close {
+  animation: SideBarAnim 200ms reverse;
+}
 
 @keyframes SideBarAnim {
-    from {left: -300px;}
-    to {left: 0px; }
+  from {
+    left: -300px;
   }
+  to {
+    left: 0px;
+  }
+}
 
-  .sidebar-btn-anim-open{
-    animation: SideBarBtnAnim 200ms linear;
+.sidebar-btn-anim-open {
+  animation: SideBarBtnAnim 200ms linear;
+}
+.sidebar-btn-anim-close {
+  animation: SideBarBtnAnim 200ms reverse;
+}
+
+@keyframes SideBarBtnAnim {
+  from {
+    left: 0px;
   }
-  .sidebar-btn-anim-close{
-      animation: SideBarBtnAnim 200ms reverse;
-    }
-  
-  @keyframes SideBarBtnAnim {
-      from {left: 0px;}
-      to {left: 270px; }
-    }
+  to {
+    left: 270px;
+  }
+}
+
+.notification {
+  position: absolute;
+  bottom: 140px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  animation: Notification 1s linear;
+  z-index: 10000;
+}
+
+@keyframes Notification {
+  from {
+    bottom: 140px;
+  }
+  to {
+    bottom: 220px;
+  }
+}

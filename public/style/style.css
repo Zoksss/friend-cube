@@ -957,4 +957,33 @@ p {
     left: 270px;
   }
 }
+
+.notification {
+  position: absolute;
+  bottom: 140px;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  -webkit-animation: Notification 1s linear;
+          animation: Notification 1s linear;
+  z-index: 10000;
+}
+
+@-webkit-keyframes Notification {
+  from {
+    bottom: 140px;
+  }
+  to {
+    bottom: 220px;
+  }
+}
+
+@keyframes Notification {
+  from {
+    bottom: 140px;
+  }
+  to {
+    bottom: 220px;
+  }
+}
 /*# sourceMappingURL=style.css.map */

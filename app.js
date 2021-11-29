@@ -42,24 +42,26 @@ io.on("connection", (socket) => {
 
     socket.on("join", (nickname, roomCode, puzzle) => {
         if (validateInput(nickname, roomCode, puzzle)) {
-            socket.nickname = nickname;
             if (rooms[roomCode] != undefined) {
                 if (!rooms[roomCode].isLocked) {
+                    socket.nickname = nickname;
+                    io.in(roomCode).emit("joinedLeavedNotification", socket.nickname);
                     rooms[roomCode].addSocket(socket);
                     socket.join(roomCode);
                     // fire event for joining
                     socket.emit("joinToTimer");
+                    updateWaitingScreenStatus(roomCode);
                 }
                 else socket.emit("serverError", "Room Closed");
             }
             else {
+                socket.nickname = nickname;
                 rooms[roomCode] = new Room(socket.id, puzzle);
                 socket.join(roomCode);
                 socket.emit("joinToTimerLeader", roomCode);
+                updateWaitingScreenStatus(roomCode);
             }
-            console.log(rooms);
-
-            updateWaitingScreenStatus(roomCode);
+            
         }
         // update joined players status
 
@@ -100,10 +102,13 @@ io.on("connection", (socket) => {
         for (let i = 0; i < roomsObj.length; i++) {
             if (roomsObj[i] === socket.id) continue;
             let socketObj = rooms[roomsObj[i]].sockets.find(o => o.socketId === socket.id);
+            updateWaitingScreenStatus(roomsObj[i]);
+            io.in(roomsObj[i]).emit("joinedLeavedNotification", socket.nickname);
             rooms[roomsObj[i]].sockets.splice(rooms[roomsObj[i]].sockets.indexOf(socketObj), 1);
             checkIfRoomIsEmpty(roomsObj[i]);
             delete socketObj;
             socketObj = null;
+            
             break;
         }
     });
@@ -132,6 +137,7 @@ const updateWaitingScreenStatus = (roomCode) => {
         msg.push(io.sockets.sockets[socket.socketId].nickname);
     });
     io.in(roomCode).emit("displayUsers", msg);
+
 }
 
 const validateInput = (nickname, roomCode, puzzle) => {
