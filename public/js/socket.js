@@ -6,6 +6,8 @@ const waitForStartLeaderOverlayRoomCode = document.querySelector("#waitForStartL
 const joinedUsersContainer = document.querySelector("#joinedUsersContainer");
 const joinedUsersContainer2 = document.querySelector("#joinedUsersContainer2");
 
+const codeElement = document.querySelector("#code");
+
 
 let round = 0;
 
@@ -22,6 +24,7 @@ socket.on("serverError", (msg) => {
 });
 
 socket.on("joinToTimer", () => {
+    codeElement.innerHTML = "Room: "+ codeInput;
     transitionAnim(inputSection, timerSection);
     waitForStartLeaderOverlay.style.display = "none";
     waitForStartOverlay.style.display = "flex";
@@ -30,6 +33,7 @@ socket.on("joinToTimer", () => {
 });
 
 socket.on("joinToTimerLeader", (roomCode) => {
+    codeElement.innerHTML = "Room: "+ roomCode;
     waitForStartOverlay.style.display = "none";
     waitForStartLeaderOverlay.style.display = "flex";
     waitForStartLeaderOverlayRoomCode.innerHTML = roomCode;
@@ -127,16 +131,18 @@ socket.on("ready", () => {
     console.log("now is ready")
 })
 
+socket.on("setScramble", (scramble) => {
+    scrambleElement.innerHTML = scramble;
+});
 
 
-socket.on("joinedLeavedNotification", (nickname) => {
-    const elem = document.createElement("p");
+socket.on("joinedLeavedNotification", (data) => {
+    console.log(data.nickname +" joined")
+    let elem = document.createElement("p");
     elem.classList.add("notification");
-    elem.innerHTML = `${nickname} joined the room`
-    setTimeout(() => {
-        console.log("test");
-        elem.parentNode.removeChild(elem);
-    }, 1000);
+    document.body.append(elem);
+    elem.innerHTML = `${data.nickname} ${data.joined?"joined":"left"} the room`
+    elem.addEventListener('animationend', () => {elem.parentNode.removeChild(elem);});
  
 });
 

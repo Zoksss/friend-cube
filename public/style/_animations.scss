@@ -48,15 +48,19 @@
   bottom: 140px;
   left: 50%;
   transform: translate(-50%, 0);
-  animation: Notification 1s linear;
+  animation: Notification 1.5s linear;
   z-index: 10000;
 }
 
 @keyframes Notification {
-  from {
+  0% {
     bottom: 140px;
   }
-  to {
+  90% {
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
     bottom: 220px;
   }
 }

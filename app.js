@@ -45,7 +45,8 @@ io.on("connection", (socket) => {
             if (rooms[roomCode] != undefined) {
                 if (!rooms[roomCode].isLocked) {
                     socket.nickname = nickname;
-                    io.in(roomCode).emit("joinedLeavedNotification", socket.nickname);
+                    io.in(roomCode).emit("joinedLeavedNotification", { nickname: nickname, joined: true });
+                    console.log("fired test with parms: " + roomCode + nickname)
                     rooms[roomCode].addSocket(socket);
                     socket.join(roomCode);
                     // fire event for joining
@@ -59,9 +60,10 @@ io.on("connection", (socket) => {
                 rooms[roomCode] = new Room(socket.id, puzzle);
                 socket.join(roomCode);
                 socket.emit("joinToTimerLeader", roomCode);
+                io.in(roomCode).emit("joinedLeavedNotification", { nickname: nickname, joined: true });
                 updateWaitingScreenStatus(roomCode);
             }
-            
+
         }
         // update joined players status
 
@@ -76,6 +78,7 @@ io.on("connection", (socket) => {
         for (let i = 0; i < rooms[roomCode].sockets.length; i++)
             rooms[roomCode].sockets[i].isFinished = false;
 
+        io.in(roomCode).emit("setScramble", generateScramble("3X3"));
         io.in(roomCode).emit("startGame");
 
 
@@ -94,6 +97,8 @@ io.on("connection", (socket) => {
         for (let i = 0; i < rooms[data.roomCode].sockets.length; i++)
             rooms[data.roomCode].sockets[i].isFinished = false;
 
+        io.in(data.roomCode).emit("setScramble", generateScramble("3X3"));
+
     });
 
     socket.on('disconnecting', () => {
@@ -102,13 +107,12 @@ io.on("connection", (socket) => {
         for (let i = 0; i < roomsObj.length; i++) {
             if (roomsObj[i] === socket.id) continue;
             let socketObj = rooms[roomsObj[i]].sockets.find(o => o.socketId === socket.id);
-            updateWaitingScreenStatus(roomsObj[i]);
-            io.in(roomsObj[i]).emit("joinedLeavedNotification", socket.nickname);
+            io.in(roomsObj[i]).emit("joinedLeavedNotification", { nickname: socket.nickname, joined: false });
             rooms[roomsObj[i]].sockets.splice(rooms[roomsObj[i]].sockets.indexOf(socketObj), 1);
             checkIfRoomIsEmpty(roomsObj[i]);
             delete socketObj;
             socketObj = null;
-            
+            updateWaitingScreenStatus(roomsObj[i]);
             break;
         }
     });
@@ -157,4 +161,11 @@ const isEveryoneFinished = (roomCode) => {
         }
     }
     return temp;
+}
+
+
+const generateScramble = (puzzle) => {
+    let scrambele = "";
+    for (a = y = r = '', x = Math.random; a++ < 22; scrambele += (r + " '2"[0 | x(y = r) * 3] + ' '))for (; r == y; r = 'RLUDFB'[0 | x() * 6]);
+    return scrambele;
 }

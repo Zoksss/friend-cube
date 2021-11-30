@@ -77,7 +77,7 @@ p {
     height: 100vh;
   }
   .scramble {
-    font-size: 1.9rem !important;
+    font-size: 1.1rem !important;
   }
   .time {
     font-size: 7rem !important;
@@ -562,7 +562,7 @@ p {
 }
 
 .timer-container .scramble {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 700;
   margin-top: 0.938rem;
   text-align: center;
@@ -964,25 +964,33 @@ p {
   left: 50%;
   -webkit-transform: translate(-50%, 0);
           transform: translate(-50%, 0);
-  -webkit-animation: Notification 1s linear;
-          animation: Notification 1s linear;
+  -webkit-animation: Notification 1.5s linear;
+          animation: Notification 1.5s linear;
   z-index: 10000;
 }
 
 @-webkit-keyframes Notification {
-  from {
+  0% {
     bottom: 140px;
   }
-  to {
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
     bottom: 220px;
   }
 }
 
 @keyframes Notification {
-  from {
+  0% {
     bottom: 140px;
   }
-  to {
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
     bottom: 220px;
   }
 }
