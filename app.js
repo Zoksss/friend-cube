@@ -26,7 +26,9 @@ class Room {
         this.sockets.push({ socketId: socket.id, isFinished: true });
     }
     removeSocket(socket) {
-        delete this.sockets.filter(o => o.socketId = socket.id);
+        let socketObj = this.sockets.find(o => o.socketId === socket.id);
+        this.sockets.splice(this.sockets.indexOf(socketObj), 1);
+        socketObj = null;
     }
 }
 
@@ -103,16 +105,13 @@ io.on("connection", (socket) => {
 
     socket.on('disconnecting', () => {
 
-        let roomsObj = Object.keys(socket.rooms);
-        for (let i = 0; i < roomsObj.length; i++) {
-            if (roomsObj[i] === socket.id) continue;
-            let socketObj = rooms[roomsObj[i]].sockets.find(o => o.socketId === socket.id);
-            io.in(roomsObj[i]).emit("joinedLeavedNotification", { nickname: socket.nickname, joined: false });
-            rooms[roomsObj[i]].sockets.splice(rooms[roomsObj[i]].sockets.indexOf(socketObj), 1);
-            checkIfRoomIsEmpty(roomsObj[i]);
-            delete socketObj;
-            socketObj = null;
-            updateWaitingScreenStatus(roomsObj[i]);
+        let roomNames = Object.keys(socket.rooms);
+        for (let i = 0; i < roomNames.length; i++) {
+            if (roomNames[i] === socket.id) continue;
+            io.in(roomNames[i]).emit("joinedLeavedNotification", { nickname: socket.nickname, joined: false });
+            rooms[roomNames[i]].removeSocket(socket);
+            checkIfRoomIsEmpty(roomNames[i]);
+            updateWaitingScreenStatus(roomNames[i]);
             break;
         }
     });
@@ -130,18 +129,18 @@ io.on("connection", (socket) => {
 
 const checkIfRoomIsEmpty = (roomCode) => {
     if (rooms[roomCode].sockets.length != 0) return;
-    delete rooms[roomCode];
+    rooms[roomCode] = null;
     console.log("Room " + roomCode + " deleted (empty)");
 
 }
 
 const updateWaitingScreenStatus = (roomCode) => {
     let msg = [];
+    if(!rooms[roomCode]) return;
     rooms[roomCode].sockets.forEach(socket => {
         msg.push(io.sockets.sockets[socket.socketId].nickname);
     });
     io.in(roomCode).emit("displayUsers", msg);
-
 }
 
 const validateInput = (nickname, roomCode, puzzle) => {

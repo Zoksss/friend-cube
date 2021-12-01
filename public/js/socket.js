@@ -24,7 +24,7 @@ socket.on("serverError", (msg) => {
 });
 
 socket.on("joinToTimer", () => {
-    codeElement.innerHTML = "Room: "+ codeInput;
+    codeElement.innerHTML = "Room: "+ codeInput.value;
     transitionAnim(inputSection, timerSection);
     waitForStartLeaderOverlay.style.display = "none";
     waitForStartOverlay.style.display = "flex";
