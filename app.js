@@ -67,6 +67,7 @@ io.on("connection", (socket) => {
             }
 
         }
+        doesUsernameAlrdeyExists(socket.nickname, roomCode);
         // update joined players status
 
     });
@@ -129,14 +130,15 @@ io.on("connection", (socket) => {
 
 const checkIfRoomIsEmpty = (roomCode) => {
     if (rooms[roomCode].sockets.length != 0) return;
-    rooms[roomCode] = null;
+    delete rooms[roomCode];
+    //rooms[roomCode] = null;
     console.log("Room " + roomCode + " deleted (empty)");
 
 }
 
 const updateWaitingScreenStatus = (roomCode) => {
     let msg = [];
-    if(!rooms[roomCode]) return;
+    if (!rooms[roomCode]) return;
     rooms[roomCode].sockets.forEach(socket => {
         msg.push(io.sockets.sockets[socket.socketId].nickname);
     });
@@ -162,6 +164,15 @@ const isEveryoneFinished = (roomCode) => {
     return temp;
 }
 
+
+const doesUsernameAlrdeyExists = (socketobj, roomCode) => {
+    let socketsInRoom = io.sockets.adapter.rooms[roomCode].sockets;
+    for (var clientId in socketsInRoom) {
+        console.log(io.connected[clientId]);
+        if(io.connected[clientId].nickname === nickname) return true;
+    }
+    return false;
+}
 
 const generateScramble = (puzzle) => {
     let scrambele = "";
