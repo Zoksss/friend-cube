@@ -67,7 +67,7 @@ io.on("connection", (socket) => {
             }
 
         }
-        doesUsernameAlrdeyExists(socket.nickname, roomCode);
+        //doesUsernameAlrdeyExists(socket.nickname, roomCode);
         // update joined players status
 
     });

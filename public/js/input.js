@@ -13,6 +13,10 @@ const codeInput = document.querySelector("#codeInput");
 const exitRoom = document.querySelector("#exitRoom");
 const openSideBar = document.querySelector("#openSideBar");
 
+const openPlayersBtn = document.querySelector("#openPlayersBtn");
+const playerModal = document.querySelector("#playerModal");
+
+
 
 const alertBox = document.querySelector("#alert")
 
@@ -65,9 +69,25 @@ openSideBar.addEventListener("click", (e) => {
 
 });
 
+
+openPlayersBtn.addEventListener("click", () => {
+    playerModal.style.display = "flex";
+});
+closePlayerModalBtn.addEventListener("click", () => {
+    console.log("123");
+    playerModal.style.display = "none";
+});
+
+//playerModal.addEventListener("click", () => {
+//    playerModal.style.display = "none";
+//});
+
+
 exitRoom.addEventListener("click", () => {
     location.reload();
 })
+
+
 
 const inputLogic = (e) => {
     nicknameInput.classList.remove("input-warning");
@@ -188,3 +208,4 @@ function isMobile(x) {
 let x = window.matchMedia("(max-width: 1024px)")
 isMobile(x) // Call listener function at run time
 x.addListener(isMobile) // Attach listener function on state changes
+

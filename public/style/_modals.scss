@@ -15,16 +15,24 @@
 	transition: opacity 400ms ease-in;
 	/*pointer-events: none;*/
     height: 100vh;
-    padding: 100px 50px;
+    //padding: 100px 50px;
+    padding: 100px 10px;
+
+    pointer-events: auto;
+
+    #playerModalTimes{
+        
+    }
 
     .modal-container{
         position: relative;
-        display: none;
+        //display: none;
         flex-direction: column;
         height: 100%;
         padding: 35px 75px;
         background-color: $white;
         width: 700px;
+    
 
         h2{
             margin: 0 auto;
@@ -90,6 +98,8 @@
         position: absolute;
         top: 50px;
         right: 50px;
+        z-index: 106;
+        //cursor: pointer;
     }
 }
 

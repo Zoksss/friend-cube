@@ -733,12 +733,12 @@ p {
   transition: opacity 400ms ease-in;
   /*pointer-events: none;*/
   height: 100vh;
-  padding: 100px 50px;
+  padding: 100px 10px;
+  pointer-events: auto;
 }
 
 .modal .modal-container {
   position: relative;
-  display: none;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -821,6 +821,7 @@ p {
   position: absolute;
   top: 50px;
   right: 50px;
+  z-index: 106;
 }
 
 .start-game-modal-container {

@@ -148,3 +148,16 @@ socket.on("joinedLeavedNotification", (data) => {
 
 
 
+const playerModalTimes = document.querySelector("#playerModalTimes"); 
+const test = (nickname, time) => {
+    let children = playerModalTimes.childl;
+    let main;
+    for(let i = 0; i < children.length; i++){
+        if(children[i].id === nickname){
+            main = children[i];
+            break;
+        }else{
+            let element = document.createElement("p");
+        }
+    }
+}
