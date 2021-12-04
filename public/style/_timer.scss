@@ -108,7 +108,7 @@
         margin: 20px 0 0 25px;
     }
 
-    table {
+    .sidebar-times {
         position: relative;
         width: 100%;
         /*padding: 15px;*/
@@ -221,13 +221,22 @@
         height: 60px;
         justify-content: center;
         align-items: center;
+        &:hover{
+            background-color: darken($secondary, 15%);
+        }
     }
 
     #openPlayersBtn {
         background-color: $green;
+        &:hover{
+            background-color: darken($green, 15%);
+        }
     }
     #exitRoom {
         background-color: $red;
+        &:hover{
+            background-color: darken($red, 15%);
+        }
     }
 }
 

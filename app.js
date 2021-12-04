@@ -4,7 +4,7 @@ const express = require("express");
 // App setup
 const PORT = process.env.PORT || 3000;
 const app = express();
-const server = app.listen(PORT, function () {
+const server = app.listen(PORT , "192.168.1.11", function () {
     console.log(`Listening on port ${PORT}`);
     console.log(`http://localhost:${PORT}`);
 });
@@ -48,7 +48,6 @@ io.on("connection", (socket) => {
                 if (!rooms[roomCode].isLocked) {
                     socket.nickname = nickname;
                     io.in(roomCode).emit("joinedLeavedNotification", { nickname: nickname, joined: true });
-                    console.log("fired test with parms: " + roomCode + nickname)
                     rooms[roomCode].addSocket(socket);
                     socket.join(roomCode);
                     // fire event for joining

@@ -495,7 +495,7 @@ p {
   margin: 20px 0 0 25px;
 }
 
-.sidebar table {
+.sidebar .sidebar-times {
   position: relative;
   width: 100%;
   /*padding: 15px;*/
@@ -504,38 +504,38 @@ p {
   font-size: 1vw;
 }
 
-.sidebar table .tbody-row-group {
+.sidebar .sidebar-times .tbody-row-group {
   width: 100%;
 }
 
-.sidebar table .default-tbody {
+.sidebar .sidebar-times .default-tbody {
   display: table;
   width: 100%;
 }
 
-.sidebar table .round-marker {
+.sidebar .sidebar-times .round-marker {
   margin-top: 25px;
 }
 
-.sidebar table .round-marker td {
+.sidebar .sidebar-times .round-marker td {
   border-top: 1px solid black;
   font-weight: 400;
 }
 
-.sidebar table td {
+.sidebar .sidebar-times td {
   font-size: 1rem;
   height: 20px;
 }
 
-.sidebar table .table-header {
+.sidebar .sidebar-times .table-header {
   font-weight: 700;
 }
 
-.sidebar table tr {
+.sidebar .sidebar-times tr {
   margin-top: 15px;
 }
 
-.sidebar table .table-no {
+.sidebar .sidebar-times .table-no {
   border-right: 1px solid black;
 }
 
@@ -638,12 +638,24 @@ p {
           align-items: center;
 }
 
+.bottom-buttons .settings-btn:hover {
+  background-color: #b35300;
+}
+
 .bottom-buttons #openPlayersBtn {
   background-color: #18B923;
 }
 
+.bottom-buttons #openPlayersBtn:hover {
+  background-color: #0f7516;
+}
+
 .bottom-buttons #exitRoom {
   background-color: #E22121;
+}
+
+.bottom-buttons #exitRoom:hover {
+  background-color: #a11515;
 }
 
 .hidden-on-start {
@@ -737,6 +749,47 @@ p {
   pointer-events: auto;
 }
 
+.modal #playerModalTimes {
+  height: 100%;
+  position: relative;
+}
+
+.modal #playerModalTimes .stats-full {
+  width: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  max-height: 80%;
+  overflow: scroll;
+}
+
+.modal #playerModalTimes .stats-full table {
+  width: 100%;
+}
+
+.modal #playerModalTimes .stats-full table .tb-heading-fix {
+  margin-bottom: 10px;
+}
+
+.modal #playerModalTimes .stats-full table .tb-heading-fix td {
+  font-weight: 700;
+}
+
+.modal #playerModalTimes .goback-from-player-btn {
+  position: absolute;
+  bottom: 55px;
+  right: 25px;
+  font-size: 1.2rem;
+  background-color: #1161FF;
+  padding: 7px 30px;
+  color: #FFF;
+  cursor: pointer;
+}
+
+.modal #playerModalTimes .goback-from-player-btn:hover {
+  background-color: #0042c4;
+}
+
 .modal .modal-container {
   position: relative;
   -webkit-box-orient: vertical;
@@ -815,6 +868,43 @@ p {
 
 .modal .modal-container .apply-btn:hover {
   background-color: #4483ff;
+}
+
+.modal .modal-container #playerRows {
+  width: 100%;
+  padding: 15px 15px;
+}
+
+.modal .modal-container #playerRows .row {
+  width: 100%;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 10px 15px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1.5rem;
+}
+
+.modal .modal-container #playerRows .row .view-more-btn {
+  font-size: 1.2rem;
+  background-color: #1161FF;
+  padding: 7px 30px;
+  color: #FFF;
+  cursor: pointer;
+}
+
+.modal .modal-container #playerRows .row .view-more-btn:hover {
+  background-color: #0042c4;
+}
+
+.modal .player-modal-times {
+  display: none;
 }
 
 .modal .settings-exit-btn {

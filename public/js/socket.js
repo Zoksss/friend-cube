@@ -8,16 +8,19 @@ const joinedUsersContainer2 = document.querySelector("#joinedUsersContainer2");
 
 const codeElement = document.querySelector("#code");
 
+const playerRows = document.querySelector("#playerRows");
+const playerModalTimes = document.querySelector("#playerModalTimes"); 
+
+
 
 let round = 0;
+let isGameStarted = false;
 
 let socket = io();
 
 socket.on("connect", () => {
     console.log("Connected to the server");
-})
-
-// first joined socekt is leader
+});
 
 socket.on("serverError", (msg) => {
     displayAlert(`Unable to join - ${msg}`);
@@ -61,18 +64,80 @@ socket.on("displayUsers", (users) => {
         child2 = joinedUsersContainer2.lastElementChild;
     }
 
+    let playersModalListElement = "";
+    let as = `<a role="button" class="goback-from-player-btn" id="goBackFromPlayer">Go Back</a>`;
     users.forEach(element => {
         let dom = document.createElement("p");
         dom.innerText = element
         joinedUsersContainer2.append(dom);
+
+        playersModalListElement += 
+        `<div class="row">
+            <h5>${element}</h5>
+            <a role="button" class="view-more-btn" id="viewMoreBtn">View</a>
+        </div>`
+        playersModalListElement = playersModalListElement.trim();
+        playerRows.innerHTML = playersModalListElement;
+        
+        if(isGameStarted) return;
+        as += `
+        <div id="${element}Row" class="stats-full">
+            <table>
+                <tr class="tb-heading-fix">
+                    <td>round</td>
+                    <td>time</td>
+                    <td>ao5</td>
+                    <td>ao12</td>
+                    <td>aoAll</td>
+                </tr>
+                <tr>
+                    <td>1.</td>
+                    <td>30.07</td>
+                    <td>39.10</td>
+                    <td>32.88</td>
+                    <td>41.35</td>
+                </tr>
+            </table>
+        </div>`
+        playerModalTimes.innerHTML = as;
     });
 });
+
+
+const playerContainerTitle = document.querySelector("#playerContainerTitle");
+
+
+const showFullPlayerStats = (nickname, toShow) => {
+    if(!toShow){
+        playerModalTimes.style.display = "none";
+        playerRows.style.display = "flex";
+        playerContainerTitle.innerHTML = "Joined Player's Stats";
+        return;
+        
+    }
+    playerModalTimes.style.display = "flex";
+    playerRows.style.display = "none";
+    playerContainerTitle.innerHTML = nickname;
+
+};
+
+document.addEventListener("click",function(e){
+    if(e.target && e.target.id=="viewMoreBtn"){
+        let name = e.target.parentElement.children[0].innerText;
+        showFullPlayerStats(name, true)
+     }
+    if(e.target && e.target.id=="goBackFromPlayer"){
+        let name = e.target.parentElement.children[0].innerText;
+        showFullPlayerStats(name, false)
+     }
+ });
 
 socket.on("startGame", () => {
     console.log("starting game");
     waitForStartOverlay.style.display = "none";
     waitForStartLeaderOverlay.style.display = "none";
     isReady = true;
+    isGameStarted = true;
 })
 
 
@@ -120,16 +185,13 @@ socket.on("timeGetFromSocket", (data) => {
         tableInserttarget.append(element);
         tableInserttarget = element;
     }
-
-
-
-})
+});
 
 socket.on("ready", () => {
     isReady = true;
     round++;
     console.log("now is ready")
-})
+});
 
 socket.on("setScramble", (scramble) => {
     scrambleElement.innerHTML = scramble;
@@ -137,18 +199,17 @@ socket.on("setScramble", (scramble) => {
 
 
 socket.on("joinedLeavedNotification", (data) => {
-    console.log(data.nickname +" joined")
     let elem = document.createElement("p");
     elem.classList.add("notification");
     document.body.append(elem);
     elem.innerHTML = `${data.nickname} ${data.joined?"joined":"left"} the room`
     elem.addEventListener('animationend', () => {elem.parentNode.removeChild(elem);});
+
  
 });
 
 
 
-const playerModalTimes = document.querySelector("#playerModalTimes"); 
 const test = (nickname, time) => {
     let children = playerModalTimes.childl;
     let main;

@@ -83,9 +83,14 @@ closePlayerModalBtn.addEventListener("click", () => {
 //});
 
 
+
+
 exitRoom.addEventListener("click", () => {
     location.reload();
 })
+
+
+
 
 
 
@@ -95,16 +100,6 @@ const inputLogic = (e) => {
     codeInput.classList.remove("input-warning");
     e.preventDefault();
     clearTimeout(t);
-
-
-    /* error codes
-
-    0 - no error
-    1 - empty nickname
-    2 - nickname must be more than 3
-    3 - code must be 8 characters
-
-    */
 
     let inputState = validateInput();
     console.log(inputState);
@@ -174,6 +169,12 @@ leaderStartGame.addEventListener("click", () => {
     console.log("fireinbg start");
     socket.emit("leaderStartGamee", codeInput.value);
 });
+
+
+
+
+
+
 
 
 function isMobile(x) {
