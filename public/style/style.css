@@ -77,7 +77,7 @@ p {
     height: 100vh;
   }
   .scramble {
-    font-size: 1.1rem !important;
+    font-size: 1.3rem !important;
   }
   .time {
     font-size: 7rem !important;
@@ -759,8 +759,9 @@ p {
   position: absolute;
   right: 0;
   top: 0;
-  max-height: 80%;
+  height: 80%;
   overflow: scroll;
+  display: none;
 }
 
 .modal #playerModalTimes .stats-full table {
@@ -873,6 +874,7 @@ p {
 .modal .modal-container #playerRows {
   width: 100%;
   padding: 15px 15px;
+  height: 80%;
 }
 
 .modal .modal-container #playerRows .row {

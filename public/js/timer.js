@@ -84,7 +84,7 @@ const timerStop = () => {
 
     ao5Element.innerHTML = calculateAo5();
     ao12Element.innerHTML = calculateAo12()
-    socket.emit("finalTime", { roomCode: codeInput.value, time: curTime });
+    socket.emit("finalTime", { roomCode: codeInput.value, time: curTime, ao5: ao5Element.innerHTML, ao12: ao12Element.innerHTML});
 
     clearInterval(started);
     scrambleElement.innerHTML = "Waiting for other players to finish solving..."

@@ -25,14 +25,13 @@ let selectedPuzzle;
 let t;
 
 enterNicknameContainerBtn.addEventListener("click", (e) => {
-    inputLogic(e);
-    console.log(codeInput.value);
-    socket.emit('join', nicknameInput.value, codeInput.value, "3x3");
+    if(inputLogic(e))
+        socket.emit('join', nicknameInput.value, codeInput.value, "3x3");
 });
 createNicknameContainerBtn.addEventListener("click", (e) => {
     codeInput.value = makeRoomId(8);
-    inputLogic(e);
-    socket.emit('join', nicknameInputOnCreate.value, codeInput.value, selectedPuzzle);
+    if(inputLogic(e))
+        socket.emit('join', nicknameInputOnCreate.value, codeInput.value, selectedPuzzle);
 });
 
 
@@ -91,9 +90,6 @@ exitRoom.addEventListener("click", () => {
 
 
 
-
-
-
 const inputLogic = (e) => {
     nicknameInput.classList.remove("input-warning");
     nicknameInputOnCreate.classList.remove("input-warning");
@@ -104,23 +100,30 @@ const inputLogic = (e) => {
     let inputState = validateInput();
     console.log(inputState);
     switch (inputState) {
+        case 0:
+            return true;
         case 1:
             nicknameInput.classList.add("input-warning");
             nicknameInputOnCreate.classList.add("input-warning");
             displayAlert("Nickname cannot be empty.");
-            break;
+            return false;
         case 2:
             nicknameInput.classList.add("input-warning");
             nicknameInputOnCreate.classList.add("input-warning");
             displayAlert("Nickname must be 3 or more characters")
-            break;
+            return false;
         case 3:
+            nicknameInput.classList.add("input-warning");
+            nicknameInputOnCreate.classList.add("input-warning");
+            displayAlert("Nickname must start with letter: [A-Z, a-z]")
+            return false;
+        case 4:
             codeInput.classList.add("input-warning");
             displayAlert("Code must be 8 characters.")
-            break;
+            return false;
         default:
             console.log("Error");
-            break;
+            return false;
     }
 }
 
@@ -144,10 +147,10 @@ const alertDestroy = () => {
 const validateInput = () => {
     if (nicknameInput.value === "" && nicknameInputOnCreate.value === "") return 1;
     if (nicknameInput.value.length < 3 && nicknameInputOnCreate.value.length < 3) return 2;
-    if (codeInput.value.length != 8) return 3;
+    if (!isNaN(nicknameInput.value.charAt(0))) return 3;
+    if (codeInput.value.length != 8) return 4;
     return 0;
 }
-
 
 const selectPuzzle = (puzzle) => {
     selectedPuzzle = puzzle;

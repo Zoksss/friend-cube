@@ -29,8 +29,9 @@
             position: absolute;
             right: 0;
             top: 0;
-            max-height: 80%;
+            height: 80%;
             overflow: scroll;
+            display: none;
             table{
                 width: 100%;
                 .tb-heading-fix{
@@ -125,6 +126,7 @@
         #playerRows {
             width: 100%;
             padding: 15px 15px;
+            height: 80%;
 
             .row {
                 width: 100%;

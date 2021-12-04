@@ -91,7 +91,7 @@ io.on("connection", (socket) => {
         let socketObjectInRoom = rooms[data.roomCode].sockets.find(o => o.socketId === socket.id);
         if (!socketObjectInRoom) return;
 
-        io.in(data.roomCode).emit("timeGetFromSocket", ({ socketName: socket.nickname, stime: data.time }));
+        io.in(data.roomCode).emit("timeGetFromSocket", ({ socketName: socket.nickname, stime: data.time, ao5: data.ao5, ao12: data.ao12 }));
         socketObjectInRoom.isFinished = true;
 
         if (!isEveryoneFinished(data.roomCode)) return;
