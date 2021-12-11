@@ -25,12 +25,12 @@ let selectedPuzzle;
 let t;
 
 enterNicknameContainerBtn.addEventListener("click", (e) => {
-    if(inputLogic(e))
+    if (inputLogic(e))
         socket.emit('join', nicknameInput.value, codeInput.value, "3x3");
 });
 createNicknameContainerBtn.addEventListener("click", (e) => {
     codeInput.value = makeRoomId(8);
-    if(inputLogic(e))
+    if (inputLogic(e))
         socket.emit('join', nicknameInputOnCreate.value, codeInput.value, selectedPuzzle);
 });
 
@@ -147,15 +147,18 @@ const alertDestroy = () => {
 const validateInput = () => {
     if (nicknameInput.value === "" && nicknameInputOnCreate.value === "") return 1;
     if (nicknameInput.value.length < 3 && nicknameInputOnCreate.value.length < 3) return 2;
-    if (!isNaN(nicknameInput.value.charAt(0))) return 3;
+    if (!isLetter(nicknameInput.value.charAt(0))) return 3;
     if (codeInput.value.length != 8) return 4;
     return 0;
 }
 
+function isLetter(str) {
+    return str.length === 1 && str.match(/[a-z]/i);
+  }
+
 const selectPuzzle = (puzzle) => {
     selectedPuzzle = puzzle;
     transitionAnim(choosePuzzleContainer, createNicknameContainer);
-
 }
 
 const makeRoomId = (length) => {

@@ -24,7 +24,7 @@
         height: 100%;
         position: relative;
 
-        .stats-full{
+        .stats-full {
             width: 100%;
             position: absolute;
             right: 0;
@@ -32,14 +32,18 @@
             height: 80%;
             overflow: scroll;
             display: none;
-            table{
+            table {
                 width: 100%;
-                .tb-heading-fix{
+                border-collapse: collapse;
+                .tb-heading-fix {
                     margin-bottom: 10px;
-                    td{
+                    td {
                         font-weight: 700;
                     }
                 }
+            }
+            tr:hover {
+                background-color: darken($white, 20%);
             }
         }
         .goback-from-player-btn {
@@ -150,7 +154,7 @@
             }
         }
     }
-    .player-modal-times{
+    .player-modal-times {
         display: none;
     }
 

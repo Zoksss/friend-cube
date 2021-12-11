@@ -1,21 +1,21 @@
-*, 
-*::before, 
-*::after{
+*,
+*::before,
+*::after {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     border: none;
 }
 
-html{
+html {
     overflow-x: hidden;
 }
 
-body{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: $dark;
     position: relative;
-    
+
     &::before {
         /* image at background */
         z-index: -1;
@@ -29,62 +29,61 @@ body{
 
     background-color: $primary;
     height: 100vh;
-    
 }
 
-h1, h2{
+h1,
+h2 {
     font-size: 1.575rem;
     font-weight: 700;
 }
 
-h3{
-    font-size:  0.763rem;
+h3 {
+    font-size: 0.763rem;
     font-weight: 700;
 }
 
-h4{
+h4 {
     font-size: 24px;
     font-weight: 400;
 }
 
-p{
+p {
     font-size: 16px;
 }
 
-.container{
+
+
+.container {
     position: relative;
     padding: 100px 0;
     width: 100% !important;
-   
 }
-
 
 /* resposnive */
 
 @media (min-width: 600px) {
 }
 
-
 @media (min-width: $tablets) {
-    .container{
+    .container {
         padding: 100px 50px;
     }
 
-    h1, h2{
+    h1,
+    h2 {
         font-size: 36px;
         font-weight: 700;
     }
-    h3{
-        font-size:  19px;
+    h3 {
+        font-size: 19px;
         font-weight: 700;
     }
-    
-    p{
+
+    p {
         font-size: 18px;
     }
-    
-    
-    .container{
+
+    .container {
         padding: 100px 100px;
         height: 100vh;
     }
@@ -99,6 +98,6 @@ p{
     }
     .bottom-buttons {
         left: 25px !important;
-        transform: translate(0,0) !important;
+        transform: translate(0, 0) !important;
     }
-  }
+}

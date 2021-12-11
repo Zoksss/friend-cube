@@ -12,12 +12,15 @@ let tableInserttarget = document.querySelector('#nullElement');
 
 
 let currTimeIndex = 1;
-let debounce = false, isTimerRunningTrue = false, isTimmerStoppedTrue = false, hideElementsOnStartTrue = true;
+let debounce = false
+    , isTimerRunningTrue = false
+    , isTimmerStoppedTrue = false
+    , hideElementsOnStartTrue = true;
 
-let timeBegan = null,
-    timeStopped = null,
-    stoppedDuration = 0,
-    started = null;
+let timeBegan = null
+    , timeStopped = null
+    , stoppedDuration = 0
+    , started = null;
 
 let currentTime, timeElapsed, hour, min, sec, ms;
 
@@ -25,44 +28,62 @@ let times = [];
 
 let isReady = false;
 
+document.querySelector(".timer-container").addEventListener("touchstart", () => {
+    if (!debounce && isReady) {
+        keyPressedTimer();
+    }
+});
+
 document.addEventListener("keydown", event => {
     if (event.isComposing || event.keyCode === 32 && !debounce && isReady) {
-        debounce = true;
+        keyPressedTimer();
+    }
+});
 
-        console.log("Space clicked");
+const keyPressedTimer = () => {
+    debounce = true;
 
-        if (!isTimerRunningTrue)
-            mainTimeElement.style.color = "green";
-        else {
-            timerStop();
-            isTimerRunningTrue = false;
-            isTimmerStoppedTrue = true;
-            if (hideElementsOnStartTrue) displayChange("block");
-        }
+    console.log("Space clicked");
+
+    if (!isTimerRunningTrue)
+        mainTimeElement.style.color = "green";
+    else {
+        timerStop();
+        isTimerRunningTrue = false;
+        isTimmerStoppedTrue = true;
+        if (hideElementsOnStartTrue) displayChange("block");
+    }
+}
+
+document.querySelector(".timer-container").addEventListener("touchend", () => {
+    if (debounce) {
+        keyLeftTimer();
     }
 });
 
 document.addEventListener("keyup", event => {
     if (event.isComposing || event.keyCode === 32 && debounce) {
-        debounce = false;
-
-        if (!isTimerRunningTrue && !isTimmerStoppedTrue) {
-            isTimerRunningTrue = true;
-
-            if (hideElementsOnStartTrue)
-                displayChange("none");
-
-            mainTimeElement.style.color = "#242424";
-            timerReset();
-            timerStart();
-        }
-        mainTimeElement.style.color = "#242424";
-        isTimmerStoppedTrue = false
-        return;
+        keyLeftTimer();
     }
 });
 
+const keyLeftTimer = () => {
+    debounce = false;
 
+    if (!isTimerRunningTrue && !isTimmerStoppedTrue) {
+        isTimerRunningTrue = true;
+
+        if (hideElementsOnStartTrue)
+            displayChange("none");
+
+        mainTimeElement.style.color = "#242424";
+        timerReset();
+        timerStart();
+    }
+    mainTimeElement.style.color = "#242424";
+    isTimmerStoppedTrue = false
+    return;
+}
 
 const displayChange = displayVal => {
     hideOnStart.forEach(element => {
@@ -79,12 +100,22 @@ const timerStart = () => {
 
 const timerStop = () => {
     timeStopped = new Date();
-    let curTime = { hours: hour, minutes: min, seconds: sec, milliseconds: ms }
+    let curTime = {
+        hours: hour
+        , minutes: min
+        , seconds: sec
+        , milliseconds: ms
+    }
     times.push(curTime);
 
     ao5Element.innerHTML = calculateAo5();
     ao12Element.innerHTML = calculateAo12()
-    socket.emit("finalTime", { roomCode: codeInput.value, time: curTime, ao5: ao5Element.innerHTML, ao12: ao12Element.innerHTML});
+    socket.emit("finalTime", {
+        roomCode: codeInput.value
+        , time: curTime
+        , ao5: ao5Element.innerHTML
+        , ao12: ao12Element.innerHTML
+    });
 
     clearInterval(started);
     scrambleElement.innerHTML = "Waiting for other players to finish solving..."
@@ -107,10 +138,10 @@ function clockRunning() {
         , ms = timeElapsed.getUTCMilliseconds();
 
 
-    let hourString = (hour > 9 ? hour : "0" + hour) + ":",
-        minString = (min > 9 ? min : "0" + min) + ":",
-        secString = (sec > 9 ? sec : "0" + sec),
-        milisString = (ms > 99 ? ms : ms > 9 ? "0" + ms : "00" + ms),
+    let hourString = (hour > 9 ? hour : "0" + hour) + ":"
+        , minString = (min > 9 ? min : "0" + min) + ":"
+        , secString = (sec > 9 ? sec : "0" + sec)
+        , milisString = (ms > 99 ? ms : ms > 9 ? "0" + ms : "00" + ms),
 
         timeString = (hour == 0 ? "" : hourString) + (min == 0 ? "" : minString) + secString + "." + milisString
     mainTimeElement.innerHTML = timeString;
@@ -124,7 +155,10 @@ const calculateAo5 = () => {
     if (times.length - 5 < 0) i = 0;
     else i = times.length - 5;
 
-    let averageHours = 0, averageMinutes = 0, averageSeconds = 0, averageMilliseconds = 0;
+    let averageHours = 0
+        , averageMinutes = 0
+        , averageSeconds = 0
+        , averageMilliseconds = 0;
 
     let counter = 0;
     for (i; i < times.length; i++) {
@@ -143,7 +177,10 @@ const calculateAo12 = () => {
     if (i < 12) return "--";
     i = times.length - 12;
 
-    let averageHours = 0, averageMinutes = 0, averageSeconds = 0, averageMilliseconds = 0;
+    let averageHours = 0
+        , averageMinutes = 0
+        , averageSeconds = 0
+        , averageMilliseconds = 0;
 
     let counter = 0;
     for (i; i < times.length; i++) {
@@ -163,7 +200,8 @@ const msToTime = (s) => {
     const pad = (n, z) => {
         z = z || 2;
         if (n == 0) return "";
-        return ('00' + n).slice(-z);
+        return ('00' + n)
+            .slice(-z);
     }
     let ms = s % 1000;
     s = (s - ms) / 1000;
@@ -171,7 +209,8 @@ const msToTime = (s) => {
     s = (s - secs) / 60;
     let mins = s % 60;
     let hrs = (s - mins) / 60;
-    return pad(hrs) + ((hrs > 0) ? ":" : "") + pad(mins) + ((mins > 0) ? ":" : "") + ((secs.toString().length === 1) ? "0" + secs : secs) + '.' + pad(ms, 3);
+    return pad(hrs) + ((hrs > 0) ? ":" : "") + pad(mins) + ((mins > 0) ? ":" : "") + ((secs.toString()
+        .length === 1) ? "0" + secs : secs) + '.' + pad(ms, 3);
 }
 
 const randomNum = (min, max) => Math.floor(Math.random() * (max - min)) + min;

@@ -13,7 +13,7 @@ html {
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #242424;
   position: relative;
   background-color: #EFF8FF;
@@ -31,7 +31,8 @@ body::before {
   margin-top: -120px;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-size: 1.575rem;
   font-weight: 700;
 }
@@ -61,7 +62,8 @@ p {
   .container {
     padding: 100px 50px;
   }
-  h1, h2 {
+  h1,
+  h2 {
     font-size: 36px;
     font-weight: 700;
   }
@@ -207,7 +209,7 @@ p {
   width: 300px;
   -webkit-box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.05);
-  margin-bottom: 100px;
+  margin-bottom: 40px;
 }
 
 .nickname-container .nickname-input-container input:not(input[type="submit"]) {
@@ -249,7 +251,8 @@ p {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: 80vh;
+  height: 70vh;
+  max-height: 70vh;
   /*display:none;*/
 }
 
@@ -766,6 +769,7 @@ p {
 
 .modal #playerModalTimes .stats-full table {
   width: 100%;
+  border-collapse: collapse;
 }
 
 .modal #playerModalTimes .stats-full table .tb-heading-fix {
@@ -774,6 +778,10 @@ p {
 
 .modal #playerModalTimes .stats-full table .tb-heading-fix td {
   font-weight: 700;
+}
+
+.modal #playerModalTimes .stats-full tr:hover {
+  background-color: #cccccc;
 }
 
 .modal #playerModalTimes .goback-from-player-btn {

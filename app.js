@@ -34,23 +34,20 @@ class Room {
 
 let rooms = {};
 
-const test = (socket, roomCode) => {
-    rooms[roomCode].removeSocket(socket);
-    console.log(rooms);
-}
-
 io.on("connection", (socket) => {
     console.log("Made socket connection with id: " + socket.id);
-
     socket.on("join", (nickname, roomCode, puzzle) => {
         if (validateInput(nickname, roomCode, puzzle)) {
+            if (doesUsernameAlrdeyExists(nickname, roomCode)) {
+                socket.emit("serverError", "Nickname alredy used in this room.");
+                return;
+            }
             if (rooms[roomCode] != undefined) {
                 if (!rooms[roomCode].isLocked) {
                     socket.nickname = nickname;
                     io.in(roomCode).emit("joinedLeavedNotification", { nickname: nickname, joined: true });
                     rooms[roomCode].addSocket(socket);
                     socket.join(roomCode);
-                    // fire event for joining
                     socket.emit("joinToTimer");
                     updateWaitingScreenStatus(roomCode);
                 }
@@ -65,10 +62,9 @@ io.on("connection", (socket) => {
                 updateWaitingScreenStatus(roomCode);
             }
 
-        }
-        //doesUsernameAlrdeyExists(socket.nickname, roomCode);
-        // update joined players status
+        } else socket.emit("serverError", "Input not valid");
 
+        //doesUsernameAlrdeyExists(socket.nickname, roomCode);
     });
 
     socket.on("leaderStartGamee", (roomCode) => {
@@ -104,25 +100,18 @@ io.on("connection", (socket) => {
     });
 
     socket.on('disconnecting', () => {
-
         let roomNames = Object.keys(socket.rooms);
         for (let i = 0; i < roomNames.length; i++) {
-            if (roomNames[i] === socket.id) continue;
+            if (!roomNames[i] === socket.id) continue;
+            if (!rooms[roomNames[i]]) return;
             io.in(roomNames[i]).emit("joinedLeavedNotification", { nickname: socket.nickname, joined: false });
             rooms[roomNames[i]].removeSocket(socket);
             checkIfRoomIsEmpty(roomNames[i]);
             updateWaitingScreenStatus(roomNames[i]);
-            break;
+            return;
         }
     });
-
-    socket.on("disconnect", () => {
-        console.log('Got disconnect! ' + socket.id);
-        console.log(rooms);
-    });
 });
-
-
 
 
 // functions
@@ -130,7 +119,6 @@ io.on("connection", (socket) => {
 const checkIfRoomIsEmpty = (roomCode) => {
     if (rooms[roomCode].sockets.length != 0) return;
     delete rooms[roomCode];
-    //rooms[roomCode] = null;
     console.log("Room " + roomCode + " deleted (empty)");
 
 }
@@ -163,18 +151,24 @@ const isEveryoneFinished = (roomCode) => {
     return temp;
 }
 
-
-const doesUsernameAlrdeyExists = (socketobj, roomCode) => {
-    let socketsInRoom = io.sockets.adapter.rooms[roomCode].sockets;
-    for (var clientId in socketsInRoom) {
-        console.log(io.connected[clientId]);
-        if(io.connected[clientId].nickname === nickname) return true;
-    }
-    return false;
-}
-
 const generateScramble = (puzzle) => {
     let scrambele = "";
-    for (a = y = r = '', x = Math.random; a++ < 22; scrambele += (r + " '2"[0 | x(y = r) * 3] + ' '))for (; r == y; r = 'RLUDFB'[0 | x() * 6]);
+    for (a = y = r = '', x = Math.random; a++ < 22; scrambele += (r + " '2"[0 | x(y = r) * 3] + ' '))
+        for (; r == y; r = 'RLUDFB'[0 | x() * 6]);
     return scrambele;
+}
+
+const doesUsernameAlrdeyExists = (nickname, roomCode) => {
+    let socketsInRoom = io.sockets.adapter.rooms[roomCode];
+    if (socketsInRoom && socketsInRoom.sockets) {
+        console.log(socketsInRoom.sockets);
+        for (let clientId in socketsInRoom.sockets) {
+            console.log(io.sockets.connected[clientId].nickname + " / " + nickname);
+            if (io.sockets.connected[clientId].nickname === nickname) {
+                console.log("isti username");
+                return true;
+            }
+        }
+        return false;
+    }
 }
