@@ -42,6 +42,11 @@ h3 {
   font-weight: 700;
 }
 
+h6 {
+  font-size: 19px;
+  font-weight: 700;
+}
+
 h4 {
   font-size: 24px;
   font-weight: 400;
@@ -309,6 +314,7 @@ p {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  width: 100%;
   display: none;
 }
 
@@ -317,31 +323,65 @@ p {
 }
 
 .choose-puzzle-container .choose-puzzle-button-container {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (120px)[4];
-      grid-template-columns: repeat(4, 120px);
-  grid-gap: 20px;
-  grid-row-gap: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-bottom: 100px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+}
+
+.choose-puzzle-container .choose-puzzle-button-container .choose-puzzle-first-row .choose-puzzle-second-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+  -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+}
+
+.choose-puzzle-container .choose-puzzle-button-container .choose-puzzle-first-row .choose-puzzle-second-row h6 {
+  font-size: 0.763rem;
 }
 
 .choose-puzzle-container .choose-puzzle-button-container .puzzle-button {
-  width: 110px;
-  height: 110px;
+  width: 80%;
+  height: 50px;
+  margin: 15px 15px;
   background: #FFF;
   -webkit-box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.05);
-  box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.05);
-  -webkit-transition: all .3s;
-  transition: all .3s;
+          box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.05);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
   overflow: hidden;
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .choose-puzzle-container .choose-puzzle-button-container .puzzle-button img {
@@ -358,6 +398,57 @@ p {
 
 .choose-puzzle-container .choose-puzzle-button-container .disabled img {
   opacity: 0.4;
+}
+
+@media (min-width: 500px) {
+  .choose-puzzle-first-row {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: normal !important;
+        -ms-flex-direction: row !important;
+            flex-direction: row !important;
+  }
+  .choose-puzzle-second-row {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: normal !important;
+        -ms-flex-direction: row !important;
+            flex-direction: row !important;
+  }
+  .puzzle-button {
+    width: 110px !important;
+    height: 110px !important;
+    margin: 15px 15px !important;
+    background: #FFF !important;
+    -webkit-box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.05);
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    overflow: hidden;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+        -ms-flex-direction: column !important;
+            flex-direction: column !important;
+    -webkit-box-pack: center !important;
+        -ms-flex-pack: center !important;
+            justify-content: center !important;
+    -webkit-box-align: center !important;
+        -ms-flex-align: center !important;
+            align-items: center !important;
+  }
+  .puzzle-button img {
+    margin-bottom: 10px;
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .timer-section {

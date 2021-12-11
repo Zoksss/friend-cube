@@ -42,6 +42,11 @@ h3 {
     font-weight: 700;
 }
 
+h6{
+    font-size: 19px;
+    font-weight: 700;
+}
+
 h4 {
     font-size: 24px;
     font-weight: 400;
@@ -61,8 +66,7 @@ p {
 
 /* resposnive */
 
-@media (min-width: 600px) {
-}
+
 
 @media (min-width: $tablets) {
     .container {

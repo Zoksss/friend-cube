@@ -134,11 +134,16 @@ const updateWaitingScreenStatus = (roomCode) => {
 
 const validateInput = (nickname, roomCode, puzzle) => {
     if (nickname === "") return false;
+    if(!isLetter(nickname.charAt(0))) return false;
     if (nickname.length < 3) return false;
     if (roomCode.length != 8) return false;
     if (puzzle != "3x3") return false;
     return true;
 }
+
+function isLetter(str) {
+    return str.length === 1 && str.match(/[a-z]/i);
+  }
 
 const isEveryoneFinished = (roomCode) => {
     let temp = true;

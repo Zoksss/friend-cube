@@ -14,10 +14,7 @@
 <body>
     <section id="inputSection">
         <div class="container">
-
-            <div class="alert" id="alert">
-                Indicates a dangerous or potentially negative action.
-            </div>
+            <div class="alert" id="alert"></div>
             <!-- Join and Create Game container -->
             <div class="start-container" id="mainMenuContainer">
                 <h1>SOLVE. WITH. FRIENDS.</h1>
@@ -55,38 +52,42 @@
                 <p>no need to login, just play</p>
 
                 <div class="choose-puzzle-button-container">
-                    <button class="puzzle-button" onclick="selectPuzzle('3x3') ">
-                        <img src="assets/333.svg">
-                        <h3>3X3</h3>
-                    </button>
-                    <button class="puzzle-button" onclick="selectPuzzle('2x2')">
-                        <img src="assets/222.svg">
-                        <h3>2X2</h3>
-                    </button>
-                    <button class="puzzle-button disabled" onclick="selectPuzzle('pyra')">
-                        <img src="assets/pyraminx.svg">
-                        <h3>Pyraminx</h3>
-                    </button>
-                    <button class="puzzle-button disabled" onclick="selectPuzzle('mega')">
-                        <img src="assets/megaminx.svg">
-                        <h3>Megaminx</h3>
-                    </button>
-                    <button class="puzzle-button disabled" onclick="selectPuzzle('sq1')">
-                        <img src="assets/square1.svg">
-                        <h3>Square 1</h3>
-                    </button>
-                    <button class="puzzle-button disabled" onclick="selectPuzzle('4x4')">
-                        <img src="assets/444.svg">
-                        <h3>4X4</h3>
-                    </button>
-                    <button class="puzzle-button disabled" onclick="selectPuzzle('5x5')">
-                        <img src="assets/555.svg">
-                        <h3>5X5</h3>
-                    </button>
-                    <button class="puzzle-button disabled" onclick="selectPuzzle('??')">
-                        <img src="assets/555.svg">
-                        <h3>6X6</h3>
-                    </button>
+                    <div class="choose-puzzle-first-row" style="width: 100%;">
+                        <button class="puzzle-button" onclick="selectPuzzle('3x3') ">
+                            <img src="assets/333.svg">
+                            <h6>3X3</h6>
+                        </button>
+                        <button class="puzzle-button" onclick="selectPuzzle('2x2')">
+                            <img src="assets/222.svg">
+                            <h6>2X2</h6>
+                        </button>
+                        <button class="puzzle-button disabled" onclick="selectPuzzle('pyra')">
+                            <img src="assets/pyraminx.svg">
+                            <h6>Pyraminx</h6>
+                        </button>
+                        <button class="puzzle-button disabled" onclick="selectPuzzle('mega')">
+                            <img src="assets/megaminx.svg">
+                            <h6>Megaminx</h6>
+                        </button>
+                    </div>
+                    <div class="choose-puzzle-second-row" style="width: 100%;">
+                        <button class="puzzle-button disabled" onclick="selectPuzzle('sq1')">
+                            <img src="assets/square1.svg">
+                            <h6>Square 1</h6>
+                        </button>
+                        <button class="puzzle-button disabled" onclick="selectPuzzle('4x4')">
+                            <img src="assets/444.svg">
+                            <h6>4X4</h6>
+                        </button>
+                        <button class="puzzle-button disabled" onclick="selectPuzzle('5x5')">
+                            <img src="assets/555.svg">
+                            <h6>5X5</h6>
+                        </button>
+                        <button class="puzzle-button disabled" onclick="selectPuzzle('??')">
+                            <img src="assets/555.svg">
+                            <h6>6X6</h6>
+                        </button>
+                    </div>
                 </div>
                 <a role="button" class="btn btn-border" id="choosePuzzleContainerGoBack">Go Back</a>
             </div>
@@ -132,7 +133,7 @@
 
                 </div>
                 <div id="playerModalTimes" class="player-modal-times">
-                    
+
                 </div>
             </div>
         </div>

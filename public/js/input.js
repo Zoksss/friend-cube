@@ -147,7 +147,7 @@ const alertDestroy = () => {
 const validateInput = () => {
     if (nicknameInput.value === "" && nicknameInputOnCreate.value === "") return 1;
     if (nicknameInput.value.length < 3 && nicknameInputOnCreate.value.length < 3) return 2;
-    if (!isLetter(nicknameInput.value.charAt(0))) return 3;
+    if (!isLetter(nicknameInput.value.charAt(0)) && !isLetter(nicknameInputOnCreate.value.charAt(0))) return 3;
     if (codeInput.value.length != 8) return 4;
     return 0;
 }
