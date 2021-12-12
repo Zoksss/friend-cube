@@ -157,6 +157,10 @@ function isLetter(str) {
   }
 
 const selectPuzzle = (puzzle) => {
+    if(puzzle !="3x3"){
+        displayAlert("Error - Puzzle is not implemented yet");
+        return;
+    }
     selectedPuzzle = puzzle;
     transitionAnim(choosePuzzleContainer, createNicknameContainer);
 }
