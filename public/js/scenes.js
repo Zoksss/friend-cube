@@ -49,10 +49,12 @@ createNicknameContainerGoBack.addEventListener("click", () =>{
 
 function transitionAnim(hiddingElement, showingElement){   // transition between containers
     transitionHolder.classList.add("transition");
-    setTimeout(() => {
-        hiddingElement.style.display = "none";
-        showingElement.style.display = "flex";  
-    }, 300);
+    transitionHolder.addEventListener("animationstart", () => {
+        setTimeout(() => {
+            hiddingElement.style.display = "none";
+            showingElement.style.display = "flex";  
+        }, 300);
+    })
     
     transitionHolder.addEventListener('animationend', () => { transitionHolder.classList.remove("transition"); });
 }

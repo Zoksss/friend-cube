@@ -17,7 +17,6 @@ body {
   color: #242424;
   position: relative;
   background-color: #EFF8FF;
-  height: 100vh;
 }
 
 body::before {
@@ -408,6 +407,8 @@ p {
 
 .timer-section {
   display: none;
+  overflow-y: hidden;
+  height: 80%;
 }
 
 .waiting-for-start-overlay {
@@ -499,7 +500,7 @@ p {
   background-color: #FFF;
   top: 0;
   left: -300px;
-  z-index: 1;
+  z-index: 999;
   overflow-y: auto;
   overflow-x: hidden;
   /* Handle on hover */
@@ -513,8 +514,7 @@ p {
   left: 0px;
   width: 60px;
   height: 60px;
-  background-color: #e6e6e6;
-  border-radius: 0 15px 15px 0;
+  background-color: #FFF;
   z-index: 99999;
 }
 
@@ -613,7 +613,7 @@ p {
 .timer-container .scramble {
   font-size: 1.3rem;
   font-weight: 700;
-  margin-top: 0.938rem;
+  margin: 15px 10px 0 10px;
   text-align: center;
 }
 
@@ -661,7 +661,7 @@ p {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  bottom: 25px;
+  bottom: 45px;
   left: 50%;
   -webkit-transform: translate(-50%, 0);
           transform: translate(-50%, 0);
@@ -1011,6 +1011,9 @@ p {
   50% {
     opacity: 1;
   }
+  70% {
+    opacity: 1;
+  }
   100% {
     opacity: 0;
   }
@@ -1021,6 +1024,9 @@ p {
     opacity: 0;
   }
   50% {
+    opacity: 1;
+  }
+  70% {
     opacity: 1;
   }
   100% {

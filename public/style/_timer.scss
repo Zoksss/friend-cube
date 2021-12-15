@@ -1,5 +1,7 @@
 .timer-section {
     display: none;
+    overflow-y: hidden;
+    height: 80%
 }
 
 .waiting-for-start-overlay {
@@ -66,7 +68,7 @@
     background-color: $white;
     top: 0;
     left: -300px;
-    z-index: 1;
+    z-index: 999;
     overflow-y: auto;
     overflow-x: hidden;
 
@@ -77,8 +79,7 @@
         left: 0px;
         width: 60px;
         height: 60px;
-        background-color: darken($white, 10%);
-        border-radius: 0 15px 15px 0;
+        background-color: $white;
         img {
             width: 60px;
             height: 60px;
@@ -166,8 +167,9 @@
     .scramble {
         font-size: 1.3rem;
         font-weight: 700;
-        margin-top: 0.938rem;
+        margin: 15px 10px 0 10px;
         text-align: center;
+
     }
 
     .times {
@@ -204,7 +206,7 @@
 .bottom-buttons {
     position: absolute;
     display: flex;
-    bottom: 25px;
+    bottom: 45px;
     //left: 25px;
     left: 50%;
     transform: translate(-50%, 0);
@@ -239,6 +241,10 @@
         }
     }
 }
+
+
+
+
 
 .hidden-on-start {
     display: inline-block;

@@ -27,21 +27,24 @@ socket.on("serverError", (msg) => {
 });
 
 socket.on("joinToTimer", () => {
-    codeElement.innerHTML = "Room: "+ codeInput.value;
+    //codeElement.innerHTML = "Room: "+ codeInput.value;
     transitionAnim(inputSection, timerSection);
-    waitForStartLeaderOverlay.style.display = "none";
-    waitForStartOverlay.style.display = "flex";
-    timerSection.style.display = "block"
-    console.log("test");
+    setTimeout(() => {  // wait for anim to 50%
+        waitForStartLeaderOverlay.style.display = "none";
+        waitForStartOverlay.style.display = "flex";
+        timerSection.style.display = "block"
+    }, 300);
 });
 
 socket.on("joinToTimerLeader", (roomCode) => {
-    codeElement.innerHTML = "Room: "+ roomCode;
+    //codeElement.innerHTML = "Room: "+ roomCode;
     waitForStartOverlay.style.display = "none";
     waitForStartLeaderOverlay.style.display = "flex";
     waitForStartLeaderOverlayRoomCode.innerHTML = roomCode;
     transitionAnim(inputSection, timerSection);
-    timerSection.style.display = "block";
+    setTimeout(() => {  // wait for anim to 50%
+        timerSection.style.display = "block";
+    }, 300);
 });
 
 socket.on("displayUsers", (users) => {
@@ -222,18 +225,3 @@ socket.on("joinedLeavedNotification", (data) => {
 
  
 });
-
-
-
-const test = (nickname, time) => {
-    let children = playerModalTimes.childl;
-    let main;
-    for(let i = 0; i < children.length; i++){
-        if(children[i].id === nickname){
-            main = children[i];
-            break;
-        }else{
-            let element = document.createElement("p");
-        }
-    }
-}
