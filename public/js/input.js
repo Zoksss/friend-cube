@@ -185,8 +185,6 @@ leaderStartGame.addEventListener("click", () => {
 
 
 
-
-
 function isMobile(x) {
     if (!x.matches) {
         // above 768

@@ -1,6 +1,7 @@
 .timer-section {
     display: none;
     overflow-y: hidden;
+    overflow-x: hidden;
     height: 80%
 }
 
@@ -68,7 +69,7 @@
     background-color: $white;
     top: 0;
     left: -300px;
-    z-index: 999;
+    z-index: 98;
     overflow-y: auto;
     overflow-x: hidden;
 
@@ -206,11 +207,11 @@
 .bottom-buttons {
     position: absolute;
     display: flex;
-    bottom: 45px;
+    bottom: 135px;
     //left: 25px;
     left: 50%;
     transform: translate(-50%, 0);
-    z-index: 1;
+    z-index: 99;
     background-color: $white;
 
     .settings-btn {

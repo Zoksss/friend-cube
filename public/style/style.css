@@ -95,6 +95,7 @@ p {
     left: 25px !important;
     -webkit-transform: translate(0, 0) !important;
             transform: translate(0, 0) !important;
+    bottom: 45px !important;
   }
   .start-game-btn {
     width: 60%;
@@ -408,6 +409,7 @@ p {
 .timer-section {
   display: none;
   overflow-y: hidden;
+  overflow-x: hidden;
   height: 80%;
 }
 
@@ -500,7 +502,7 @@ p {
   background-color: #FFF;
   top: 0;
   left: -300px;
-  z-index: 999;
+  z-index: 98;
   overflow-y: auto;
   overflow-x: hidden;
   /* Handle on hover */
@@ -661,11 +663,11 @@ p {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  bottom: 45px;
+  bottom: 135px;
   left: 50%;
   -webkit-transform: translate(-50%, 0);
           transform: translate(-50%, 0);
-  z-index: 1;
+  z-index: 99;
   background-color: #FFF;
 }
 
