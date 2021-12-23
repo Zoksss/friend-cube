@@ -12,175 +12,178 @@
 </head>
 
 <body>
-    <section id="inputSection">
-        <div class="container">
-            <div class="alert" id="alert"></div>
-            <!-- Join and Create Game container -->
-            <div class="start-container" id="mainMenuContainer">
-                <h1>SOLVE. WITH. FRIENDS.</h1>
-                <p>no need to login, just play</p>
-                <div class="start-container-btn">
-                    <a role="button" class="btn btn-primary" id="mainMenuJoinGame">&nbsp Join Game &nbsp</a>
-                    <p>or</p>
-                    <a role="button" class="btn btn-border create-game" id="mainMenuCreateGame">Create Game</a>
-                </div>
-                <p class="start-container-credit">Created by Zoks</p>
-            </div>
-
-            <!-- Join container-->
-            <div class="nickname-container" id="enterNicknameContainer">
-                <h1 id="nicknameContainerTitle">JOIN</h1>
-                <p id="nicknameContainerSubtitle">enter room code and nickname below</p>
-                <div class="nickname-input-container">
-                    <form>
-                        <p>Nickname</p>
-                        <input type="text" min=5 id="nicknameInput" name="nickname" placeholder="Nickname"
-                            maxlength="20" class="input-warning-none">
-                        <p id="codeLabel">Code</p>
-                        <input id="codeInput" type="text" name="code" placeholder="Code" maxlength="8"
-                            class="input-warning-none">
-                    </form>
-                    <a role="button" class="btn btn-primary" id="enterNicknameContainerBtn">Join Game</a>
-                </div>
-                <a role="button" class="btn btn-border" id="enterNicknameContainerGoBack">Go Back</a>
-            </div>
-
-
-            <!-- Choose puzzle -->
-            <div class="choose-puzzle-container" id="choosePuzzleContainer">
-                <h1>SOLVE. WITH. FRIENDS.</h1>
-                <p>no need to login, just play</p>
-
-                <div class="choose-puzzle-button-container">
-                    <div class="choose-puzzle-row">
-                        <button class="puzzle-button" onclick="selectPuzzle('3x3') ">
-                            <img src="assets/333.svg">
-                            <h6>3X3</h6>
-                        </button>
-                        <button class="puzzle-button disabled" onclick="selectPuzzle('2x2')">
-                            <img src="assets/222.svg">
-                            <h6>2X2</h6>
-                        </button>
-                        <button class="puzzle-button disabled" onclick="selectPuzzle('pyra')">
-                            <img src="assets/pyraminx.svg">
-                            <h6>Pyraminx</h6>
-                        </button>
-                        <button class="puzzle-button disabled" onclick="selectPuzzle('mega')">
-                            <img src="assets/megaminx.svg">
-                            <h6>Megaminx</h6>
-                        </button>
+    <div class="wraper">
+        <section id="inputSection">
+            <div class="container">
+                <div class="alert" id="alert"></div>
+                <!-- Join and Create Game container -->
+                <div class="start-container" id="mainMenuContainer">
+                    <h1>SOLVE. WITH. FRIENDS.</h1>
+                    <p>no need to login, just play</p>
+                    <div class="start-container-btn">
+                        <a role="button" class="btn btn-primary" id="mainMenuJoinGame">&nbsp Join Game &nbsp</a>
+                        <p>or</p>
+                        <a role="button" class="btn btn-border create-game" id="mainMenuCreateGame">Create Game</a>
                     </div>
-                    <div class="choose-puzzle-row">
-                        <button class="puzzle-button disabled" onclick="selectPuzzle('sq1')">
-                            <img src="assets/square1.svg">
-                            <h6>Square 1</h6>
-                        </button>
-                        <button class="puzzle-button disabled" onclick="selectPuzzle('4x4')">
-                            <img src="assets/444.svg">
-                            <h6>4X4</h6>
-                        </button>
-                        <button class="puzzle-button disabled" onclick="selectPuzzle('5x5')">
-                            <img src="assets/555.svg">
-                            <h6>5X5</h6>
-                        </button>
-                        <button class="puzzle-button disabled" onclick="selectPuzzle('??')">
-                            <img src="assets/555.svg">
-                            <h6>6X6</h6>
-                        </button>
+                    <p class="start-container-credit">Created by Zoks</p>
+                </div>
+
+                <!-- Join container-->
+                <div class="nickname-container" id="enterNicknameContainer">
+                    <h1 id="nicknameContainerTitle">JOIN</h1>
+                    <p id="nicknameContainerSubtitle">enter room code and nickname below</p>
+                    <div class="nickname-input-container">
+                        <form>
+                            <p>Nickname</p>
+                            <input type="text" min=5 id="nicknameInput" name="nickname" placeholder="Nickname"
+                                maxlength="20" class="input-warning-none">
+                            <p id="codeLabel">Code</p>
+                            <input id="codeInput" type="text" name="code" placeholder="Code" maxlength="8"
+                                class="input-warning-none">
+                        </form>
+                        <a role="button" class="btn btn-primary" id="enterNicknameContainerBtn">Join Game</a>
+                    </div>
+                    <a role="button" class="btn btn-border" id="enterNicknameContainerGoBack">Go Back</a>
+                </div>
+
+
+                <!-- Choose puzzle -->
+                <div class="choose-puzzle-container" id="choosePuzzleContainer">
+                    <h1>SOLVE. WITH. FRIENDS.</h1>
+                    <p>no need to login, just play</p>
+
+                    <div class="choose-puzzle-button-container">
+                        <div class="choose-puzzle-row">
+                            <button class="puzzle-button" onclick="selectPuzzle('3x3') ">
+                                <img src="assets/333.svg">
+                                <h6>3X3</h6>
+                            </button>
+                            <button class="puzzle-button disabled" onclick="selectPuzzle('2x2')">
+                                <img src="assets/222.svg">
+                                <h6>2X2</h6>
+                            </button>
+                            <button class="puzzle-button disabled" onclick="selectPuzzle('pyra')">
+                                <img src="assets/pyraminx.svg">
+                                <h6>Pyraminx</h6>
+                            </button>
+                            <button class="puzzle-button disabled" onclick="selectPuzzle('mega')">
+                                <img src="assets/megaminx.svg">
+                                <h6>Megaminx</h6>
+                            </button>
+                        </div>
+                        <div class="choose-puzzle-row">
+                            <button class="puzzle-button disabled" onclick="selectPuzzle('sq1')">
+                                <img src="assets/square1.svg">
+                                <h6>Square 1</h6>
+                            </button>
+                            <button class="puzzle-button disabled" onclick="selectPuzzle('4x4')">
+                                <img src="assets/444.svg">
+                                <h6>4X4</h6>
+                            </button>
+                            <button class="puzzle-button disabled" onclick="selectPuzzle('5x5')">
+                                <img src="assets/555.svg">
+                                <h6>5X5</h6>
+                            </button>
+                            <button class="puzzle-button disabled" onclick="selectPuzzle('??')">
+                                <img src="assets/555.svg">
+                                <h6>6X6</h6>
+                            </button>
+                        </div>
+                    </div>
+                    <a role="button" class="btn btn-border" id="choosePuzzleContainerGoBack">Go Back</a>
+                </div>
+
+
+
+                <!-- Create container-->
+                <div class="nickname-container" id="createNicknameContainer">
+                    <h1 id="nicknameContainerTitle">CREATE</h1>
+                    <p id="nicknameContainerSubtitle">enter nickname below</p>
+                    <div class="nickname-input-container">
+                        <form>
+                            <p>Nickname</p>
+                            <input id="nicknameInputOnCreate" type="text" min=5 id="nicknameInput" name="nickname"
+                                placeholder="Nickname" maxlength="20" class="input-warning-none">
+
+                        </form>
+                        <a role="button" class="btn btn-primary" id="createNicknameContainerBtn">Create Game</a>
+                    </div>
+                    <a role="button" class="btn btn-border" id="createNicknameContainerGoBack">Go Back</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="timer-section" id="timerSection">
+            <div class="waiting-for-start-overlay" id="waitForStartOverlay">
+                <h1>Waiting for leader to start the game</h1>
+                <img src="assets/loading.gif" alt="loading">
+                <div class="joined-users" id="joinedUsersContainer2"></div>
+            </div>
+            <div class="waiting-for-start-leader-overlay" id="waitForStartLeaderOverlay">
+                <h1>Room: <span id="waitForStartLeaderOverlayRoomCode">x3f341k2</span></h1>
+                <a role="button" class="start-game-btn" id="leaderStartGame">Start Game</a>
+                <div class="joined-users" id="joinedUsersContainer"></div>
+            </div>
+
+            <div class="modal players" id="playerModal">
+                <div class="modal-container">
+                    <a href="#" class="settings-exit-btn" id="closePlayerModalBtn"><img src="assets/x.svg"></a>
+                    <h2 id="playerContainerTitle">Joined Player's Stats</h2>
+                    <hr class="modal-underline">
+                    <div id="playerRows">
+
+                    </div>
+                    <div id="playerModalTimes" class="player-modal-times">
+
                     </div>
                 </div>
-                <a role="button" class="btn btn-border" id="choosePuzzleContainerGoBack">Go Back</a>
             </div>
 
 
-
-            <!-- Create container-->
-            <div class="nickname-container" id="createNicknameContainer">
-                <h1 id="nicknameContainerTitle">CREATE</h1>
-                <p id="nicknameContainerSubtitle">enter nickname below</p>
-                <div class="nickname-input-container">
-                    <form>
-                        <p>Nickname</p>
-                        <input id="nicknameInputOnCreate" type="text" min=5 id="nicknameInput" name="nickname"
-                            placeholder="Nickname" maxlength="20" class="input-warning-none">
-
-                    </form>
-                    <a role="button" class="btn btn-primary" id="createNicknameContainerBtn">Create Game</a>
-                </div>
-                <a role="button" class="btn btn-border" id="createNicknameContainerGoBack">Go Back</a>
+            <div class="sidebar" id="sidebar">
+                <a role="button" class="sidebar-arrow-btn" id="openSideBar">
+                    <img src="assets/arrow.png" alt="arrow">
+                </a>
+                <h3>Times</h3>
+                <table id="sidebarTimes" class="sidebar-times">
+                    <tbody class="default-tbody">
+                        <tr class="table-header">
+                            <td>Player</td>
+                            <td>time</td>
+                        </tr>
+                        <tr id="nullElement"></tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
-    </section>
 
-    <section class="timer-section" id="timerSection">
-        <div class="waiting-for-start-overlay" id="waitForStartOverlay">
-            <h1>Waiting for leader to start the game</h1>
-            <img src="assets/loading.gif" alt="loading">
-            <div class="joined-users" id="joinedUsersContainer2"></div>
-        </div>
-        <div class="waiting-for-start-leader-overlay" id="waitForStartLeaderOverlay">
-            <h1>Room: <span id="waitForStartLeaderOverlayRoomCode">x3f341k2</span></h1>
-            <a role="button" class="start-game-btn" id="leaderStartGame">Start Game</a>
-            <div class="joined-users" id="joinedUsersContainer"></div>
-        </div>
 
-        <div class="modal players" id="playerModal">
-            <div class="modal-container">
-                <a href="#" class="settings-exit-btn" id="closePlayerModalBtn"><img src="assets/x.svg"></a>
-                <h2 id="playerContainerTitle">Joined Player's Stats</h2>
-                <hr class="modal-underline">
-                <div id="playerRows">
-
-                </div>
-                <div id="playerModalTimes" class="player-modal-times">
-
+            <div class="timer-container" onselectstart="return false">
+                <!-- <h2 id="code">code: x3f341</h2> -->
+                <p class="puzzle hidden-on-start" id="puzzle">3X3</p>
+                <h3 class="scramble hidden-on-start" id="scramble">Waiting for start</h3>
+                <div class="times">
+                    <p class="time" id="time">00:00.00</p>
+                    <p class="ao5 hidden-on-start" id="ao5">ao5: <span>--</span></p>
+                    <p class="ao12 hidden-on-start" id="ao12">ao12: <span>--</span></p>
                 </div>
             </div>
-        </div>
 
-
-        <div class="sidebar" id="sidebar">
-            <a role="button" class="sidebar-arrow-btn" id="openSideBar">
-                <img src="assets/arrow.png" alt="arrow">
-            </a>
-            <h3>Times</h3>
-            <table id="sidebarTimes" class="sidebar-times">
-                <tbody class="default-tbody">
-                    <tr class="table-header">
-                        <td>Player</td>
-                        <td>time</td>
-                    </tr>
-                    <tr id="nullElement"></tr>
-                </tbody>
-            </table>
-        </div>
-
-
-        <div class="timer-container" onselectstart="return false">
-            <!-- <h2 id="code">code: x3f341</h2> -->
-            <p class="puzzle hidden-on-start" id="puzzle">3X3</p>
-            <h3 class="scramble hidden-on-start" id="scramble">Waiting for start</h3>
-            <div class="times">
-                <p class="time" id="time">00:00.00</p>
-                <p class="ao5 hidden-on-start" id="ao5">ao5: <span>--</span></p>
-                <p class="ao12 hidden-on-start" id="ao12">ao12: <span>--</span></p>
+            <div class="bottom-buttons">
+                <a href="#" class="settings-btn" id="openSettingsBtn"><img src="./assets/settings.svg"></a>
+                <a href="#" class="settings-btn" id="openPlayersBtn"><img src="./assets/user.svg"></a>
+                <a href="#" class="settings-btn" id="exitRoom"><img src="./assets/exit.svg"></a>
             </div>
-        </div>
+        </section>
 
-        <div class="bottom-buttons">
-            <a href="#" class="settings-btn" id="openSettingsBtn"><img src="./assets/settings.svg"></a>
-            <a href="#" class="settings-btn" id="openPlayersBtn"><img src="./assets/user.svg"></a>
-            <a href="#" class="settings-btn" id="exitRoom"><img src="./assets/exit.svg"></a>
-        </div>
-    </section>
+        <span id="transitionHolder"></span>
 
-    <span id="transitionHolder"></span>
-
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="js/socket.js"></script>
-    <script src="js/scenes.js"></script>
-    <script src="js/input.js"></script>
-    <script src="js/timer.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="js/socket.js"></script>
+        <script src="js/scenes.js"></script>
+        <script src="js/input.js"></script>
+        <script src="js/timer.js"></script>
+    </div>
 </body>
+
 
 </html>
