@@ -683,7 +683,6 @@ p {
   -webkit-transform: translate(-50%, 0);
           transform: translate(-50%, 0);
   z-index: 99;
-  background-color: #FFF;
 }
 
 .bottom-buttons .settings-btn {
