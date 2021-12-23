@@ -28,6 +28,7 @@ socket.on("serverError", (msg) => {
 
 socket.on("joinToTimer", () => {
     //codeElement.innerHTML = "Room: "+ codeInput.value;
+    document.body.style.overflowY = "hidden";
     transitionAnim(inputSection, timerSection);
     setTimeout(() => {  // wait for anim to 50%
         waitForStartLeaderOverlay.style.display = "none";
@@ -40,8 +41,9 @@ socket.on("joinToTimerLeader", (roomCode) => {
     //codeElement.innerHTML = "Room: "+ roomCode;
     waitForStartOverlay.style.display = "none";
     waitForStartLeaderOverlay.style.display = "flex";
-    waitForStartLeaderOverlayRoomCode.innerHTML = roomCode;
+    //waitForStartLeaderOverlayRoomCode.innerHTML = roomCode;
     transitionAnim(inputSection, timerSection);
+    document.body.style.overflowY = "hidden";
     setTimeout(() => {  // wait for anim to 50%
         timerSection.style.display = "block";
     }, 300);
