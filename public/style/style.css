@@ -18,6 +18,7 @@ body {
   color: #242424;
   height: 99.9%;
   position: relative;
+  overflow-x: hidden;
   background-color: #EFF8FF;
 }
 
@@ -103,6 +104,12 @@ p {
     width: 60%;
     font-size: 30pt;
     font-weight: 700;
+  }
+  .joined-users {
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: normal !important;
+        -ms-flex-direction: row !important;
+            flex-direction: row !important;
   }
 }
 
@@ -503,7 +510,12 @@ p {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   margin-top: 50px;
+  text-align: center;
 }
 
 .joined-users p {

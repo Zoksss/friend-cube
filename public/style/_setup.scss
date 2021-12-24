@@ -19,6 +19,7 @@ body {
     color: $dark;
     height: 99.9%;
     position: relative;
+    overflow-x: hidden;
 
 
     &::before {
@@ -115,6 +116,9 @@ p {
         font-size: 30pt;
         font-weight: 700;
     }
+    .joined-users {
+        flex-direction: row !important;
+    }
 }
 
 
@@ -127,3 +131,4 @@ p {
     overflow-x: hidden; /* or any other value */
     overflow-y: auto; /* or any other value */
 }
+

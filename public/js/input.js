@@ -73,7 +73,6 @@ openPlayersBtn.addEventListener("click", () => {
     playerModal.style.display = "flex";
 });
 closePlayerModalBtn.addEventListener("click", () => {
-    console.log("123");
     playerModal.style.display = "none";
 });
 
@@ -98,7 +97,6 @@ const inputLogic = (e) => {
     clearTimeout(t);
 
     let inputState = validateInput();
-    console.log(inputState);
     switch (inputState) {
         case 0:
             return true;
@@ -122,7 +120,6 @@ const inputLogic = (e) => {
             displayAlert("Code must be 8 characters.")
             return false;
         default:
-            console.log("Error");
             return false;
     }
 }
@@ -176,7 +173,6 @@ const makeRoomId = (length) => {
 }
 
 leaderStartGame.addEventListener("click", () => {
-    console.log("fireinbg start");
     socket.emit("leaderStartGamee", codeInput.value);
 });
 

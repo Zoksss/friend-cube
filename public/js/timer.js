@@ -28,6 +28,8 @@ let times = [];
 
 let isReady = false;
 
+let pressStarted = false;
+
 document.querySelector(".timer-container").addEventListener("touchstart", () => {
     if (!debounce && isReady) {
         keyPressedTimer();
@@ -40,17 +42,39 @@ document.addEventListener("keydown", event => {
     }
 });
 
+var lastKeyUpAt = 0;
+
+document.addEventListener("keyup", event => {
+    if (event.keyCode === 32) {
+        lastKeyUpAt = new Date();
+        mainTimeElement.style.color = "#242424";
+    }
+});
+
 const keyPressedTimer = () => {
-    debounce = true;
+    var keyDownAt = new Date();
+    mainTimeElement.style.color = "#E22121";
+    setTimeout(() => {
+        // Compare key down time with key up time
+        if (+keyDownAt > +lastKeyUpAt) {
+            // Key has been held down for x seconds
+            console.log("hold for 1 sec");
+            debounce = true;
 
-    console.log("Space clicked");
+            console.log("Space holded");
 
-    if (!isTimerRunningTrue)
-        mainTimeElement.style.color = "green";
-    else {
+            if (!isTimerRunningTrue)
+                mainTimeElement.style.color = "green";
+        }
+
+    }, 500);
+
+    if (isTimerRunningTrue) {
         timerStop();
         isTimerRunningTrue = false;
         isTimmerStoppedTrue = true;
+        lastKeyUpAt = 0;
+        debounce = false;
         if (hideElementsOnStartTrue) displayChange("block");
     }
 }

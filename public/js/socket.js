@@ -41,7 +41,7 @@ socket.on("joinToTimerLeader", (roomCode) => {
     //codeElement.innerHTML = "Room: "+ roomCode;
     waitForStartOverlay.style.display = "none";
     waitForStartLeaderOverlay.style.display = "flex";
-    //waitForStartLeaderOverlayRoomCode.innerHTML = roomCode;
+    waitForStartLeaderOverlayRoomCode.innerHTML = roomCode;
     transitionAnim(inputSection, timerSection);
     document.body.style.overflowY = "hidden";
     setTimeout(() => {  // wait for anim to 50%
@@ -151,7 +151,6 @@ document.addEventListener("click",function(e){
  });
 
 socket.on("startGame", () => {
-    console.log("starting game");
     waitForStartOverlay.style.display = "none";
     waitForStartLeaderOverlay.style.display = "none";
     isReady = true;
@@ -164,7 +163,6 @@ let timesToAdd = [];
 
 
 socket.on("timeGetFromSocket", (data) => {
-    console.log("data je: ")
     //console.table(data);
     let socketName = data.socketName;
     let time = data.stime;
@@ -183,7 +181,6 @@ socket.on("timeGetFromSocket", (data) => {
     `
 
     const element = document.createElement("tr");
-    console.log(time.seconds.toString().length + "   " + "0" + time.seconds);
     element.innerHTML = `
     <tr>
         <td>${socketName}</td>
@@ -192,7 +189,6 @@ socket.on("timeGetFromSocket", (data) => {
 
 
     if (document.querySelector(`.round-${round}`)) {
-        console.log("round shit alredy exist");
 
         tableInserttarget = document.querySelector(`.round-${round}`);
         tableInserttarget.append(element);
@@ -210,7 +206,6 @@ socket.on("timeGetFromSocket", (data) => {
 socket.on("ready", () => {
     isReady = true;
     round++;
-    console.log("now is ready")
 });
 
 socket.on("setScramble", (scramble) => {
