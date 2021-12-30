@@ -313,6 +313,14 @@ p {
   color: #242424;
 }
 
+.online-clients {
+  position: absolute;
+  right: 25px;
+  top: 25px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
 .choose-puzzle-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -519,6 +527,13 @@ p {
   z-index: 98;
   overflow-y: auto;
   overflow-x: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   /* Handle on hover */
 }
 
@@ -677,6 +692,10 @@ p {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   bottom: 135px;
   left: 50%;
   -webkit-transform: translate(-50%, 0);
@@ -720,10 +739,6 @@ p {
 
 .bottom-buttons #exitRoom:hover {
   background-color: #a11515;
-}
-
-.hidden-on-start {
-  display: inline-block;
 }
 
 .choose-round-finish {
@@ -805,6 +820,12 @@ p {
   font-weight: 700;
   margin: 0 10px;
   border: 1px solid #EFF8FF;
+  -webkit-transition: 300ms all ease;
+  transition: 300ms all ease;
+}
+
+.choose-round-finish .choose-round-finish-container .choose-round-finish-buttons .btn-row button:hover {
+  background-color: #e66b00;
 }
 
 .choose-round-finish .choose-round-finish-container .choose-round-finish-buttons .btn-row .finish-btn {

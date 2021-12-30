@@ -73,6 +73,8 @@
     z-index: 98;
     overflow-y: auto;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
 
     .sidebar-arrow-btn {
         position: fixed;
@@ -207,6 +209,7 @@
 .bottom-buttons {
     position: absolute;
     display: flex;
+    flex-direction: row;
     bottom: 135px;
     //left: 25px;
     left: 50%;
@@ -241,9 +244,7 @@
     }
 }
 
-.hidden-on-start {
-    display: inline-block;
-}
+
 
 .choose-round-finish {
     display: none;
@@ -298,6 +299,11 @@
                     font-weight: 700;
                     margin: 0 10px;
                     border: 1px solid $primary;
+                    transition: 300ms all ease;
+
+                    &:hover{
+                        background-color: darken($secondary, 5%);
+                    }
                 }
                 .finish-btn{
                     width: 100%;

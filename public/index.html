@@ -13,6 +13,8 @@
 <body>
     <section id="inputSection">
         <div class="container">
+            <h6 class="online-clients" id="onlineClients">Online: 0</h6>
+
             <div class="alert" id="alert"></div>
             <!-- Join and Create Game container -->
             <div class="start-container" id="mainMenuContainer">
@@ -115,7 +117,7 @@
     <div class="wraper">
 
         <section class="timer-section" id="timerSection">
-            <div class="choose-round-finish" class="chooseRoundFinish">
+            <div class="choose-round-finish" id="chooseRoundFinish">
                 <div class="choose-round-finish-container" id="chooseRoundFinish">
                     <!-- <h1>How was this round?</h1> -->
                     <div class="choose-round-finish-buttons">
@@ -156,7 +158,7 @@
             </div>
 
 
-            <div class="sidebar" id="sidebar">
+            <div class="sidebar hidden-on-start" id="sidebar">
                 <a role="button" class="sidebar-arrow-btn" id="openSideBar">
                     <img src="assets/arrow.png" alt="arrow">
                 </a>
@@ -184,7 +186,7 @@
                 </div>
             </div>
 
-            <div class="bottom-buttons">
+            <div class="bottom-buttons hidden-on-start">
                 <a href="#" class="settings-btn" id="openSettingsBtn"><img src="./assets/settings.svg"></a>
                 <a href="#" class="settings-btn" id="openPlayersBtn"><img src="./assets/user.svg"></a>
                 <a href="#" class="settings-btn" id="exitRoom"><img src="./assets/exit.svg"></a>

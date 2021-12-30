@@ -32,9 +32,12 @@ class Room {
 }
 
 let rooms = {};
+let onlineClients = 0;
 
 io.on("connection", (socket) => {
     console.log("Made socket connection with id: " + socket.id);
+    onlineClients++;
+    io.sockets.emit('onlineClientChange', onlineClients);
     socket.on("join", (nickname, roomCode, puzzle) => {
         if (validateInput(nickname, roomCode, puzzle)) {
             if (doesUsernameAlrdeyExists(nickname, roomCode)) {
@@ -85,8 +88,7 @@ io.on("connection", (socket) => {
         if (!rooms[data.roomCode]) return;
         let socketObjectInRoom = rooms[data.roomCode].sockets.find(o => o.socketId === socket.id);
         if (!socketObjectInRoom) return;
-
-        io.in(data.roomCode).emit("timeGetFromSocket", ({ socketName: socket.nickname, stime: data.time, ao5: data.ao5, ao12: data.ao12 }));
+        io.in(data.roomCode).emit("timeGetFromSocket", ({ socketName: socket.nickname, stime: data.time, ao5: data.ao5, ao12: data.ao12, finishStatus: data.finishStatus}));
         socketObjectInRoom.isFinished = true;
 
         if (!isEveryoneFinished(data.roomCode)) return;
@@ -110,6 +112,10 @@ io.on("connection", (socket) => {
             return;
         }
     });
+    socket.on('disconnect', () => {
+        onlineClients--;
+        io.sockets.emit('onlineClientChange', onlineClients);
+    })
 });
 
 

@@ -8,7 +8,15 @@ const sidebarTimes = document.querySelector("#sidebarTimes");
 const scrambleElement = document.querySelector('#scramble');
 const modal = document.querySelector(".modal");
 
+const finishedBtn = document.querySelector('#finishedBtn');
+const dnfBtn = document.querySelector('#dnfBtn');
+const plus2Btn = document.querySelector('#plus2Btn');
+const resetBtn = document.querySelector('#resetBtn');
+const chooseRoundFinish = document.querySelector("#chooseRoundFinish");
+
+
 let tableInserttarget = document.querySelector('#nullElement');
+
 
 
 let currTimeIndex = 1;
@@ -28,72 +36,62 @@ let times = [];
 
 let isReady = false;
 
-let pressStarted = false;
+let canShowFinishScreen = false;
 
-document.querySelector(".timer-container").addEventListener("touchstart", () => {
-    if (!debounce && isReady) {
-        keyPressedTimer();
+
+document.querySelector(".timer-container").addEventListener("touchstart", (event) => {
+    if (!debounce && isReady && !canChoose) {
+        debounce = true;
+        console.log("Space clicked");
+        stopTimerLogic();
     }
 });
 
 document.addEventListener("keydown", event => {
-    if (event.isComposing || event.keyCode === 32 && !debounce && isReady) {
-        keyPressedTimer();
+    if (event.isComposing || event.keyCode === 32 && !debounce && isReady && !canChoose) {
+        debounce = true;
+        console.log("Space clicked");
+        stopTimerLogic();
     }
 });
 
-var lastKeyUpAt = 0;
-
-document.addEventListener("keyup", event => {
-    if (event.keyCode === 32) {
-        lastKeyUpAt = new Date();
-        mainTimeElement.style.color = "#242424";
-    }
-});
-
-const keyPressedTimer = () => {
-    var keyDownAt = new Date();
-    mainTimeElement.style.color = "#E22121";
-    setTimeout(() => {
-        // Compare key down time with key up time
-        if (+keyDownAt > +lastKeyUpAt) {
-            // Key has been held down for x seconds
-            console.log("hold for 1 sec");
-            debounce = true;
-
-            console.log("Space holded");
-
-            if (!isTimerRunningTrue)
-                mainTimeElement.style.color = "green";
-        }
-
-    }, 500);
-
-    if (isTimerRunningTrue) {
+const stopTimerLogic = () => {
+    if (!isTimerRunningTrue)
+        mainTimeElement.style.color = "green";
+    else {
         timerStop();
         isTimerRunningTrue = false;
         isTimmerStoppedTrue = true;
-        lastKeyUpAt = 0;
-        debounce = false;
-        if (hideElementsOnStartTrue) displayChange("block");
+        if (hideElementsOnStartTrue) displayChange("flex");
     }
 }
 
 document.querySelector(".timer-container").addEventListener("touchend", () => {
     if (debounce) {
-        keyLeftTimer();
+        debounce = false;
+        if (isTimmerStoppedTrue) {
+            setTimeout(() => {
+                canChoose = true;
+                chooseRoundFinish.style.display = "flex";
+            }, 100);
+        }
+        startTimerLogic();
     }
 });
-
 document.addEventListener("keyup", event => {
     if (event.isComposing || event.keyCode === 32 && debounce) {
-        keyLeftTimer();
+        debounce = false;
+        if (isTimmerStoppedTrue) {
+            setTimeout(() => {
+                canChoose = true;
+                chooseRoundFinish.style.display = "flex";
+            }, 100);
+        }
+        startTimerLogic();
     }
 });
 
-const keyLeftTimer = () => {
-    debounce = false;
-
+const startTimerLogic = () => {
     if (!isTimerRunningTrue && !isTimmerStoppedTrue) {
         isTimerRunningTrue = true;
 
@@ -109,6 +107,7 @@ const keyLeftTimer = () => {
     return;
 }
 
+
 const displayChange = displayVal => {
     hideOnStart.forEach(element => {
         element.style.display = displayVal;
@@ -122,21 +121,18 @@ const timerStart = () => {
     started = setInterval(clockRunning, 10);
 }
 
-
 let dnf, plus2, reset, finished;
 
-const finishedBtn = document.querySelector('#finishedBtn');
-const dnfBtn = document.querySelector('#dnfBtn');
-const plus2Btn = document.querySelector('#plus2Btn');
-const resetBtn = document.querySelector('#resetBtn');
 
 
 let finishStatus = ""
 let canChoose = false;
-const chooseRoundFinish = document.querySelector("#chooseRoundFinish");
+
 finishedBtn.addEventListener("click", () => {
     if (canChoose) {
         finishStatus = "";
+        canChoose = false;
+        chooseRoundFinish.style.display = "none";
         timerStopPush();
     }
 });
@@ -151,6 +147,14 @@ dnfBtn.addEventListener("click", () => {
 plus2Btn.addEventListener("click", () => {
     if (canChoose) {
         finishStatus = "plus2";
+        timeElapsed.setSeconds(timeElapsed.getSeconds() + 2)
+        console.log(timeElapsed)
+        hour = timeElapsed.getUTCHours();
+        min = timeElapsed.getUTCMinutes();
+        sec = timeElapsed.getUTCSeconds();
+        ms = timeElapsed.getUTCMilliseconds();
+
+
         canChoose = false;
         chooseRoundFinish.style.display = "none";
         timerStopPush();
@@ -166,10 +170,9 @@ resetBtn.addEventListener("click", () => {
 
 
 const timerStop = () => {
-    canChoose = true;
-    chooseRoundFinish.style.display = "flex";
-    timeStopped = new Date();
 
+    timeStopped = new Date();
+    clearInterval(started);
 }
 
 const timerStopPush = () => {
@@ -178,18 +181,21 @@ const timerStopPush = () => {
         , minutes: min
         , seconds: sec
         , milliseconds: ms
-        , finishedStatus: finishStatus
+        , finishStatus: finishStatus
     }
 
     times.push(curTime);
+    console.log(curTime);
 
     ao5Element.innerHTML = calculateAo5();
-    ao12Element.innerHTML = calculateAo12()
+    ao12Element.innerHTML = calculateAo12();
+
     socket.emit("finalTime", {
         roomCode: codeInput.value
         , time: curTime
         , ao5: ao5Element.innerHTML
         , ao12: ao12Element.innerHTML
+        , finishStatus: finishStatus
     });
 
     clearInterval(started);
@@ -206,11 +212,10 @@ const timerReset = () => {
 function clockRunning() {
     currentTime = new Date()
         , timeElapsed = new Date(currentTime - timeBegan - stoppedDuration)
-        , hour = timeElapsed.getUTCHours()
+        ,hour = timeElapsed.getUTCHours()
         , min = timeElapsed.getUTCMinutes()
         , sec = timeElapsed.getUTCSeconds()
         , ms = timeElapsed.getUTCMilliseconds();
-
 
     let hourString = (hour > 9 ? hour : "0" + hour) + ":"
         , minString = (min > 9 ? min : "0" + min) + ":"
@@ -222,10 +227,12 @@ function clockRunning() {
 };
 
 
-
 const calculateAo5 = () => {
     let i = times.length;
     if (i < 5) return "--";
+    for(let i = times.length - 1; i >= times.length - 5; i--){
+        if(times[i].finishStatus === "dnf") return "DNF";
+    }
     if (times.length - 5 < 0) i = 0;
     else i = times.length - 5;
 
@@ -246,9 +253,13 @@ const calculateAo5 = () => {
 
     return msToTime(Math.round(allMillisecodns /= counter));
 }
+
 const calculateAo12 = () => {
     let i = times.length;
     if (i < 12) return "--";
+    for(let i = times.length - 1; i >= times.length - 12; i--){
+        if(times[i].finishStatus === "dnf") return "DNF";
+    }
     i = times.length - 12;
 
     let averageHours = 0
