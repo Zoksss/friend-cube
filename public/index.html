@@ -4,10 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/style.css">
     <title>FriendCUBE | Cube with friends</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1.0, user-scalable=no" />
 
 </head>
 
@@ -116,17 +115,17 @@
     <div class="wraper">
 
         <section class="timer-section" id="timerSection">
-            <div class="choose-round-finish">
+            <div class="choose-round-finish" class="chooseRoundFinish">
                 <div class="choose-round-finish-container" id="chooseRoundFinish">
                     <!-- <h1>How was this round?</h1> -->
                     <div class="choose-round-finish-buttons">
                         <div class="btn-row">
-                            <button class="finish-btn">Finished</button>
+                            <button class="finish-btn" id="finishedBtn">Finished</button>
                         </div>
                         <div class="btn-row">
-                            <button class="plus2-btn">+2</button>
-                            <button class="dnf-btn">DNF</button>
-                            <button class="x-btn">X</button>
+                            <button class="plus2-btn" id="plus2Btn">+2</button>
+                            <button class="dnf-btn" id="dnfBtn">DNF</button>
+                            <button class="x-btn" id="resetBtn">X</button>
                         </div>
                     </div>
                 </div>
@@ -197,6 +196,7 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/socket.js"></script>
+    <script src="js/functions.js"></script>
     <script src="js/scenes.js"></script>
     <script src="js/input.js"></script>
     <script src="js/timer.js"></script>

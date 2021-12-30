@@ -122,14 +122,65 @@ const timerStart = () => {
     started = setInterval(clockRunning, 10);
 }
 
+
+let dnf, plus2, reset, finished;
+
+const finishedBtn = document.querySelector('#finishedBtn');
+const dnfBtn = document.querySelector('#dnfBtn');
+const plus2Btn = document.querySelector('#plus2Btn');
+const resetBtn = document.querySelector('#resetBtn');
+
+
+let finishStatus = ""
+let canChoose = false;
+const chooseRoundFinish = document.querySelector("#chooseRoundFinish");
+finishedBtn.addEventListener("click", () => {
+    if (canChoose) {
+        finishStatus = "";
+        timerStopPush();
+    }
+});
+dnfBtn.addEventListener("click", () => {
+    if (canChoose) {
+        finishStatus = "dnf";
+        canChoose = false;
+        chooseRoundFinish.style.display = "none";
+        timerStopPush();
+    }
+});
+plus2Btn.addEventListener("click", () => {
+    if (canChoose) {
+        finishStatus = "plus2";
+        canChoose = false;
+        chooseRoundFinish.style.display = "none";
+        timerStopPush();
+    }
+});
+resetBtn.addEventListener("click", () => {
+    if (canChoose) {
+        finishStatus = "reset";
+        canChoose = false;
+        chooseRoundFinish.style.display = "none";
+    }
+});
+
+
 const timerStop = () => {
+    canChoose = true;
+    chooseRoundFinish.style.display = "flex";
     timeStopped = new Date();
+
+}
+
+const timerStopPush = () => {
     let curTime = {
         hours: hour
         , minutes: min
         , seconds: sec
         , milliseconds: ms
+        , finishedStatus: finishStatus
     }
+
     times.push(curTime);
 
     ao5Element.innerHTML = calculateAo5();
@@ -145,7 +196,6 @@ const timerStop = () => {
     scrambleElement.innerHTML = "Waiting for other players to finish solving..."
     isReady = false;
 }
-
 const timerReset = () => {
     clearInterval(started);
     stoppedDuration = 0;

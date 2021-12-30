@@ -46,15 +46,3 @@ createNicknameContainerGoBack.addEventListener("click", () =>{
 
 // transition between input screens and timer screen is in *input.js*
 
-
-function transitionAnim(hiddingElement, showingElement){   // transition between containers
-    transitionHolder.classList.add("transition");
-    transitionHolder.addEventListener("animationstart", () => {
-        setTimeout(() => {
-            hiddingElement.style.display = "none";
-            showingElement.style.display = "flex";  
-        }, 300);
-    })
-    
-    transitionHolder.addEventListener('animationend', () => { transitionHolder.classList.remove("transition"); });
-}

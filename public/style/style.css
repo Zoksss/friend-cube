@@ -10,7 +10,6 @@
 
 html {
   overflow-x: hidden;
-  overflow-y: hidden;
 }
 
 body {
@@ -86,7 +85,8 @@ p {
     height: 100vh;
   }
   .scramble {
-    font-size: 1.3rem !important;
+    font-size: 1.7rem !important;
+    margin: 15px 50px 0 50px !important;
   }
   .time {
     font-size: 7rem !important;
@@ -111,18 +111,6 @@ p {
         -ms-flex-direction: row !important;
             flex-direction: row !important;
   }
-}
-
-.wrapper {
-  position: absolute;
-  top: 0.5px;
-  left: 0;
-  right: 0;
-  bottom: 0.5px;
-  overflow-x: hidden;
-  /* or any other value */
-  overflow-y: auto;
-  /* or any other value */
 }
 
 .btn {
@@ -339,7 +327,6 @@ p {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  max-height: 80vh;
   display: none;
 }
 
@@ -740,6 +727,7 @@ p {
 }
 
 .choose-round-finish {
+  display: none;
   position: absolute;
   left: 0;
   top: 0;
@@ -750,9 +738,6 @@ p {
   opacity: 1;
   -webkit-transition: opacity 400ms ease-in;
   transition: opacity 400ms ease-in;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;

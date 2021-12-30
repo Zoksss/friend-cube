@@ -246,6 +246,7 @@
 }
 
 .choose-round-finish {
+    display: none;
     position: absolute;
     left: 0;
     top: 0;
@@ -257,7 +258,6 @@
     -webkit-transition: opacity 400ms ease-in;
     -moz-transition: opacity 400ms ease-in;
     transition: opacity 400ms ease-in;
-    display: flex;
     justify-content: center;
     align-items: center;
     .choose-round-finish-container {
