@@ -739,6 +739,99 @@ p {
   display: inline-block;
 }
 
+.choose-round-finish {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 107;
+  opacity: 1;
+  -webkit-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.choose-round-finish .choose-round-finish-container {
+  width: 90%;
+  max-width: 450px;
+  background-color: #FFF;
+  -webkit-box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.05);
+  height: 300px;
+  z-index: 999;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.choose-round-finish .choose-round-finish-container .choose-round-finish-buttons {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 80%;
+}
+
+.choose-round-finish .choose-round-finish-container .choose-round-finish-buttons .btn-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.choose-round-finish .choose-round-finish-container .choose-round-finish-buttons .btn-row button {
+  width: 100px;
+  height: 100px;
+  background-color: #FFF;
+  -webkit-box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  font-size: 25px;
+  font-weight: 700;
+  margin: 0 10px;
+  border: 1px solid #EFF8FF;
+}
+
+.choose-round-finish .choose-round-finish-container .choose-round-finish-buttons .btn-row .finish-btn {
+  width: 100%;
+  font-size: 40px !important;
+  font-weight: 800;
+  margin-bottom: 35px;
+  background-color: #18B923;
+  color: #FFF;
+  border: none !important;
+}
+
 .playerRow {
   display: -webkit-box;
   display: -ms-flexbox;
