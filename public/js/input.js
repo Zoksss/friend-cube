@@ -11,10 +11,13 @@ const nicknameInputOnCreate = document.querySelector("#nicknameInputOnCreate");
 const codeInput = document.querySelector("#codeInput");
 
 const exitRoom = document.querySelector("#exitRoom");
+const settings = document.querySelector("#openSettingsBtn");
 const openSideBar = document.querySelector("#openSideBar");
+const closeSettingsModalBtn = document.querySelector("#closeSettingsModalBtn");
 
 const openPlayersBtn = document.querySelector("#openPlayersBtn");
 const playerModal = document.querySelector("#playerModal");
+const settingsModal = document.querySelector(".settings-container");
 
 const alertBox = document.querySelector("#alert");
 
@@ -74,10 +77,19 @@ closePlayerModalBtn.addEventListener("click", () => {
     playerModal.style.display = "none";
 });
 
+settings.addEventListener("click", () => {
+    settingsModal.style.display = "flex";
+})
+
+closeSettingsModalBtn.addEventListener("click", () => {
+    settingsModal.style.display = "none";
+})
 
 exitRoom.addEventListener("click", () => {
     location.reload();
 })
+
+
 
 leaderStartGame.addEventListener("click", () => {
     socket.emit("leaderStartGamee", codeInput.value);
