@@ -43,6 +43,3 @@ createNicknameContainerGoBack.addEventListener("click", () =>{
     transitionAnim(createNicknameContainer, choosePuzzleContainer);
 });
 
-
-// transition between input screens and timer screen is in *input.js*
-

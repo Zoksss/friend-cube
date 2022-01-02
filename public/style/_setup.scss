@@ -16,7 +16,8 @@ html {
 body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: $dark;
-    height: 99.9%;
+    height: 100vh;
+    max-height: 100vh;
     position: relative;
     overflow-x: hidden;
 

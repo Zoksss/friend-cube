@@ -16,9 +16,8 @@ const openSideBar = document.querySelector("#openSideBar");
 const openPlayersBtn = document.querySelector("#openPlayersBtn");
 const playerModal = document.querySelector("#playerModal");
 
+const alertBox = document.querySelector("#alert");
 
-
-const alertBox = document.querySelector("#alert")
 
 let urlString;
 let selectedPuzzle;
@@ -65,7 +64,6 @@ openSideBar.addEventListener("click", (e) => {
 
         sidebar.addEventListener('animationend', () => { sidebar.classList.remove("sidebar-anim-close"); openSideBar.classList.remove("sidebar-btn-anim-close"); });
     }
-
 });
 
 
@@ -76,19 +74,11 @@ closePlayerModalBtn.addEventListener("click", () => {
     playerModal.style.display = "none";
 });
 
-//playerModal.addEventListener("click", () => {
-//    playerModal.style.display = "none";
-//});
-
 
 exitRoom.addEventListener("click", () => {
     location.reload();
 })
 
-
 leaderStartGame.addEventListener("click", () => {
     socket.emit("leaderStartGamee", codeInput.value);
 });
-
-
-

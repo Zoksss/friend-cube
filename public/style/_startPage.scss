@@ -47,3 +47,17 @@
     font-size: 16px;
     font-weight: 400;
 }
+
+.start-screen-down-btns{
+    position: absolute;
+    bottom: 20px;
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    button{
+        img{
+            width: 50px;
+            height: 50px; 
+        }
+    }
+}

@@ -67,14 +67,14 @@ const validateInput = () => {
     if (nicknameInput.value === "" && nicknameInputOnCreate.value === "") return 1;
     if (nicknameInput.value.length < 3 && nicknameInputOnCreate.value.length < 3) return 2;
     if (!isLetter(nicknameInput.value.charAt(0)) && !isLetter(nicknameInputOnCreate.value.charAt(0))) return 3;
+    for(let i=0;i<nicknameInput.value.length;i++)if(!isLetter(nicknameInput.value.charAt(i))&&!isLetter(nicknameInputOnCreate.value.charAt(i)));
     if (codeInput.value.length != 8) return 4;
     return 0;
 }
 
 function isLetter(str) {
     return str.length === 1 && str.match(/[a-z]/i);
-  }
-
+}
 const selectPuzzle = (puzzle) => {
     if(puzzle !="3x3"){
         displayAlert("Error - Puzzle is not implemented yet");

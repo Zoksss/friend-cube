@@ -15,7 +15,8 @@ html {
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #242424;
-  height: 99.9%;
+  height: 100vh;
+  max-height: 100vh;
   position: relative;
   overflow-x: hidden;
   background-color: #EFF8FF;
@@ -319,6 +320,24 @@ p {
   top: 25px;
   font-size: 16px;
   font-weight: 400;
+}
+
+.start-screen-down-btns {
+  position: absolute;
+  bottom: 20px;
+  right: 25px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.start-screen-down-btns button img {
+  width: 50px;
+  height: 50px;
 }
 
 .choose-puzzle-container {
@@ -836,6 +855,125 @@ p {
   background-color: #18B923;
   color: #FFF;
   border: none !important;
+}
+
+.settings-container {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 106;
+  opacity: 1;
+  -webkit-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+  /*pointer-events: none;*/
+  height: 100%;
+  padding: 100px 10px;
+  width: 100%;
+}
+
+.settings-container .settings-box {
+  position: relative;
+  width: 90%;
+  max-width: 450px;
+  height: 600px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: #FFF;
+  -webkit-box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.05);
+}
+
+.settings-container .settings-box .settings-container-title {
+  margin: 25px 0 0 25px;
+}
+
+.settings-container .settings-box hr {
+  height: 2px;
+  background-color: #b0b0b0;
+  margin: 5px 25px 0 25px;
+}
+
+.settings-container .settings-box .settings {
+  margin: 25px 25px 0 25px;
+}
+
+.settings-container .settings-box .settings .setting {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 52px;
+}
+
+.settings-container .settings-box .settings .setting .setting-name {
+  font-size: 20px;
+}
+
+.settings-container .settings-box .settings .setting .color-input {
+  -webkit-appearance: none;
+  border: none;
+  width: 62px;
+  height: 32px;
+}
+
+.settings-container .settings-box .settings .setting .color-input::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.settings-container .settings-box .settings .setting .color-input::-webkit-color-swatch {
+  border: none;
+}
+
+.settings-container .settings-box .settings .setting .checkbox {
+  width: 62px;
+  height: 22px;
+}
+
+.settings-container .settings-box .settings-container-apply {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background-color: #1161FF;
+  font-size: 20px;
+  font-weight: 600;
+  color: #FFF;
+  padding: 12px 25px;
+  cursor: pointer;
+}
+
+.settings-container .settings-box .settings-container-reset {
+  position: absolute;
+  bottom: 15px;
+  right: 125px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #242424;
+  padding: 12px 25px;
+  cursor: pointer;
+}
+
+.settings-container .settings-box .settings-container-reset:hover {
+  background-color: #e6e6e6;
 }
 
 .playerRow {

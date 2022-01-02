@@ -14,10 +14,7 @@ const plus2Btn = document.querySelector('#plus2Btn');
 const resetBtn = document.querySelector('#resetBtn');
 const chooseRoundFinish = document.querySelector("#chooseRoundFinish");
 
-
 let tableInserttarget = document.querySelector('#nullElement');
-
-
 
 let currTimeIndex = 1;
 let debounce = false
@@ -42,7 +39,6 @@ let canShowFinishScreen = false;
 document.querySelector(".timer-container").addEventListener("touchstart", (event) => {
     if (!debounce && isReady && !canChoose) {
         debounce = true;
-        console.log("Space clicked");
         stopTimerLogic();
     }
 });
@@ -50,7 +46,6 @@ document.querySelector(".timer-container").addEventListener("touchstart", (event
 document.addEventListener("keydown", event => {
     if (event.isComposing || event.keyCode === 32 && !debounce && isReady && !canChoose) {
         debounce = true;
-        console.log("Space clicked");
         stopTimerLogic();
     }
 });
@@ -148,7 +143,6 @@ plus2Btn.addEventListener("click", () => {
     if (canChoose) {
         finishStatus = "plus2";
         timeElapsed.setSeconds(timeElapsed.getSeconds() + 2)
-        console.log(timeElapsed)
         hour = timeElapsed.getUTCHours();
         min = timeElapsed.getUTCMinutes();
         sec = timeElapsed.getUTCSeconds();
@@ -185,8 +179,6 @@ const timerStopPush = () => {
     }
 
     times.push(curTime);
-    console.log(curTime);
-
     ao5Element.innerHTML = calculateAo5();
     ao12Element.innerHTML = calculateAo12();
 

@@ -4,15 +4,14 @@ const express = require("express");
 // App setup
 const PORT = process.env.PORT || 3000;
 const app = express();
-const server = app.listen(PORT, function () {
-    console.log(`Listening on port ${PORT}`);
-});
+const server = app.listen(PORT);
 
 // Static files
 app.use(express.static("public"));
 
 // Socket setup
 const io = socketio(server);
+
 
 class Room {
     constructor(leader, puzzle) {
@@ -31,13 +30,15 @@ class Room {
     }
 }
 
+
+let online = 0;
 let rooms = {};
-let onlineClients = 0;
+
 
 io.on("connection", (socket) => {
     console.log("Made socket connection with id: " + socket.id);
-    onlineClients++;
-    io.sockets.emit('onlineClientChange', onlineClients);
+    online++;
+    io.sockets.emit('onlineClientChange', online);
     socket.on("join", (nickname, roomCode, puzzle) => {
         if (validateInput(nickname, roomCode, puzzle)) {
             if (doesUsernameAlrdeyExists(nickname, roomCode)) {
@@ -47,11 +48,12 @@ io.on("connection", (socket) => {
             if (rooms[roomCode] != undefined) {
                 if (!rooms[roomCode].isLocked) {
                     socket.nickname = nickname;
-                    io.in(roomCode).emit("joinedLeavedNotification", { nickname: nickname, joined: true });
                     rooms[roomCode].addSocket(socket);
                     socket.join(roomCode);
                     socket.emit("joinToTimer");
+                    io.in(roomCode).emit("joinedLeavedNotification", { nickname: nickname, joined: true });
                     updateWaitingScreenStatus(roomCode);
+                    
                 }
                 else socket.emit("serverError", "Room Closed");
             }
@@ -113,8 +115,8 @@ io.on("connection", (socket) => {
         }
     });
     socket.on('disconnect', () => {
-        onlineClients--;
-        io.sockets.emit('onlineClientChange', onlineClients);
+        online--;
+        io.sockets.emit('onlineClientChange', online);
     })
 });
 
@@ -124,8 +126,6 @@ io.on("connection", (socket) => {
 const checkIfRoomIsEmpty = (roomCode) => {
     if (rooms[roomCode].sockets.length != 0) return;
     delete rooms[roomCode];
-    console.log("Room " + roomCode + " deleted (empty)");
-
 }
 
 const updateWaitingScreenStatus = (roomCode) => {
@@ -140,6 +140,7 @@ const updateWaitingScreenStatus = (roomCode) => {
 const validateInput = (nickname, roomCode, puzzle) => {
     if (nickname === "") return false;
     if(!isLetter(nickname.charAt(0))) return false;
+    for(let i = 0; i < nickname.length; i++) if(!isLetter(nickname.charAt(i))) return false; 
     if (nickname.length < 3) return false;
     if (roomCode.length != 8) return false;
     if (puzzle != "3x3") return false;
@@ -148,7 +149,8 @@ const validateInput = (nickname, roomCode, puzzle) => {
 
 function isLetter(str) {
     return str.length === 1 && str.match(/[a-z]/i);
-  }
+}
+
 
 const isEveryoneFinished = (roomCode) => {
     let temp = true;
@@ -171,11 +173,8 @@ const generateScramble = (puzzle) => {
 const doesUsernameAlrdeyExists = (nickname, roomCode) => {
     let socketsInRoom = io.sockets.adapter.rooms[roomCode];
     if (socketsInRoom && socketsInRoom.sockets) {
-        console.log(socketsInRoom.sockets);
         for (let clientId in socketsInRoom.sockets) {
-            console.log(io.sockets.connected[clientId].nickname + " / " + nickname);
             if (io.sockets.connected[clientId].nickname === nickname) {
-                console.log("isti username");
                 return true;
             }
         }

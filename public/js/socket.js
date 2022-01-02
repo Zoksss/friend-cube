@@ -10,14 +10,18 @@ const codeElement = document.querySelector("#code");
 
 const playerRows = document.querySelector("#playerRows");
 const playerModalTimes = document.querySelector("#playerModalTimes");
+const playerContainerTitle = document.querySelector("#playerContainerTitle");
+
+
+const onlineClients = document.querySelector("#onlineClients");
 
 
 
 let round = 0;
 let isGameStarted = false;
+let timesToAdd = [];
 
 let socket = io();
-
 socket.on("connect", () => {
     console.log("Connected to the server");
 });
@@ -27,10 +31,8 @@ socket.on("serverError", (msg) => {
 });
 
 socket.on("joinToTimer", () => {
-    //codeElement.innerHTML = "Room: "+ codeInput.value;
-    document.body.style.overflowY = "hidden";
     transitionAnim(inputSection, timerSection);
-    setTimeout(() => {  // wait for anim to 50%
+    setTimeout(() => {
         waitForStartLeaderOverlay.style.display = "none";
         waitForStartOverlay.style.display = "flex";
         timerSection.style.display = "block"
@@ -38,13 +40,12 @@ socket.on("joinToTimer", () => {
 });
 
 socket.on("joinToTimerLeader", (roomCode) => {
-    //codeElement.innerHTML = "Room: "+ roomCode;
     waitForStartOverlay.style.display = "none";
     waitForStartLeaderOverlay.style.display = "flex";
     waitForStartLeaderOverlayRoomCode.innerHTML = roomCode;
     transitionAnim(inputSection, timerSection);
     document.body.style.overflowY = "hidden";
-    setTimeout(() => {  // wait for anim to 50%
+    setTimeout(() => {
         timerSection.style.display = "block";
     }, 300);
 });
@@ -57,17 +58,17 @@ socket.on("displayUsers", (users) => {
         child = joinedUsersContainer.lastElementChild;
     }
 
+    let child2 = joinedUsersContainer2.lastElementChild;
+    while (child2) {
+        joinedUsersContainer2.removeChild(child2);
+        child2 = joinedUsersContainer2.lastElementChild;
+    }
     users.forEach(element => {
         let dom = document.createElement("p");
         dom.innerText = element
         joinedUsersContainer.append(dom);
     });
 
-    let child2 = joinedUsersContainer2.lastElementChild;
-    while (child2) {
-        joinedUsersContainer2.removeChild(child2);
-        child2 = joinedUsersContainer2.lastElementChild;
-    }
 
     let playersModalListElement = "";
     let as = `<a role="button" class="goback-from-player-btn" id="goBackFromPlayer">Go Back</a>`;
@@ -97,12 +98,8 @@ socket.on("displayUsers", (users) => {
             </table>
         </div>`
         playerModalTimes.innerHTML = as;
-
     });
 });
-
-
-const playerContainerTitle = document.querySelector("#playerContainerTitle");
 
 
 const showFullPlayerStats = (nickname, toShow) => {
@@ -124,16 +121,15 @@ const showFullPlayerStats = (nickname, toShow) => {
 
 };
 const addTimeToPlayerModal = (nickname, time) => {
-
     if (!document.querySelector(`#${nickname}HeadingFix`)) return;
     let tableHeading = document.querySelector(`#${nickname}HeadingFix`)
     let element = document.createElement("tr");
     element.innerHTML =
         `
-    <td>${round}</td>
-    <td>${time.time}</td>
-    <td>${time.ao5}</td>
-    <td>${time.ao12}</td>
+        <td>${round}</td>
+        <td>${time.time}</td>
+        <td>${time.ao5}</td>
+        <td>${time.ao12}</td>
     `
     tableHeading.parentNode.insertBefore(element, tableHeading.parentElement.children[1]);
 }
@@ -157,19 +153,12 @@ socket.on("startGame", () => {
     isGameStarted = true;
 })
 
-
-let timesToAdd = [];
-
-
-
 socket.on("timeGetFromSocket", (data) => {
-    //console.table(data);
     let socketName = data.socketName;
     let time = data.stime;
     let ao5 = data.ao5;
     let ao12 = data.ao12;
     let finishStatus = data.finishStatus;
-    console.log(finishStatus);
 
     if (finishStatus === "dnf")
         addTimeToPlayerModal(socketName, { time: "DNF", ao5: ao5, ao12: ao12 });
@@ -186,29 +175,25 @@ socket.on("timeGetFromSocket", (data) => {
     `
 
     const element = document.createElement("tr");
-    console.log(finishStatus);
-    if (finishStatus === "dnf")
+    if (finishStatus === "dnf") {
         element.innerHTML = `
         <tr>
             <td>${socketName}</td>
             <td>DNF</td>
         </td>`
-    else
+    } else {
         element.innerHTML = `
         <tr>
             <td>${socketName}</td>
-            <td>${(time.hours != 0) ? time.hours + ":" : ""}${(time.minutes != 0) ? time.minutes + ":" : ""}${(time.seconds)}.${time.milliseconds}${finishStatus==="plus2"?"+":""}</td>
+            <td>${(time.hours != 0) ? time.hours + ":" : ""}${(time.minutes != 0) ? time.minutes + ":" : ""}${(time.seconds)}.${time.milliseconds}${finishStatus === "plus2" ? "+" : ""}</td>
         </td>`
-
-
+    }
     if (document.querySelector(`.round-${round}`)) {
-
         tableInserttarget = document.querySelector(`.round-${round}`);
         tableInserttarget.append(element);
     }
     else {
         tableInserttarget = document.querySelector(".table-header");
-
         tableInserttarget.parentElement.insertBefore(tbody, tableInserttarget.nextSibling);
         tableInserttarget = tbody;
         tableInserttarget.append(element);
@@ -232,13 +217,9 @@ socket.on("joinedLeavedNotification", (data) => {
     document.body.append(elem);
     elem.innerHTML = `${data.nickname} ${data.joined ? "joined" : "left"} the room`
     elem.addEventListener('animationend', () => { elem.parentNode.removeChild(elem); });
-
-
 });
 
 
-
-const onlineClients = document.querySelector("#onlineClients");
 socket.on("onlineClientChange", (num) => {
     onlineClients.innerHTML = `Online: ${num}`;
 })
