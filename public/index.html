@@ -123,11 +123,11 @@
             <div class="settings">
                 <div class="setting">
                     <p class="setting-name">Background Color</p>
-                    <input class="color-input" type="color" value="#EFF8FF">
+                    <input class="color-input" type="color" value="#EFF8FF" id="bgColorInput">
                 </div>
                 <div class="setting">
                     <p class="setting-name">Text Color</p>
-                    <input class="color-input" type="color" value="#242424">
+                    <input class="color-input" type="color" value="#242424" id="textColorInput">
                 </div>
                 <div class="setting">
                     <p class="setting-name">Hide on start</p>
@@ -138,14 +138,14 @@
                     <input class="checkbox" type="checkbox" checked>
                 </div>
             </div>
-            <a role="button" class="settings-container-apply" id="">Apply</a>
-            <a role="button" class="settings-container-reset" id="">Reset</a>
+            <a role="button" class="settings-container-apply" id="settingsApplyButton">Apply</a>
+            <a role="button" class="settings-container-reset" id="resetToDefaultButton">Reset</a>
         </div>
     </div>
 
     <section class="timer-section" id="timerSection">
         <div class="choose-round-finish" id="chooseRoundFinish">
-            <div class="choose-round-finish-container" id="chooseRoundFinish">
+            <div class="choose-round-finish-container" id="chooseRoundFinishContainer">
                 <!-- <h1>How was this round?</h1> -->
                 <div class="choose-round-finish-buttons">
                     <div class="btn-row">
@@ -189,7 +189,7 @@
             <a role="button" class="sidebar-arrow-btn" id="openSideBar">
                 <img src="assets/arrow.png" alt="arrow">
             </a>
-            <h3>Times</h3>
+            <h3 id="sidebarTitle">Times</h3>
             <table id="sidebarTimes" class="sidebar-times">
                 <tbody class="default-tbody">
                     <tr class="table-header">
@@ -228,6 +228,7 @@
     <script src="js/scenes.js"></script>
     <script src="js/input.js"></script>
     <script src="js/timer.js"></script>
+    <script src="js/settings.js"></script>
 </body>
 
 

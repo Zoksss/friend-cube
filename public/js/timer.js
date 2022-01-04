@@ -34,7 +34,7 @@ let times = [];
 let isReady = false;
 
 let canShowFinishScreen = false;
-
+let textColor = "#242424";
 
 document.querySelector(".timer-container").addEventListener("touchstart", (event) => {
     if (!debounce && isReady && !canChoose) {
@@ -93,11 +93,11 @@ const startTimerLogic = () => {
         if (hideElementsOnStartTrue)
             displayChange("none");
 
-        mainTimeElement.style.color = "#242424";
+        mainTimeElement.style.color = textColor;
         timerReset();
         timerStart();
     }
-    mainTimeElement.style.color = "#242424";
+    mainTimeElement.style.color = textColor;
     isTimmerStoppedTrue = false
     return;
 }
