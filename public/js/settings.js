@@ -1,8 +1,17 @@
+const settings = document.querySelector("#openSettingsBtn");
+const closeSettingsModalBtn = document.querySelector("#closeSettingsModalBtn");
+
 const bgColorInput = document.querySelector("#bgColorInput");
 const textColorInput = document.querySelector("#textColorInput");
 
+const hideOnStartInput = document.querySelector("#hideOnStart");
+
 const settingsApplyButton = document.querySelector("#settingsApplyButton");
 const resetToDefaultButton = document.querySelector("#resetToDefaultButton");
+
+settings.addEventListener("click", () => {
+    settingsModal.style.display = "flex";
+})
 
 
 let bgColor = ""
@@ -48,10 +57,10 @@ const backgroundElementsLighter= [
 ];
 
 settingsApplyButton.addEventListener("click", () => {
+    settingsModal.style.display = "none";
+
     textColor = textColorInput.value;
     bgColor = bgColorInput.value;
-    console.log("vredniost " + bgColorInput.value);
-    document.body.style.backgroundColor = bgColorInput.value;
     backgroundElements.forEach(element => {
         element.style.backgroundColor = bgColorInput.value;
     })
@@ -62,9 +71,16 @@ settingsApplyButton.addEventListener("click", () => {
     textElements.forEach(element => {
         element.style.color = textColorInput.value;
     })
-})
+    if(!hideOnStartInput.checked){
+        hideElementsOnStartTrue = false;
+    }else{
+        hideElementsOnStartTrue = true;
+    }
+});
+
 
 resetToDefaultButton.addEventListener("click", () => {
+    settingsModal.style.display = "none";
     textElements.forEach(element => {
         element.style.color = defaultValues[0];
     })
@@ -75,7 +91,14 @@ resetToDefaultButton.addEventListener("click", () => {
     backgroundElementsLighter.forEach(element => {
         element.style.backgroundColor = defaultValues[2];
     })
-    
+    textColorInput.value = defaultValues[0];
+    bgColorInput.value = defaultValues[1];
+    hideOnStartInput.checked = true;
+    hideElementsOnStartTrue = true;
+})
+
+closeSettingsModalBtn.addEventListener("click", () => {
+    settingsModal.style.display = "none";
 })
 
 function lightenDarkenColor(col, amt) {

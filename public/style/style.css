@@ -31,7 +31,7 @@ body::before {
   height: 500px;
   margin-left: -100px;
   margin-top: -120px;
-  opacity: 0.2;
+  opacity: 0.4;
 }
 
 h1,
@@ -87,8 +87,8 @@ p {
     height: 100vh;
   }
   .scramble {
-    font-size: 1.7rem !important;
-    margin: 15px 50px 0 50px !important;
+    font-size: 2rem !important;
+    margin: 15px 75px 0 75px !important;
   }
   .time {
     font-size: 7rem !important;
@@ -664,9 +664,9 @@ p {
 }
 
 .timer-container .scramble {
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   font-weight: 700;
-  margin: 15px 10px 0 10px;
+  margin: 15px 20px 0 20px;
   text-align: center;
 }
 
@@ -901,7 +901,7 @@ p {
 .settings-container .settings-box .settings-exit-btn {
   position: absolute;
   right: 25px;
-  top: 38px;
+  top: 20px;
 }
 
 .settings-container .settings-box .settings-container-title {
