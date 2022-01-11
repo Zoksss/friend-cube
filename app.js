@@ -53,7 +53,7 @@ io.on("connection", (socket) => {
                     socket.emit("joinToTimer");
                     io.in(roomCode).emit("joinedLeavedNotification", { nickname: nickname, joined: true });
                     updateWaitingScreenStatus(roomCode);
-                    
+
                 }
                 else socket.emit("serverError", "Room Closed");
             }
@@ -90,7 +90,7 @@ io.on("connection", (socket) => {
         if (!rooms[data.roomCode]) return;
         let socketObjectInRoom = rooms[data.roomCode].sockets.find(o => o.socketId === socket.id);
         if (!socketObjectInRoom) return;
-        io.in(data.roomCode).emit("timeGetFromSocket", ({ socketName: socket.nickname, stime: data.time, ao5: data.ao5, ao12: data.ao12, finishStatus: data.finishStatus}));
+        io.in(data.roomCode).emit("timeGetFromSocket", ({ socketName: socket.nickname, stime: data.time, ao5: data.ao5, ao12: data.ao12, finishStatus: data.finishStatus }));
         socketObjectInRoom.isFinished = true;
 
         if (!isEveryoneFinished(data.roomCode)) return;
@@ -132,15 +132,16 @@ const updateWaitingScreenStatus = (roomCode) => {
     let msg = [];
     if (!rooms[roomCode]) return;
     rooms[roomCode].sockets.forEach(socket => {
-        msg.push(io.sockets.sockets[socket.socketId].nickname);
+        if (io.sockets.sockets[socket.socketId].nickname)
+            msg.push(io.sockets.sockets[socket.socketId].nickname);
     });
     io.in(roomCode).emit("displayUsers", msg);
 }
 
 const validateInput = (nickname, roomCode, puzzle) => {
     if (nickname === "") return false;
-    if(!isLetter(nickname.charAt(0))) return false;
-    for(let i = 0; i < nickname.length; i++) if(!isLetter(nickname.charAt(i))) return false; 
+    if (!isLetter(nickname.charAt(0))) return false;
+    for (let i = 0; i < nickname.length; i++) if (!isLetter(nickname.charAt(i))) return false;
     if (nickname.length < 3) return false;
     if (roomCode.length != 8) return false;
     if (puzzle != "3x3") return false;

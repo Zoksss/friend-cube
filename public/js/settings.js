@@ -35,6 +35,10 @@ const textElements = [
     document.querySelector(".plus2-btn"),
     document.querySelector(".dnf-btn"),
     document.querySelector(".x-btn"),
+    document.querySelector(".settings-box"),
+    document.querySelector(".settings-container-reset"),
+
+
 ];
 
 
@@ -46,37 +50,51 @@ const backgroundElements = [
     document.querySelector(".choose-round-finish-container"),
 
 ];
-const backgroundElementsLighter= [
+const backgroundElementsLighter = [
     document.querySelector("#sidebar"),
     document.querySelector("#openSideBar"),
     document.querySelector(".modal-container"),
     document.querySelector(".plus2-btn"),
     document.querySelector(".dnf-btn"),
     document.querySelector(".x-btn"),
+    document.querySelector(".settings-box"),
 
 ];
 
 settingsApplyButton.addEventListener("click", () => {
     settingsModal.style.display = "none";
-
     textColor = textColorInput.value;
     bgColor = bgColorInput.value;
+    if (!hideOnStartInput.checked) hideElementsOnStartTrue = false;
+    else hideElementsOnStartTrue = true;
+    localStorage.setItem("settings", JSON.stringify({ textColor: textColorInput.value, bgColor: bgColorInput.value, hideElementsOnStartTrue: hideElementsOnStartTrue }));
+    applySettings();
+});
+
+const applySettingsFromLocalStorage = () => {
+    let settings = JSON.parse(localStorage.getItem("settings"));
+    console.log(settings);
+    if (settings != null) {
+        textColor = settings.textColor || defaultValues[0];
+        bgColor = settings.bgColor || defaultValues[0];
+        hideElementsOnStartTrue = settings.hideElementsOnStartTrue || true;
+        applySettings();
+    }
+}
+
+const applySettings = () => {
     backgroundElements.forEach(element => {
-        element.style.backgroundColor = bgColorInput.value;
+        element.style.backgroundColor = bgColor;
     })
     backgroundElementsLighter.forEach(element => {
-        console.log(lightenDarkenColor(bgColorInput.value, 30));
-        element.style.backgroundColor = lightenDarkenColor(bgColorInput.value, 30);
+        element.style.backgroundColor = lightenDarkenColor(bgColor, 30);
     })
     textElements.forEach(element => {
-        element.style.color = textColorInput.value;
+        element.style.color = textColor;
     })
-    if(!hideOnStartInput.checked){
-        hideElementsOnStartTrue = false;
-    }else{
-        hideElementsOnStartTrue = true;
-    }
-});
+    textColorInput.value = textColor;
+    bgColorInput.value = bgColor;
+}
 
 
 resetToDefaultButton.addEventListener("click", () => {
@@ -95,6 +113,8 @@ resetToDefaultButton.addEventListener("click", () => {
     bgColorInput.value = defaultValues[1];
     hideOnStartInput.checked = true;
     hideElementsOnStartTrue = true;
+    localStorage.setItem("settings", { textColor: textColorInput.value, bgColor: bgColorInput.value, hideElementsOnStartTrue: hideElementsOnStartTrue });
+
 })
 
 closeSettingsModalBtn.addEventListener("click", () => {
@@ -107,15 +127,15 @@ function lightenDarkenColor(col, amt) {
         col = col.slice(1);
         usePound = true;
     }
-    let num = parseInt(col,16);
+    let num = parseInt(col, 16);
     let r = (num >> 16) + amt;
     if (r > 255) r = 255;
-    else if  (r < 0) r = 0;
+    else if (r < 0) r = 0;
     let b = ((num >> 8) & 0x00FF) + amt;
     if (b > 255) b = 255;
-    else if  (b < 0) b = 0;
+    else if (b < 0) b = 0;
     var g = (num & 0x0000FF) + amt;
     if (g > 255) g = 255;
     else if (g < 0) g = 0;
-    return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
+    return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
 }

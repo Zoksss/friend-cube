@@ -36,6 +36,8 @@ socket.on("joinToTimer", () => {
         waitForStartLeaderOverlay.style.display = "none";
         waitForStartOverlay.style.display = "flex";
         timerSection.style.display = "block"
+        applySettingsFromLocalStorage();
+
     }, 300);
 });
 
@@ -47,6 +49,8 @@ socket.on("joinToTimerLeader", (roomCode) => {
     document.body.style.overflowY = "hidden";
     setTimeout(() => {
         timerSection.style.display = "block";
+        applySettingsFromLocalStorage();
+
     }, 300);
 });
 
