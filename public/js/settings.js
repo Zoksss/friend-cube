@@ -72,15 +72,15 @@ settingsApplyButton.addEventListener("click", () => {
 });
 
 const applySettingsFromLocalStorage = () => {
-    let settings = JSON.parse(localStorage.getItem("settings"));
-    console.log(settings);
-    if (settings != null) {
-        textColor = settings.textColor || defaultValues[0];
-        bgColor = settings.bgColor || defaultValues[0];
-        hideElementsOnStartTrue = settings.hideElementsOnStartTrue || true;
+    if (localStorage.getItem("settings") !== null) {
+        let settings = JSON.parse(localStorage.getItem("settings"));
+        textColor = settings.textColor
+        bgColor = settings.bgColor
+        hideElementsOnStartTrue = settings.hideElementsOnStartTrue;
         applySettings();
     }
 }
+
 
 const applySettings = () => {
     backgroundElements.forEach(element => {

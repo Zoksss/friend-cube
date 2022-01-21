@@ -23,9 +23,11 @@ class Room {
     addSocket(socket) {
         this.sockets.push({ socketId: socket.id, isFinished: true });
     }
-    removeSocket(socket) {
+    removeSocket(socket, roomCode) {
         let socketObj = this.sockets.find(o => o.socketId === socket.id);
         this.sockets.splice(this.sockets.indexOf(socketObj), 1);
+        if(socketObj.socketId === this.leader)
+            io.in(rooms[roomCode]).emit("leaderLeft");
         socketObj = null;
     }
 }
@@ -108,7 +110,7 @@ io.on("connection", (socket) => {
             if (!roomNames[i] === socket.id) continue;
             if (!rooms[roomNames[i]]) return;
             io.in(roomNames[i]).emit("joinedLeavedNotification", { nickname: socket.nickname, joined: false });
-            rooms[roomNames[i]].removeSocket(socket);
+            rooms[roomNames[i]].removeSocket(socket, roomNames[i]);
             checkIfRoomIsEmpty(roomNames[i]);
             updateWaitingScreenStatus(roomNames[i]);
             return;

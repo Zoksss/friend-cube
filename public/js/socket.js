@@ -227,3 +227,10 @@ socket.on("joinedLeavedNotification", (data) => {
 socket.on("onlineClientChange", (num) => {
     onlineClients.innerHTML = `Online: ${num}`;
 })
+
+socket.on("leaderLeft", () => {
+    displayAlert(`Leader left the room, disconecting...`);
+    setTimeout(() => {
+        location.reload();
+    }, (2000));
+});
