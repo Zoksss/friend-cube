@@ -52,7 +52,7 @@ const displayAlert = (message) => {
     t = setTimeout(() => {
         alertBox.classList.add("alert-unload");
         alertDestroy();
-    }, 5000);
+    }, 4000);
 }
 
 const alertDestroy = () => {

@@ -229,8 +229,5 @@ socket.on("onlineClientChange", (num) => {
 })
 
 socket.on("leaderLeft", () => {
-    displayAlert(`Leader left the room, disconecting...`);
-    setTimeout(() => {
-        location.reload();
-    }, (2000));
+    location.reload();
 });

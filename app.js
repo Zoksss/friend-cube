@@ -26,8 +26,10 @@ class Room {
     removeSocket(socket, roomCode) {
         let socketObj = this.sockets.find(o => o.socketId === socket.id);
         this.sockets.splice(this.sockets.indexOf(socketObj), 1);
-        if(socketObj.socketId === this.leader)
-            io.in(rooms[roomCode]).emit("leaderLeft");
+        if(socketObj.socketId.toString() === this.leader){
+            io.in(roomCode).emit("leaderLeft");
+            console.log("fired")
+        }
         socketObj = null;
     }
 }

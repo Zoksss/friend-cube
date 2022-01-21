@@ -162,6 +162,7 @@ p {
   padding: 20px;
   background-color: #f44336;
   color: white;
+  z-index: 1000000000;
 }
 
 .alert .closebtn {
