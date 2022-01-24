@@ -26,7 +26,7 @@ class Room {
     removeSocket(socket, roomCode) {
         let socketObj = this.sockets.find(o => o.socketId === socket.id);
         this.sockets.splice(this.sockets.indexOf(socketObj), 1);
-        if(socketObj.socketId.toString() === this.leader){
+        if(!this.isLocked && socketObj.socketId.toString() === this.leader){
             io.in(roomCode).emit("leaderLeft");
             console.log("fired")
         }
@@ -71,8 +71,6 @@ io.on("connection", (socket) => {
             }
 
         } else socket.emit("serverError", "Input not valid");
-
-        //doesUsernameAlrdeyExists(socket.nickname, roomCode);
     });
 
     socket.on("leaderStartGamee", (roomCode) => {
@@ -86,8 +84,6 @@ io.on("connection", (socket) => {
 
         io.in(roomCode).emit("setScramble", generateScramble("3X3"));
         io.in(roomCode).emit("startGame");
-
-
     });
 
     socket.on("finalTime", (data) => {

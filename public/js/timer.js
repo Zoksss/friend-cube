@@ -36,6 +36,33 @@ let isReady = false;
 let canShowFinishScreen = false;
 let textColor = "#242424";
 
+let timeStartedHolding = 0, timeStartedHoldingElapsed = 0, timeStartedHoldingBegan = 0, timeStartedHoldingStopped = 0;
+let holdingStarted;
+let isHolding = false;
+let state = false;
+let timems = 2000;
+const hasHolded = () => {
+    console.log("has holded started")
+    timeStartedHoldingBegan = new Date();
+    holdingStarted = setInterval(holdingCounter, 10);
+}
+
+const holdingCounter = () => {
+    timeStartedHolding = new Date();
+    document.addEventListener("keyup", event => {
+        if (event.isComposing || event.keyCode === 32) {
+            timeStartedHoldingStopped = new Date();
+            timeStartedHoldingElapsed = new Date(timeStartedHolding - timeBegan - stoppedDuration);
+            isHolding = false;
+            clearInterval(holdingStarted);
+            if (timeStartedHoldingElapsed.getUTCMilliseconds() >= timems) state = true;
+            else state = false;
+            return state;
+        }
+    });
+}
+
+
 document.querySelector(".timer-container").addEventListener("touchstart", (event) => {
     if (!debounce && isReady && !canChoose) {
         debounce = true;
@@ -45,6 +72,7 @@ document.querySelector(".timer-container").addEventListener("touchstart", (event
 
 document.addEventListener("keydown", event => {
     if (event.isComposing || event.keyCode === 32 && !debounce && isReady && !canChoose) {
+        console.log(hasHolded());
         debounce = true;
         stopTimerLogic();
     }
@@ -115,10 +143,6 @@ const timerStart = () => {
     if (timeStopped !== null) stoppedDuration += (new Date() - timeStopped);
     started = setInterval(clockRunning, 10);
 }
-
-let dnf, plus2, reset, finished;
-
-
 
 let finishStatus = ""
 let canChoose = false;
@@ -204,7 +228,7 @@ const timerReset = () => {
 function clockRunning() {
     currentTime = new Date()
         , timeElapsed = new Date(currentTime - timeBegan - stoppedDuration)
-        ,hour = timeElapsed.getUTCHours()
+        , hour = timeElapsed.getUTCHours()
         , min = timeElapsed.getUTCMinutes()
         , sec = timeElapsed.getUTCSeconds()
         , ms = timeElapsed.getUTCMilliseconds();
@@ -222,8 +246,8 @@ function clockRunning() {
 const calculateAo5 = () => {
     let i = times.length;
     if (i < 5) return "--";
-    for(let i = times.length - 1; i >= times.length - 5; i--){
-        if(times[i].finishStatus === "dnf") return "DNF";
+    for (let i = times.length - 1; i >= times.length - 5; i--) {
+        if (times[i].finishStatus === "dnf") return "DNF";
     }
     if (times.length - 5 < 0) i = 0;
     else i = times.length - 5;
@@ -249,8 +273,8 @@ const calculateAo5 = () => {
 const calculateAo12 = () => {
     let i = times.length;
     if (i < 12) return "--";
-    for(let i = times.length - 1; i >= times.length - 12; i--){
-        if(times[i].finishStatus === "dnf") return "DNF";
+    for (let i = times.length - 1; i >= times.length - 12; i--) {
+        if (times[i].finishStatus === "dnf") return "DNF";
     }
     i = times.length - 12;
 
