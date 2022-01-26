@@ -35,3 +35,9 @@ document.addEventListener("keyup", event => {
         stopHolding();
     }
 });
+
+document.querySelector(".timer-container").addEventListener("touchend", () => {
+    if (debounce) {
+        stopHolding();
+    }
+})

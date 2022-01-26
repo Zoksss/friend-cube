@@ -81,7 +81,7 @@ const applySettingsFromLocalStorage = () => {
         let settings = JSON.parse(localStorage.getItem("settings"));
         textColor = settings.textColor
         bgColor = settings.bgColor
-        timems = settings.timems;
+        timems = settings.timems || 500;
         holdToStartMsInput.value = timems;
         applySettings();
     }

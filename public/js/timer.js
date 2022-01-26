@@ -45,8 +45,10 @@ let canStartTimer = false;
 
 document.querySelector(".timer-container").addEventListener("touchstart", (event) => {
     if (!debounce && isReady && !canChoose && canStartTimer) {
+        hasHolded();
         debounce = true;
         stopTimerLogic();
+        
     }
 });
 
