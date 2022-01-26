@@ -20,7 +20,9 @@ let currTimeIndex = 1;
 let debounce = false
     , isTimerRunningTrue = false
     , isTimmerStoppedTrue = false
-    , hideElementsOnStartTrue = true;
+    , hideElementsOnStartTrue = true
+    , hideTimeElementOnStart = false;
+
 
 let timeBegan = null
     , timeStopped = null
@@ -36,35 +38,13 @@ let isReady = false;
 let canShowFinishScreen = false;
 let textColor = "#242424";
 
-let timeStartedHolding = 0, timeStartedHoldingElapsed = 0, timeStartedHoldingBegan = 0, timeStartedHoldingStopped = 0;
-let holdingStarted;
-let isHolding = false;
-let state = false;
-let timems = 2000;
-const hasHolded = () => {
-    console.log("has holded started")
-    timeStartedHoldingBegan = new Date();
-    holdingStarted = setInterval(holdingCounter, 10);
-}
 
-const holdingCounter = () => {
-    timeStartedHolding = new Date();
-    document.addEventListener("keyup", event => {
-        if (event.isComposing || event.keyCode === 32) {
-            timeStartedHoldingStopped = new Date();
-            timeStartedHoldingElapsed = new Date(timeStartedHolding - timeBegan - stoppedDuration);
-            isHolding = false;
-            clearInterval(holdingStarted);
-            if (timeStartedHoldingElapsed.getUTCMilliseconds() >= timems) state = true;
-            else state = false;
-            return state;
-        }
-    });
-}
+let canStartTimer = false;
+
 
 
 document.querySelector(".timer-container").addEventListener("touchstart", (event) => {
-    if (!debounce && isReady && !canChoose) {
+    if (!debounce && isReady && !canChoose && canStartTimer) {
         debounce = true;
         stopTimerLogic();
     }
@@ -72,7 +52,8 @@ document.querySelector(".timer-container").addEventListener("touchstart", (event
 
 document.addEventListener("keydown", event => {
     if (event.isComposing || event.keyCode === 32 && !debounce && isReady && !canChoose) {
-        console.log(hasHolded());
+        isHoldingTimerRunning = true;
+        hasHolded();
         debounce = true;
         stopTimerLogic();
     }
@@ -80,12 +61,13 @@ document.addEventListener("keydown", event => {
 
 const stopTimerLogic = () => {
     if (!isTimerRunningTrue)
-        mainTimeElement.style.color = "green";
+        mainTimeElement.style.color = "red";
     else {
         timerStop();
         isTimerRunningTrue = false;
         isTimmerStoppedTrue = true;
         if (hideElementsOnStartTrue) displayChange("flex");
+        if (hideTimeElementOnStart) mainTimeElement.style.display = "flex";
     }
 }
 
@@ -115,11 +97,12 @@ document.addEventListener("keyup", event => {
 });
 
 const startTimerLogic = () => {
-    if (!isTimerRunningTrue && !isTimmerStoppedTrue) {
+    if (!isTimerRunningTrue && !isTimmerStoppedTrue && canStartTimer) {
         isTimerRunningTrue = true;
+        canStartTimer = false;
 
-        if (hideElementsOnStartTrue)
-            displayChange("none");
+        if (hideElementsOnStartTrue) displayChange("none");
+        if (hideTimeElementOnStart) mainTimeElement.style.display = "none";
 
         mainTimeElement.style.color = textColor;
         timerReset();

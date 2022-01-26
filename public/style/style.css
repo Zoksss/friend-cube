@@ -956,6 +956,14 @@ p {
   height: 22px;
 }
 
+.settings-container .settings-box .settings .setting .text-input {
+  width: 62px;
+  height: 32px;
+  font-size: 20px;
+  padding-left: 10px;
+  border: 1px solid #EFF8FF;
+}
+
 .settings-container .settings-box .settings-container-apply {
   position: absolute;
   bottom: 15px;

@@ -130,9 +130,18 @@
                     <input class="color-input" type="color" value="#242424" id="textColorInput">
                 </div>
                 <div class="setting">
+                    <p class="setting-name">Hold to start (ms)</p>
+                    <input id="holdToStartMsInput" class="text-input" type="number" min=0 max=10000 value=800 checked>
+                </div>
+                <div class="setting">
                     <p class="setting-name">Hide on start</p>
                     <input id="hideOnStart" class="checkbox" type="checkbox" checked>
                 </div>
+                <div class="setting">
+                    <p class="setting-name">Hide time on start</p>
+                    <input id="hideTimeOnStart" class="checkbox" type="checkbox">
+                </div>
+                
             </div>
             <a role="button" class="settings-container-apply" id="settingsApplyButton">Apply</a>
             <a role="button" class="settings-container-reset" id="resetToDefaultButton">Reset</a>
@@ -224,7 +233,9 @@
     <script src="js/settings.js"></script>
     <script src="js/scenes.js"></script>
     <script src="js/input.js"></script>
+    <script src="js/holdForStart.js"></script>
     <script src="js/timer.js"></script>
+    
 </body>
 
 

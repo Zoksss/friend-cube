@@ -3,17 +3,19 @@ const closeSettingsModalBtn = document.querySelector("#closeSettingsModalBtn");
 
 const bgColorInput = document.querySelector("#bgColorInput");
 const textColorInput = document.querySelector("#textColorInput");
+const holdToStartMsInput = document.querySelector("#holdToStartMsInput");
 
 const hideOnStartInput = document.querySelector("#hideOnStart");
+const hideTimeOnStart = document.querySelector("#hideTimeOnStart");
 
 const settingsApplyButton = document.querySelector("#settingsApplyButton");
 const resetToDefaultButton = document.querySelector("#resetToDefaultButton");
 
 settings.addEventListener("click", () => {
     settingsModal.style.display = "flex";
-})
+});
 
-
+let timems = 500;
 let bgColor = ""
 
 const defaultValues = [
@@ -67,7 +69,10 @@ settingsApplyButton.addEventListener("click", () => {
     bgColor = bgColorInput.value;
     if (!hideOnStartInput.checked) hideElementsOnStartTrue = false;
     else hideElementsOnStartTrue = true;
-    localStorage.setItem("settings", JSON.stringify({ textColor: textColorInput.value, bgColor: bgColorInput.value, hideElementsOnStartTrue: hideElementsOnStartTrue }));
+    timems = holdToStartMsInput.value; 
+    if(hideTimeOnStart.checked) hideTimeElementOnStart = true;
+    else hideTimeElementOnStart = false;
+    localStorage.setItem("settings", JSON.stringify({ textColor: textColorInput.value, bgColor: bgColorInput.value, timems: timems, hideElementsOnStartTrue: hideElementsOnStartTrue }));
     applySettings();
 });
 
@@ -76,7 +81,8 @@ const applySettingsFromLocalStorage = () => {
         let settings = JSON.parse(localStorage.getItem("settings"));
         textColor = settings.textColor
         bgColor = settings.bgColor
-        hideElementsOnStartTrue = settings.hideElementsOnStartTrue;
+        timems = settings.timems;
+        holdToStartMsInput.value = timems;
         applySettings();
     }
 }
@@ -99,23 +105,18 @@ const applySettings = () => {
 
 resetToDefaultButton.addEventListener("click", () => {
     settingsModal.style.display = "none";
-    textElements.forEach(element => {
-        element.style.color = defaultValues[0];
-    })
-    textColor = defaultValues[0];
-    backgroundElements.forEach(element => {
-        element.style.backgroundColor = defaultValues[1];
-    })
-    backgroundElementsLighter.forEach(element => {
-        element.style.backgroundColor = defaultValues[2];
-    })
     textColorInput.value = defaultValues[0];
     bgColorInput.value = defaultValues[1];
     hideOnStartInput.checked = true;
     hideElementsOnStartTrue = true;
-    localStorage.setItem("settings", { textColor: textColorInput.value, bgColor: bgColorInput.value, hideElementsOnStartTrue: hideElementsOnStartTrue });
+    timems = 500;
+    holdToStartMsInput.value = timems;
+    hideTimeOnStart.checked = true;
+    hideTimeElementOnStart.checked = false;
+    applySettings();
+    localStorage.setItem("settings", JSON.stringify({ textColor: textColorInput.value, bgColor: bgColorInput.value, timems: timems, hideElementsOnStartTrue: hideElementsOnStartTrue }));
 
-})
+});
 
 closeSettingsModalBtn.addEventListener("click", () => {
     settingsModal.style.display = "none";
