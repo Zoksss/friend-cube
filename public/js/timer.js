@@ -200,7 +200,6 @@ const timerStopPush = () => {
     });
 
     clearInterval(started);
-    scrambleElement.innerHTML = "Waiting for other players to finish solving..."
     isReady = false;
 }
 const timerReset = () => {

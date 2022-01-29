@@ -141,7 +141,7 @@
                     <p class="setting-name">Hide time on start</p>
                     <input id="hideTimeOnStart" class="checkbox" type="checkbox">
                 </div>
-                
+
             </div>
             <a role="button" class="settings-container-apply" id="settingsApplyButton">Apply</a>
             <a role="button" class="settings-container-reset" id="resetToDefaultButton">Reset</a>
@@ -173,6 +173,16 @@
             <h1>Room: <span id="waitForStartLeaderOverlayRoomCode">x3f341k2</span></h1>
             <a role="button" class="start-game-btn" id="leaderStartGame">Start Game</a>
             <div class="joined-users" id="joinedUsersContainer"></div>
+        </div>
+
+        <div class="modal players" id="scrambleContainer">
+            <div class="modal-container scramble-info-container">
+                <a href="#" class="settings-exit-btn" id="closescrambleContainer"><img src="assets/x.svg"></a>
+                <h2 id="scrambleContainerTitle">Round 0 scramble</h2>
+                <hr class="modal-underline">
+                <div id="scrambleContainerScrambles">
+                </div>
+            </div>
         </div>
 
         <div class="modal players" id="playerModal">
@@ -235,7 +245,7 @@
     <script src="js/input.js"></script>
     <script src="js/holdForStart.js"></script>
     <script src="js/timer.js"></script>
-    
+
 </body>
 
 

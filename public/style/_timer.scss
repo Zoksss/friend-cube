@@ -62,6 +62,9 @@
         margin: 0 15px;
     }
 }
+.scramble-info-container {
+    height: 300px !important;
+}
 
 .sidebar {
     position: absolute;
@@ -75,9 +78,9 @@
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
-    -webkit-box-shadow: 0px 3px 10px 5px rgba(0,0,0,0.05);
-        -moz-box-shadow: 0px 3px 10px 5px rgba(0,0,0,0.05);
-        box-shadow: 0px 3px 10px 5px rgba(0,0,0,0.05);
+    -webkit-box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.05);
 
     .sidebar-arrow-btn {
         position: fixed;
@@ -133,6 +136,12 @@
         }
         .round-marker {
             margin-top: 25px;
+            transition: 300ms all ease;
+            cursor: pointer;
+
+            &:hover{
+                background-color: $secondary;
+            }
             td {
                 border-top: 1px solid black;
                 font-weight: 400;
@@ -247,8 +256,6 @@
     }
 }
 
-
-
 .choose-round-finish {
     display: none;
     position: absolute;
@@ -278,7 +285,6 @@
         align-items: center;
         flex-direction: column;
 
-
         .choose-round-finish-buttons {
             margin-top: 20px;
             display: flex;
@@ -303,11 +309,11 @@
                     margin: 0 10px;
                     transition: 300ms all ease;
 
-                    &:hover{
+                    &:hover {
                         background-color: darken($secondary, 5%);
                     }
                 }
-                .finish-btn{
+                .finish-btn {
                     width: 100%;
                     font-size: 40px !important;
                     font-weight: 800;

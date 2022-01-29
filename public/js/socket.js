@@ -173,10 +173,12 @@ socket.on("timeGetFromSocket", (data) => {
     tbody.classList.add(`tbody-row-group`);
     tbody.classList.add(`round-${round}`);
     tbody.innerHTML = `
-    <tr class="round-marker">
+    <tr class="round-marker" id="round${round}scramble" onClick="showScramble(this, ${round})">
         <td>Round <span id="roundCounterElement">${round}</span></td>
     </tr>
     `
+    document.querySelector("#scrambleContainerScrambles").innerHTML+=`<p id="round${round}scrambleElement">${scrambleElement.innerText}</p>`
+    scrambleElement.innerHTML = "Waiting for other players to finish solving..."
 
     const element = document.createElement("tr");
     if (finishStatus === "dnf") {
@@ -230,4 +232,28 @@ socket.on("onlineClientChange", (num) => {
 
 socket.on("leaderLeft", () => {
     location.reload();
+});
+
+
+const scrambleContainer = document.querySelector("#scrambleContainer");
+const scrambleContainerScrambles = document.querySelector("#scrambleContainerScrambles");
+
+const showScramble = (dom, roundE) => {
+    console.log(dom);
+    let scrambleTargetId = dom.id+"Element"
+    let targetElement = document.querySelector("#"+scrambleTargetId);
+    if(targetElement){
+        for(let i = 0; i < scrambleContainerScrambles.children.length; i++){
+            scrambleContainerScrambles.children[i].style.display = "none"
+        }
+        scrambleContainerTitle.innerHTML=`Round ${roundE} scramble`
+        targetElement.style.display = "flex";
+        scrambleContainer.style.display = "flex";
+        
+    }
+};
+
+const closescrambleContainer = document.querySelector("#closescrambleContainer");
+closescrambleContainer.addEventListener("click", () => {
+    scrambleContainer.style.display = "none"
 });

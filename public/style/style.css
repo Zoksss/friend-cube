@@ -538,6 +538,10 @@ p {
   margin: 0 15px;
 }
 
+.scramble-info-container {
+  height: 300px !important;
+}
+
 .sidebar {
   position: absolute;
   width: 270px;
@@ -618,6 +622,13 @@ p {
 
 .sidebar .sidebar-times .round-marker {
   margin-top: 25px;
+  -webkit-transition: 300ms all ease;
+  transition: 300ms all ease;
+  cursor: pointer;
+}
+
+.sidebar .sidebar-times .round-marker:hover {
+  background-color: #FF7700;
 }
 
 .sidebar .sidebar-times .round-marker td {
