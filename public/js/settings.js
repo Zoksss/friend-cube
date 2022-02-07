@@ -60,6 +60,7 @@ const backgroundElementsLighter = [
     document.querySelector(".dnf-btn"),
     document.querySelector(".x-btn"),
     document.querySelector(".settings-box"),
+    document.querySelector(".player-info-container"),
 
 ];
 
@@ -105,13 +106,13 @@ const applySettings = () => {
 
 resetToDefaultButton.addEventListener("click", () => {
     settingsModal.style.display = "none";
-    textColorInput.value = defaultValues[0];
-    bgColorInput.value = defaultValues[1];
+    textColor = defaultValues[0];
+    bgColor = defaultValues[1];
     hideOnStartInput.checked = true;
     hideElementsOnStartTrue = true;
     timems = 500;
     holdToStartMsInput.value = timems;
-    hideTimeOnStart.checked = true;
+    hideTimeOnStart.checked = false;
     hideTimeElementOnStart.checked = false;
     applySettings();
     localStorage.setItem("settings", JSON.stringify({ textColor: textColorInput.value, bgColor: bgColorInput.value, timems: timems, hideElementsOnStartTrue: hideElementsOnStartTrue }));

@@ -24,6 +24,7 @@ class Room {
         this.sockets.push({ socketId: socket.id, isFinished: true });
     }
     removeSocket(socket, roomCode) {
+        console.log("fireed")
         let socketObj = this.sockets.find(o => o.socketId === socket.id);
         this.sockets.splice(this.sockets.indexOf(socketObj), 1);
         if(!this.isLocked && socketObj.socketId.toString() === this.leader){
@@ -104,6 +105,7 @@ io.on("connection", (socket) => {
 
     socket.on('disconnecting', () => {
         let roomNames = Object.keys(socket.rooms);
+        console.log(roomNames);
         for (let i = 0; i < roomNames.length; i++) {
             if (!roomNames[i] === socket.id) continue;
             if (!rooms[roomNames[i]]) return;
@@ -144,6 +146,7 @@ const validateInput = (nickname, roomCode, puzzle) => {
     for (let i = 0; i < nickname.length; i++) if (!isLetter(nickname.charAt(i))) return false;
     if (nickname.length < 3) return false;
     if (roomCode.length != 8) return false;
+    for (let i = 0; i < roomCode.length; i++) if (isNaN(roomCode.charAt(i))) return false;
     if (puzzle != "3x3") return false;
     return true;
 }

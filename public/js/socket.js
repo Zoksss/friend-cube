@@ -128,6 +128,7 @@ const addTimeToPlayerModal = (nickname, time) => {
     if (!document.querySelector(`#${nickname}HeadingFix`)) return;
     let tableHeading = document.querySelector(`#${nickname}HeadingFix`)
     let element = document.createElement("tr");
+    
     element.innerHTML =
         `
         <td>${round}</td>
@@ -139,7 +140,7 @@ const addTimeToPlayerModal = (nickname, time) => {
 }
 
 
-document.addEventListener("click", function (e) {
+document.addEventListener("click", (e) => {
     if (e.target && e.target.id == "viewMoreBtn") {
         let name = e.target.parentElement.children[0].innerText;
         showFullPlayerStats(name, true)

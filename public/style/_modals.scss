@@ -157,14 +157,6 @@
     .player-modal-times {
         display: none;
     }
-
-    .settings-exit-btn {
-        position: absolute;
-        top: 50px;
-        right: 50px;
-        z-index: 106;
-        //cursor: pointer;
-    }
 }
 
 .start-game-modal-container {
@@ -177,4 +169,12 @@
         margin-left: auto;
         margin-right: auto;
     }
+}
+
+.modal-exit-btn {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    z-index: 106;
+    //cursor: pointer;
 }

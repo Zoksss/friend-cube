@@ -1,12 +1,12 @@
-function transitionAnim(hiddingElement, showingElement){   // transition between containers
+function transitionAnim(hiddingElement, showingElement) {   // transition between containers
     transitionHolder.classList.add("transition");
     transitionHolder.addEventListener("animationstart", () => {
         setTimeout(() => {
             hiddingElement.style.display = "none";
-            showingElement.style.display = "flex";  
+            showingElement.style.display = "flex";
         }, 300);
     })
-    
+
     transitionHolder.addEventListener('animationend', () => { transitionHolder.classList.remove("transition"); });
 }
 
@@ -39,7 +39,11 @@ const inputLogic = (e) => {
             return false;
         case 4:
             codeInput.classList.add("input-warning");
-            displayAlert("Code must be 8 characters.")
+            displayAlert("Code must be 8 characters long.")
+            return false;
+        case 5:
+            codeInput.classList.add("input-warning");
+            displayAlert("Code must be only numbers")
             return false;
         default:
             return false;
@@ -67,8 +71,9 @@ const validateInput = () => {
     if (nicknameInput.value === "" && nicknameInputOnCreate.value === "") return 1;
     if (nicknameInput.value.length < 3 && nicknameInputOnCreate.value.length < 3) return 2;
     if (!isLetter(nicknameInput.value.charAt(0)) && !isLetter(nicknameInputOnCreate.value.charAt(0))) return 3;
-    for(let i=0;i<nicknameInput.value.length;i++)if(!isLetter(nicknameInput.value.charAt(i))&&!isLetter(nicknameInputOnCreate.value.charAt(i)));
+    for (let i = 0; i < nicknameInput.value.length; i++)if (!isLetter(nicknameInput.value.charAt(i)) && !isLetter(nicknameInputOnCreate.value.charAt(i)));
     if (codeInput.value.length != 8) return 4;
+    for (let i = 0; i < codeInput.value.length; i++) if (isNaN(codeInput.value.charAt(i))) return 5;
     return 0;
 }
 
@@ -76,7 +81,7 @@ function isLetter(str) {
     return str.length === 1 && str.match(/[a-z]/i);
 }
 const selectPuzzle = (puzzle) => {
-    if(puzzle !="3x3"){
+    if (puzzle != "3x3") {
         displayAlert("Error - Puzzle is not implemented yet");
         return;
     }
@@ -86,7 +91,7 @@ const selectPuzzle = (puzzle) => {
 
 const makeRoomId = (length) => {
     let result = '';
-    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let characters = '0123456789';
     let charactersLength = characters.length;
     for (let i = 0; i < length; i++) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
