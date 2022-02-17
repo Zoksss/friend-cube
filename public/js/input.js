@@ -88,3 +88,10 @@ exitRoom.addEventListener("click", () => {
 leaderStartGame.addEventListener("click", () => {
     socket.emit("leaderStartGamee", codeInput.value);
 });
+
+
+document.querySelectorAll(".modal").forEach(modal => {
+    modal.addEventListener("click", (e) => {
+        if(e.target.classList.contains("modal")) e.target.style.display = "none";
+    })
+})

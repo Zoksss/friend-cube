@@ -1,0 +1,50 @@
+@media (min-width: $tablets) {
+    .container {
+        padding: 100px 50px;
+    }
+
+    h1,
+    h2 {
+        font-size: 36px;
+        font-weight: 700 ;
+    }
+    h3 {
+        font-size: 19px;
+        font-weight: 700;
+    }
+
+    p {
+        font-size: 18px
+    }
+
+    .container {
+        padding: 100px 100px;
+        height: 100vh;
+    }
+    .scramble {
+        font-size: 2rem !important;
+        margin: 15px 75px 0 75px;
+
+    }
+    .time {
+        font-size: 7rem !important;
+    }
+    #code {
+        bottom: 25px;
+    }
+    .bottom-buttons {
+        left: 25px;
+        transform: translate(0, 0);
+        bottom: 45px;
+    }
+
+    .start-game-btn {
+        width: 60%;
+        font-size: 30pt;
+        font-weight: 700;
+    }
+    .joined-users {
+        flex-direction: row;
+    }
+}
+

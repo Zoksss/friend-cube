@@ -198,7 +198,9 @@ const timerStopPush = () => {
         , ao12: ao12Element.innerHTML
         , finishStatus: finishStatus
     });
-
+    document.querySelector("#scrambleContainerScrambles").innerHTML+=`<p id="round${round}scrambleElement">${scrambleElement.innerText}</p>`
+    scrambleElement.innerHTML = "Waiting for other players to finish solving..."
+    
     clearInterval(started);
     isReady = false;
 }

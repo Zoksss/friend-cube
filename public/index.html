@@ -115,10 +115,12 @@
         </div>
     </section>
 
-    <div class="settings-container">
+    <div class="modal settings-container">
         <div class="settings-box">
-            <a href="#" class="modal-exit-btn" id="closeSettingsModalBtn"><img src="assets/x.svg" style="top: 27px"></a>
-            <h2 class="settings-container-title">Settings</h2>
+            <div class="modal-top-row">
+                <h2 class="settings-container-title">Settings</h2>
+                <a href="#" class="modal-exit-btn" id="closeSettingsModalBtn"><img src="assets/x.svg"></a>
+            </div>
             <hr class="settings-container-underline">
             <div class="settings">
                 <div class="setting">
@@ -177,8 +179,10 @@
 
         <div class="modal players" id="scrambleContainer">
             <div class="modal-container scramble-info-container">
-                <a href="#" class="modal-exit-btn" id="closescrambleContainer"><img src="assets/x.svg"></a>
-                <h2 id="scrambleContainerTitle">Round 0 scramble</h2>
+                <div class="modal-top-row">
+                    <h2 id="scrambleContainerTitle"></h2>
+                    <a href="#" class="modal-exit-btn" id="closescrambleContainer"><img src="assets/x.svg"></a>
+                </div>
                 <hr class="modal-underline">
                 <div id="scrambleContainerScrambles">
                 </div>
@@ -187,18 +191,16 @@
 
         <div class="modal players" id="playerModal">
             <div class="modal-container player-info-container">
-                <a href="#" class="modal-exit-btn" id="closePlayerModalBtn"><img src="assets/x.svg"></a>
-                <h2 id="playerContainerTitle">Joined Player's Stats</h2>
+                <div class="modal-top-row">
+                    <h2 class="settings-container-title" id="playerContainerTitle">Joined Players</h2>
+                    <a href="#" class="modal-exit-btn" id="closePlayerModalBtn"><img class="close-modal-btn" src="assets/x.svg"></a>
+                </div>
                 <hr class="modal-underline">
-                <div id="playerRows">
-
-                </div>
-                <div id="playerModalTimes" class="player-modal-times">
-
-                </div>
+                <div id="playerRows"></div>
+                <div id="playerModalTimes" class="player-modal-times"></div>
             </div>
         </div>
-
+        
 
         <div class="sidebar hidden-on-start" id="sidebar">
             <a role="button" class="sidebar-arrow-btn" id="openSideBar">

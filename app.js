@@ -150,11 +150,9 @@ const validateInput = (nickname, roomCode, puzzle) => {
     if (puzzle != "3x3") return false;
     return true;
 }
-
 function isLetter(str) {
     return str.length === 1 && str.match(/[a-z]/i);
 }
-
 
 const isEveryoneFinished = (roomCode) => {
     let temp = true;

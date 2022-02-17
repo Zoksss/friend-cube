@@ -23,15 +23,18 @@
     #playerModalTimes {
         height: 100%;
         position: relative;
+        height: 600px;
 
         .stats-full {
-            width: 100%;
+            width: 87%;
             position: absolute;
             right: 0;
             top: 0;
-            height: 80%;
+            height: 70%;
             overflow: scroll;
             display: none;
+            margin: 0 30px 0 25px;
+            margin-left: 25px;
             table {
                 width: 100%;
                 border-collapse: collapse;
@@ -48,16 +51,14 @@
         }
         .goback-from-player-btn {
             position: absolute;
-            bottom: 55px;
-            right: 25px;
-            font-size: 1.2rem;
+            bottom: 115px;
+            right: 15px;
             background-color: $blue;
-            padding: 7px 30px;
+            font-size: 20px;
+            font-weight: 600;
             color: $white;
+            padding: 12px 25px;
             cursor: pointer;
-            &:hover {
-                background-color: darken($blue, 15%);
-            }
         }
     }
 
@@ -65,18 +66,15 @@
         position: relative;
         //display: none;
         flex-direction: column;
-        height: 100%;
-        padding: 35px 75px;
+        height: 600px;
         background-color: $white;
-        width: 700px;
+        width: 500px;
 
-        h2 {
-            margin: 0 auto;
-        }
+     
         hr {
             height: 2px;
             background-color: lighten($dark, 55%);
-            margin: 10px 0;
+            margin: 10px 25px;
         }
 
         .color-settings-container {
@@ -156,6 +154,7 @@
     }
     .player-modal-times {
         display: none;
+        height: 400px;
     }
 }
 
@@ -171,10 +170,21 @@
     }
 }
 
-.modal-exit-btn {
-    position: absolute;
-    top: 40px;
-    right: 50px;
-    z-index: 106;
-    //cursor: pointer;
+.modal-top-row{
+    display:flex;
+    justify-content: space-between;
+    padding: 20px 30px 5px 30px;
+    width: 100%;
+    .modal-exit-btn{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .settings-container-title{
+        text-align: start;
+    }
+}
+
+#scrambleContainerScrambles{
+    padding-left: 25px;
 }

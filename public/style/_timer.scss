@@ -310,7 +310,7 @@
                     transition: 300ms all ease;
 
                     &:hover {
-                        background-color: darken($secondary, 5%);
+                        background-color: darken($secondary, 5%) !important;
                     }
                 }
                 .finish-btn {

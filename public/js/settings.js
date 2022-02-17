@@ -5,8 +5,8 @@ const bgColorInput = document.querySelector("#bgColorInput");
 const textColorInput = document.querySelector("#textColorInput");
 const holdToStartMsInput = document.querySelector("#holdToStartMsInput");
 
-const hideOnStartInput = document.querySelector("#hideOnStart");
-const hideTimeOnStart = document.querySelector("#hideTimeOnStart");
+let hideOnStartInput = document.querySelector("#hideOnStart");
+let hideTimeOnStart = document.querySelector("#hideTimeOnStart");
 
 const settingsApplyButton = document.querySelector("#settingsApplyButton");
 const resetToDefaultButton = document.querySelector("#resetToDefaultButton");
@@ -39,8 +39,8 @@ const textElements = [
     document.querySelector(".x-btn"),
     document.querySelector(".settings-box"),
     document.querySelector(".settings-container-reset"),
-
-
+    document.querySelector("#playerRows"),
+    document.querySelector("#playerModalTimes"),
 ];
 
 
@@ -61,19 +61,16 @@ const backgroundElementsLighter = [
     document.querySelector(".x-btn"),
     document.querySelector(".settings-box"),
     document.querySelector(".player-info-container"),
-
 ];
 
 settingsApplyButton.addEventListener("click", () => {
     settingsModal.style.display = "none";
     textColor = textColorInput.value;
     bgColor = bgColorInput.value;
-    if (!hideOnStartInput.checked) hideElementsOnStartTrue = false;
-    else hideElementsOnStartTrue = true;
     timems = holdToStartMsInput.value; 
-    if(hideTimeOnStart.checked) hideTimeElementOnStart = true;
-    else hideTimeElementOnStart = false;
-    localStorage.setItem("settings", JSON.stringify({ textColor: textColorInput.value, bgColor: bgColorInput.value, timems: timems, hideElementsOnStartTrue: hideElementsOnStartTrue }));
+    hideElementsOnStartTrue = hideOnStartInput.checked;
+    hideTimeElementOnStart = hideTimeOnStart.checked;
+    localStorage.setItem("settings", JSON.stringify({ textColor: textColorInput.value, bgColor: bgColorInput.value, timems: timems, heos: hideOnStartInput.checked, hteos: hideTimeOnStart.checked}));
     applySettings();
 });
 
@@ -84,10 +81,11 @@ const applySettingsFromLocalStorage = () => {
         bgColor = settings.bgColor
         timems = settings.timems || 500;
         holdToStartMsInput.value = timems;
+        hideOnStartInput.checked = settings.heos;
+        hideTimeOnStart.checked = settings.hteos;
         applySettings();
     }
-}
-
+} 
 
 const applySettings = () => {
     backgroundElements.forEach(element => {
@@ -101,6 +99,9 @@ const applySettings = () => {
     })
     textColorInput.value = textColor;
     bgColorInput.value = bgColor;
+
+    hideElementsOnStartTrue = hideOnStartInput.checked;
+    hideTimeOnStart = hideTimeOnStart.checked;
 }
 
 
@@ -112,10 +113,10 @@ resetToDefaultButton.addEventListener("click", () => {
     hideElementsOnStartTrue = true;
     timems = 500;
     holdToStartMsInput.value = timems;
+    hideTimeOnStart.checked = true;
     hideTimeOnStart.checked = false;
-    hideTimeElementOnStart.checked = false;
     applySettings();
-    localStorage.setItem("settings", JSON.stringify({ textColor: textColorInput.value, bgColor: bgColorInput.value, timems: timems, hideElementsOnStartTrue: hideElementsOnStartTrue }));
+    localStorage.setItem("settings", JSON.stringify({ textColor: textColorInput.value, bgColor: bgColorInput.value, timems: timems, heos: hideOnStartInput.checked, hteos: hideTimeOnStart.checked}));
 
 });
 

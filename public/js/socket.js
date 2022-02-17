@@ -178,9 +178,6 @@ socket.on("timeGetFromSocket", (data) => {
         <td>Round <span id="roundCounterElement">${round}</span></td>
     </tr>
     `
-    document.querySelector("#scrambleContainerScrambles").innerHTML+=`<p id="round${round}scrambleElement">${scrambleElement.innerText}</p>`
-    scrambleElement.innerHTML = "Waiting for other players to finish solving..."
-
     const element = document.createElement("tr");
     if (finishStatus === "dnf") {
         element.innerHTML = `

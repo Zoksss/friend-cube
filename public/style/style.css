@@ -65,56 +65,6 @@ p {
   width: 100% !important;
 }
 
-/* resposnive */
-@media (min-width: 768px) {
-  .container {
-    padding: 100px 50px;
-  }
-  h1,
-  h2 {
-    font-size: 36px;
-    font-weight: 700;
-  }
-  h3 {
-    font-size: 19px;
-    font-weight: 700;
-  }
-  p {
-    font-size: 18px;
-  }
-  .container {
-    padding: 100px 100px;
-    height: 100vh;
-  }
-  .scramble {
-    font-size: 2rem !important;
-    margin: 15px 75px 0 75px !important;
-  }
-  .time {
-    font-size: 7rem !important;
-  }
-  #code {
-    bottom: 25px !important;
-  }
-  .bottom-buttons {
-    left: 25px !important;
-    -webkit-transform: translate(0, 0) !important;
-            transform: translate(0, 0) !important;
-    bottom: 45px !important;
-  }
-  .start-game-btn {
-    width: 60%;
-    font-size: 30pt;
-    font-weight: 700;
-  }
-  .joined-users {
-    -webkit-box-orient: horizontal !important;
-    -webkit-box-direction: normal !important;
-        -ms-flex-direction: row !important;
-            flex-direction: row !important;
-  }
-}
-
 .btn {
   border: none;
   outline: none;
@@ -858,7 +808,7 @@ p {
 }
 
 .choose-round-finish .choose-round-finish-container .choose-round-finish-buttons .btn-row button:hover {
-  background-color: #e66b00;
+  background-color: #e66b00 !important;
 }
 
 .choose-round-finish .choose-round-finish-container .choose-round-finish-buttons .btn-row .finish-btn {
@@ -869,6 +819,55 @@ p {
   background-color: #18B923;
   color: #FFF;
   border: none !important;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 100px 50px;
+  }
+  h1,
+  h2 {
+    font-size: 36px;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 19px;
+    font-weight: 700;
+  }
+  p {
+    font-size: 18px;
+  }
+  .container {
+    padding: 100px 100px;
+    height: 100vh;
+  }
+  .scramble {
+    font-size: 2rem !important;
+    margin: 15px 75px 0 75px;
+  }
+  .time {
+    font-size: 7rem !important;
+  }
+  #code {
+    bottom: 25px;
+  }
+  .bottom-buttons {
+    left: 25px;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+    bottom: 45px;
+  }
+  .start-game-btn {
+    width: 60%;
+    font-size: 30pt;
+    font-weight: 700;
+  }
+  .joined-users {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
 }
 
 .settings-container {
@@ -908,16 +907,6 @@ p {
   background: #FFF;
   -webkit-box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.05);
-}
-
-.settings-container .settings-box .settings-exit-btn {
-  position: absolute;
-  right: 25px;
-  top: 20px;
-}
-
-.settings-container .settings-box .settings-container-title {
-  margin: 25px 0 0 25px;
 }
 
 .settings-container .settings-box hr {
@@ -1092,16 +1081,19 @@ p {
 .modal #playerModalTimes {
   height: 100%;
   position: relative;
+  height: 600px;
 }
 
 .modal #playerModalTimes .stats-full {
-  width: 100%;
+  width: 87%;
   position: absolute;
   right: 0;
   top: 0;
-  height: 80%;
+  height: 70%;
   overflow: scroll;
   display: none;
+  margin: 0 30px 0 25px;
+  margin-left: 25px;
 }
 
 .modal #playerModalTimes .stats-full table {
@@ -1123,17 +1115,14 @@ p {
 
 .modal #playerModalTimes .goback-from-player-btn {
   position: absolute;
-  bottom: 55px;
-  right: 25px;
-  font-size: 1.2rem;
+  bottom: 115px;
+  right: 15px;
   background-color: #1161FF;
-  padding: 7px 30px;
+  font-size: 20px;
+  font-weight: 600;
   color: #FFF;
+  padding: 12px 25px;
   cursor: pointer;
-}
-
-.modal #playerModalTimes .goback-from-player-btn:hover {
-  background-color: #0042c4;
 }
 
 .modal .modal-container {
@@ -1142,20 +1131,15 @@ p {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: 100%;
-  padding: 35px 75px;
+  height: 600px;
   background-color: #FFF;
-  width: 700px;
-}
-
-.modal .modal-container h2 {
-  margin: 0 auto;
+  width: 500px;
 }
 
 .modal .modal-container hr {
   height: 2px;
   background-color: #b0b0b0;
-  margin: 10px 0;
+  margin: 10px 25px;
 }
 
 .modal .modal-container .color-settings-container {
@@ -1252,6 +1236,7 @@ p {
 
 .modal .player-modal-times {
   display: none;
+  height: 400px;
 }
 
 .start-game-modal-container {
@@ -1273,11 +1258,35 @@ p {
   margin-right: auto;
 }
 
-.modal-exit-btn {
-  position: absolute;
-  top: 40px;
-  right: 50px;
-  z-index: 106;
+.modal-top-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 20px 30px 5px 30px;
+  width: 100%;
+}
+
+.modal-top-row .modal-exit-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.modal-top-row .settings-container-title {
+  text-align: start;
+}
+
+#scrambleContainerScrambles {
+  padding-left: 25px;
 }
 
 .transition::before {
