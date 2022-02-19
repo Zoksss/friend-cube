@@ -6,7 +6,7 @@ const textColorInput = document.querySelector("#textColorInput");
 const holdToStartMsInput = document.querySelector("#holdToStartMsInput");
 
 let hideOnStartInput = document.querySelector("#hideOnStart");
-let hideTimeOnStart = document.querySelector("#hideTimeOnStart");
+let hideTimeOnStartEl = document.querySelector("#hideTimeOnStart");
 
 const settingsApplyButton = document.querySelector("#settingsApplyButton");
 const resetToDefaultButton = document.querySelector("#resetToDefaultButton");
@@ -69,8 +69,8 @@ settingsApplyButton.addEventListener("click", () => {
     bgColor = bgColorInput.value;
     timems = holdToStartMsInput.value; 
     hideElementsOnStartTrue = hideOnStartInput.checked;
-    hideTimeElementOnStart = hideTimeOnStart.checked;
-    localStorage.setItem("settings", JSON.stringify({ textColor: textColorInput.value, bgColor: bgColorInput.value, timems: timems, heos: hideOnStartInput.checked, hteos: hideTimeOnStart.checked}));
+    hideTimeElementOnStart = hideTimeOnStartEl.checked;
+    localStorage.setItem("settings", JSON.stringify({ textColor: textColorInput.value, bgColor: bgColorInput.value, timems: timems, heos: hideOnStartInput.checked, hteos: hideTimeOnStartEl.checked}));
     applySettings();
 });
 
@@ -82,7 +82,7 @@ const applySettingsFromLocalStorage = () => {
         timems = settings.timems || 500;
         holdToStartMsInput.value = timems;
         hideOnStartInput.checked = settings.heos;
-        hideTimeOnStart.checked = settings.hteos;
+        hideTimeOnStartEl.checked = settings.hteos;
         applySettings();
     }
 } 
@@ -101,7 +101,7 @@ const applySettings = () => {
     bgColorInput.value = bgColor;
 
     hideElementsOnStartTrue = hideOnStartInput.checked;
-    hideTimeOnStart = hideTimeOnStart.checked;
+    hideTimeOnStart = hideTimeOnStartEl.checked;
 }
 
 
@@ -113,8 +113,8 @@ resetToDefaultButton.addEventListener("click", () => {
     hideElementsOnStartTrue = true;
     timems = 500;
     holdToStartMsInput.value = timems;
-    hideTimeOnStart.checked = true;
-    hideTimeOnStart.checked = false;
+    hideOnStartInput.checked = true;
+    hideTimeOnStartEl.checked = false;
     applySettings();
     localStorage.setItem("settings", JSON.stringify({ textColor: textColorInput.value, bgColor: bgColorInput.value, timems: timems, heos: hideOnStartInput.checked, hteos: hideTimeOnStart.checked}));
 
