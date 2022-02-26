@@ -1447,4 +1447,23 @@ p {
     bottom: 220px;
   }
 }
+
+.image-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.image-container .help-image {
+  width: 80%;
+  margin: 25px 0;
+  border: 2px solid black;
+}
 /*# sourceMappingURL=style.css.map */
