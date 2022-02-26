@@ -79,10 +79,6 @@ https://friend-cube.herokuapp.com/help.html
 
 
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/Zoksss/friend-cube)
-
-
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
