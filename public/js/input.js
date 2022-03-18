@@ -20,19 +20,22 @@ const settingsModal = document.querySelector(".settings-container");
 
 const alertBox = document.querySelector("#alert");
 
+const puzzleEl = document.querySelector("#puzzle");
+
 
 let urlString;
-let selectedPuzzle;
+let selectedPuzzle = "3x3";
 let t;
 
 enterNicknameContainerBtn.addEventListener("click", (e) => {
     if (inputLogic(e))
-        socket.emit('join', nicknameInput.value, codeInput.value, "3x3");
+        socket.emit('join', nicknameInput.value, codeInput.value, selectedPuzzle);
 });
 createNicknameContainerBtn.addEventListener("click", (e) => {
     codeInput.value = makeRoomId(8);
     if (inputLogic(e))
         socket.emit('join', nicknameInputOnCreate.value, codeInput.value, selectedPuzzle);
+        
 });
 
 

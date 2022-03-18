@@ -81,11 +81,12 @@ function isLetter(str) {
     return str.length === 1 && str.match(/[a-z]/i);
 }
 const selectPuzzle = (puzzle) => {
-    if (puzzle != "3x3") {
+    if (puzzle != "3x3" && puzzle != "2x2" && puzzle != "pyra") {
         displayAlert("Error - Puzzle is not implemented yet");
         return;
     }
     selectedPuzzle = puzzle;
+    puzzleEl.innerHTML = selectedPuzzle;
     transitionAnim(choosePuzzleContainer, createNicknameContainer);
 }
 
