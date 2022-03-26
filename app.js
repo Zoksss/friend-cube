@@ -181,10 +181,10 @@ const generateScramble = (puzzle) => {
     else if(puzzle === "pyra"){
         let scrambele = "";
         for (a = y = r = '', x = Math.random; a++ < 9; scrambele += (r + " '2"[0 | x(y = r) * 3] + ' '))
-            for (; r == y; r = 'BRUF'[0 | x() * 4]);
+            for (; r == y; r = 'BRUL'[0 | x() * 4]);
         for(let i = 0; i < 4; i++){
             let l = Math.floor(Math.random() * 2);
-            scrambele += (l==1?'bruf'[i] + " '"[0 | Math.floor(Math.random() * 2)]:"");    
+            scrambele += (l==1?'brul'[i] + " '"[0 | Math.floor(Math.random() * 2)]:"");    
         }
         return scrambele;
     }
